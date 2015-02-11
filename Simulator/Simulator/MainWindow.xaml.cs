@@ -23,7 +23,6 @@ namespace Simulator
         public MainWindow()
         {
             InitializeComponent();
-            this.Map.Draw();
         }
     }
 }

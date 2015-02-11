@@ -30,21 +30,18 @@ namespace Simulator
         private Canvas MapCanvas { get; set; }
         public Position CurrentPosition { get; private set; }
         public List<Path> Paths { get; private set; }
-        public bool ExitNode { get; private set; }
-        public Direction? ExitDirection { get; private set; }
+        private string Label = "";
+        private bool DrawnOnCanvas = false;
 
-        public Node(Canvas MapCanvas, Position CurrentPosition, Direction? ExitDirection = null)
+        //Local variables
+        protected Color FillColor = Colors.White;
+
+        public Node(Canvas MapCanvas, Position CurrentPosition)
             : base()
         {
             this.Paths = new List<Path>();
             this.CurrentPosition = CurrentPosition;
             this.MapCanvas = MapCanvas;
-
-            if (ExitDirection != null)
-            {
-                this.ExitDirection = ExitDirection;
-                this.ExitNode = true;
-            }
         }
 
         public Node AddNode(Node DestinationNode)
@@ -56,32 +53,51 @@ namespace Simulator
 
         public void Draw()
         {
-            Ellipse NodeEllipse = new System.Windows.Shapes.Ellipse();
-            NodeEllipse.Height = 20;
-            NodeEllipse.Width = 20;
-            NodeEllipse.StrokeThickness = 2;
-            NodeEllipse.Stroke = new SolidColorBrush(Colors.Red);
-            NodeEllipse.Fill = new SolidColorBrush(Colors.Transparent);
-
-            NodeEllipse.Margin = new Thickness(CurrentPosition.X - 10, CurrentPosition.Y - 10, 0, 0);
-
-            this.MapCanvas.Children.Add(NodeEllipse);
-
-            foreach (Path p in this.Paths)
+            if (!this.DrawnOnCanvas)
             {
-                p.Draw();
+                this.DrawnOnCanvas = true;
+                Ellipse NodeEllipse = new System.Windows.Shapes.Ellipse();
+                NodeEllipse.Height = 20;
+                NodeEllipse.Width = 20;
+                NodeEllipse.StrokeThickness = 2;
+                NodeEllipse.Stroke = new SolidColorBrush(Colors.Red);
+                NodeEllipse.Fill = new SolidColorBrush(this.FillColor);
+
+                NodeEllipse.Margin = new Thickness(CurrentPosition.X - 10, CurrentPosition.Y - 10, 0, 0);
+
+                TextBlock IDNumberTextblock = new TextBlock();
+                IDNumberTextblock.Text = this.Label;
+                IDNumberTextblock.FontWeight = FontWeight.FromOpenTypeWeight(500);
+                IDNumberTextblock.Margin = new Thickness(CurrentPosition.X - 5, CurrentPosition.Y - 7, 0, 0);
+
+
+
+                foreach (Path p in this.Paths)
+                {
+                    p.Draw();
+                }
+
+                this.MapCanvas.Children.Add(NodeEllipse);
+                this.MapCanvas.Children.Add(IDNumberTextblock);
+                Map.SetZIndex(NodeEllipse, 254);
+                Map.SetZIndex(IDNumberTextblock, 255);
             }
+        }
+
+        public void SetLabel(string Label)
+        {
+            this.Label = Label;
         }
 
         public override string ToString()
         {
-            return CurrentPosition.ToString() + ((this.ExitNode) ? " (Exit)" : string.Empty);
+            return CurrentPosition.ToString();
         }
 
         private static int CurrentIDCount = 0;
         private static int GenerateID()
         {
-            return CurrentIDCount++;
+            return ++CurrentIDCount;
         }
     }
 }

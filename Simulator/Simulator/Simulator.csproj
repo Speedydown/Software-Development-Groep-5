@@ -61,9 +61,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Dijkstra\ExitNode.cs" />
     <Compile Include="Dijkstra\Node.cs" />
     <Compile Include="Dijkstra\Path.cs" />
     <Compile Include="Classes\Enums.cs" />
+    <Compile Include="Dijkstra\EntryNode.cs" />
     <Compile Include="Logic\Map.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
