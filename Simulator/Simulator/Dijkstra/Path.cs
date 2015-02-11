@@ -28,13 +28,15 @@ namespace Simulator
 
         public Node Source { get; private set; }
         public Node Destination { get; private set; }
+        private Color NodeColor { get; set; }
 
-        public Path(Canvas MapCanvas, Node Source, Node Destination)
+        public Path(Node Source, Node Destination, Color NodeColor)
         {
             this.Source = Source;
             this.Destination = Destination;
             this.NumberOfVehicles = 0;
-            this.MapCanvas = MapCanvas;
+            this.MapCanvas = Map.Instance;
+            this.NodeColor = NodeColor;
         }
 
         public void AddVehicle()
@@ -51,7 +53,7 @@ namespace Simulator
             PathLine.Y2 = this.Destination.CurrentPosition.Y;
 
             PathLine.StrokeThickness = 2;
-            PathLine.Stroke = new SolidColorBrush(Colors.Red);
+            PathLine.Stroke = new SolidColorBrush(this.NodeColor);
 
 
             this.MapCanvas.Children.Add(PathLine);

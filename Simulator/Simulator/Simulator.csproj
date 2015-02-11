@@ -67,6 +67,7 @@
     <Compile Include="Classes\Enums.cs" />
     <Compile Include="Dijkstra\EntryNode.cs" />
     <Compile Include="Logic\Map.cs" />
+    <Compile Include="Logic\Nodes.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -27,26 +27,28 @@ namespace Simulator
             }
         }
 
-        private Canvas MapCanvas { get; set; }
+        private Canvas MapCanvas = Map.Instance;
         public Position CurrentPosition { get; private set; }
         public List<Path> Paths { get; private set; }
         private string Label = "";
         private bool DrawnOnCanvas = false;
+        private Color NodeColor { get; set; }
 
         //Local variables
         protected Color FillColor = Colors.White;
 
-        public Node(Canvas MapCanvas, Position CurrentPosition)
+        public Node(Position CurrentPosition, Color NodeColor, string Label = "")
             : base()
         {
             this.Paths = new List<Path>();
             this.CurrentPosition = CurrentPosition;
-            this.MapCanvas = MapCanvas;
+            this.NodeColor = NodeColor;
+            this.Label = Label;
         }
 
         public Node AddNode(Node DestinationNode)
         {
-            this.Paths.Add(new Path(this.MapCanvas, this, DestinationNode));
+            this.Paths.Add(new Path(this, DestinationNode, this.NodeColor)); 
 
             return DestinationNode;
         }
@@ -60,7 +62,7 @@ namespace Simulator
                 NodeEllipse.Height = 20;
                 NodeEllipse.Width = 20;
                 NodeEllipse.StrokeThickness = 2;
-                NodeEllipse.Stroke = new SolidColorBrush(Colors.Red);
+                NodeEllipse.Stroke = new SolidColorBrush(this.NodeColor);
                 NodeEllipse.Fill = new SolidColorBrush(this.FillColor);
 
                 NodeEllipse.Margin = new Thickness(CurrentPosition.X - 10, CurrentPosition.Y - 10, 0, 0);
@@ -68,7 +70,7 @@ namespace Simulator
                 TextBlock IDNumberTextblock = new TextBlock();
                 IDNumberTextblock.Text = this.Label;
                 IDNumberTextblock.FontWeight = FontWeight.FromOpenTypeWeight(500);
-                IDNumberTextblock.Margin = new Thickness(CurrentPosition.X - 5, CurrentPosition.Y - 7, 0, 0);
+                IDNumberTextblock.Margin = new Thickness(CurrentPosition.X - 5, CurrentPosition.Y - 8, 0, 0);
 
 
 

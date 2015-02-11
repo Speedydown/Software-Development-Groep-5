@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Markup;
+using System.Windows.Media;
 
 namespace Simulator.UserControls
 {
@@ -12,20 +13,11 @@ namespace Simulator.UserControls
     {
         //Static instance
         public static Map Instance { get; private set; }
-
+        
 
         public List<Node> StartPoints { get; private set; }
-
-        private Node NodeA;
-        private Node NodeB;
-        private Node NodeC;
-        private Node NodeD;
-        private Node NodeE;
-        private Node NodeF;
-        private Node NodeG;
-        private Node NodeH;
-        private Node NodeI;
-        private Node NodeJ;
+        public Nodes nodes { get; private set; }
+        
 
         public Map() : base()
         {
@@ -35,6 +27,7 @@ namespace Simulator.UserControls
             //Initialize Node List
             this.StartPoints = new List<Node>();
 
+            this.nodes = new Nodes();
             //Create nodes to their end points
             this.CreateNodes();
 
@@ -45,10 +38,12 @@ namespace Simulator.UserControls
         private void CreateNodes()
         {
             //Eerst simpel daarna veel nodes maken
+            this.AddStartNodes();
             this.BuildRoadFromSouth();
             this.BuildRoadFromWest();
             this.BuildRoadFromEast();
             this.BuildRoadFromNorth();
+            this.BuidVentweg();
         }
 
         public void Draw()
@@ -59,85 +54,105 @@ namespace Simulator.UserControls
             }
         }
 
+        public void AddStartNodes()
+        {
+            StartPoints.Add(this.nodes.EntryNode1);
+            StartPoints.Add(this.nodes.EntryNode2);
+            StartPoints.Add(this.nodes.EntryNode3);
+            StartPoints.Add(this.nodes.EntryNode4);
+            StartPoints.Add(this.nodes.EntryNode8);
+        }
+
+        private void BuildIntersection1()
+        {
+
+        }
+
         private void BuildRoadFromSouth()
         {
-            Node CurrentNode = new EntryNode(this, new Position(400, 786));
-            StartPoints.Add(CurrentNode);
+            Color Red = Colors.Red;
 
+            Node CurrentNode = new EntryNode(new Position(400, 786), Red);
             
-            CurrentNode = CurrentNode.AddNode(new Node(this, new Position(400, 393)));
-            this.NodeA = CurrentNode;
-            this.NodeA.SetLabel("A"); //Kruispunt 1 RechtsOnder
 
-            this.NodeB = CurrentNode.AddNode(new Node(this, new Position(400, 343)));
-            this.NodeB.SetLabel("B"); //Kruispunt 1 RechtsBoven
 
-            this.NodeC = this.NodeB.AddNode(new Node(this, new Position(350, 343)));
-            this.NodeC.SetLabel("C"); //Kruispunt 1 LinksBoven
+            CurrentNode = CurrentNode.AddNode(this.nodes.NodeD); //Kruispunt 1 RechtsOnder
+            CurrentNode.AddNode(this.nodes.NodeB);  //Kruispunt 1 RechtsBoven
 
-            this.NodeC.AddNode(new ExitNode(this, new Position(0, 343), Direction.West));
-            
-            CurrentNode = CurrentNode.AddNode(new Node(this, new Position(650, 393)));
-            this.NodeD = CurrentNode;
-            this.NodeD.SetLabel("D"); //EntraceFromVentweg
+            this.nodes.NodeB.AddNode(this.nodes.NodeA); //Kruispunt 1 LinksBoven
 
-            CurrentNode = CurrentNode.AddNode(new Node(this, new Position(720, 393)));
-            this.NodeE = CurrentNode;
-            this.NodeE.SetLabel("E"); //ExitFromVentweg
+            this.nodes.NodeA.AddNode(new ExitNode(new Position(0, 343), Direction.West, Red));
 
-            CurrentNode = CurrentNode.AddNode(new Node(this, new Position(1050, 393)));
-            this.NodeF = CurrentNode;
-            this.NodeF.SetLabel("F"); //Kruispunt2 LinksOnder
+            CurrentNode = CurrentNode.AddNode(this.nodes.NodeI); //EntraceFromVentweg
 
-            CurrentNode = CurrentNode.AddNode(new Node(this, new Position(1100, 393)));
-            this.NodeJ = CurrentNode;
-            this.NodeJ.SetLabel("J"); //Kruispunt2 Rechtsonder
+            CurrentNode = CurrentNode.AddNode(this.nodes.NodeJ);  //ExitFromVentweg
 
-            this.NodeG = CurrentNode.AddNode(new Node(this, new Position(1100, 343)));
-            this.NodeG.SetLabel("G"); //Kruispunt2 RechtsBoven
+            CurrentNode = CurrentNode.AddNode(this.nodes.NodeG); //Kruispunt2 LinksOnder
 
-            this.NodeG.AddNode(new ExitNode(this, new Position(1100, 0), Direction.Noord));
-            CurrentNode.AddNode(new ExitNode(this, new Position(1368, 393), Direction.Oost));
+            CurrentNode = CurrentNode.AddNode(this.nodes.NodeH);//Kruispunt2 Rechtsonder
+
+            CurrentNode.AddNode(this.nodes.NodeF1); //Kruispunt2 RechtsBoven
+
+            //CurrentNode.AddNode(this.nodes.NodeF3); //Kruispunt2 RechtsBoven
+
+           // this.nodes.NodeF3.AddNode(this.nodes.ExitNode1);
+          //  CurrentNode.AddNode(this.nodes.ExitNode3);
         }
 
         private void BuildRoadFromWest()
         {
+            Color Red = Colors.Red;
+
             //First node (Entry point west)
-            Node CurrentNode = new EntryNode(this, new Position(0, 393));
+            Node CurrentNode = this.nodes.EntryNode8;
             StartPoints.Add(CurrentNode);
 
             //Second Node (First intersection)
-            CurrentNode = CurrentNode.AddNode(new Node(this, new Position(350, 393)));
-            this.NodeH = CurrentNode;
-            this.NodeH.SetLabel("H"); // Kruispunt1 LinksOnder
-            CurrentNode.AddNode(new ExitNode(this, new Position(350, 786), Direction.Oost));
-            CurrentNode.AddNode(this.NodeA);
+            CurrentNode = CurrentNode.AddNode(this.nodes.NodeC);
+
+            CurrentNode.AddNode(new ExitNode(new Position(350, 786), Direction.Oost, Red));
+            CurrentNode.AddNode(this.nodes.NodeD);
         }
 
         private void BuildRoadFromEast()
         {
-            //First node (Entry point East)
-            Node CurrentNode = new EntryNode(this, new Position(1368, 343));
-            StartPoints.Add(CurrentNode);
+            this.nodes.EntryNode3.AddNode(this.nodes.Custom4);
+            this.nodes.Custom4.AddNode(this.nodes.Custom5);
+            this.nodes.Custom4.AddNode(this.nodes.Custom6);
+            this.nodes.Custom5.AddNode(this.nodes.NodeF3);
+            this.nodes.NodeF3.AddNode(this.nodes.ExitNode2);
+            
+            //this.nodes.Custom6.AddNode(this.nodes.NodeE3); uitgecomment om overzichtelijk te houden
 
-            CurrentNode = CurrentNode.AddNode(this.NodeG);
-            CurrentNode = CurrentNode.AddNode(new Node(this, new Position(1050, 343)));
-            this.NodeI = CurrentNode;
-            this.NodeI.SetLabel("I");
-            CurrentNode.AddNode(NodeB);
-
-            this.NodeC.AddNode(this.NodeH);
-
+            //this.nodes.EntryNode4.AddNode(this.nodes.NodeE2); uitgecomment om overzichtelijk te houden
         }
 
         private void BuildRoadFromNorth()
         {
-            //First node (Entry point North)
-            Node CurrentNode = new EntryNode(this, new Position(1050, 0));
-            StartPoints.Add(CurrentNode);
+            this.nodes.EntryNode1.AddNode(this.nodes.Custom1);
+            this.nodes.Custom1.AddNode(this.nodes.Custom2);
+            this.nodes.Custom2.AddNode(this.nodes.NodeE3);
+            this.nodes.Custom1.AddNode(this.nodes.Custom3);
+            this.nodes.Custom3.AddNode(this.nodes.NodeE2);
 
-            CurrentNode.AddNode(this.NodeI);
-            this.NodeI.AddNode(this.NodeF);
+            this.nodes.EntryNode2.AddNode(this.nodes.NodeE1);
+
+            
+
         }
+
+        private void BuidVentweg()
+        {
+            //First node (Entry point Ventweg)
+            Node CurrentNode = new EntryNode(new Position(580, 786), Colors.Red);
+            StartPoints.Add(CurrentNode);
+            CurrentNode = CurrentNode.AddNode(new Node(new Position(580, 443), Colors.Red));
+            CurrentNode.AddNode(this.nodes.NodeI);
+
+            CurrentNode = this.nodes.NodeJ.AddNode(new Node(new Position(790, 463), Colors.Red));
+            CurrentNode = CurrentNode.AddNode(new Node(new Position(1150, 463), Colors.Red));
+            CurrentNode.AddNode(new ExitNode(new Position(1368, 463), Direction.Ventweg, Colors.Red));
+        } 
     }
 }
+
