@@ -32,14 +32,15 @@ namespace Simulator
         public List<Path> Paths { get; private set; }
         private string Label = "";
         private bool DrawnOnCanvas = false;
-        private Color NodeColor { get; set; }
+        public Color NodeColor { get; protected set; }
 
         //Local variables
         protected Color FillColor = Colors.White;
 
-        public Node(Position CurrentPosition, Color NodeColor, string Label = "")
+        public Node(Position CurrentPosition, string Label = "")
             : base()
         {
+            this.NodeColor = Colors.Red;
             this.Paths = new List<Path>();
             this.CurrentPosition = CurrentPosition;
             this.NodeColor = NodeColor;
@@ -48,7 +49,14 @@ namespace Simulator
 
         public Node AddNode(Node DestinationNode)
         {
-            this.Paths.Add(new Path(this, DestinationNode, this.NodeColor)); 
+            if (this is BusNode)
+            {
+                this.Paths.Add(new Path(this, DestinationNode, this.NodeColor)); 
+            }
+            else
+            {
+                this.Paths.Add(new Path(this, DestinationNode, DestinationNode.NodeColor)); 
+            }
 
             return DestinationNode;
         }

@@ -136,7 +136,10 @@ namespace Simulator.UserControls
             this.nodes.Custom2.AddNode(this.nodes.NodeE2);
             this.nodes.Custom1.AddNode(this.nodes.NodeE1);
 
-            this.nodes.EntryNode2.AddNode(this.nodes.NodeG2);
+            this.nodes.EntryNode2.AddNode(this.nodes.Custom3);
+            this.nodes.Custom3.AddNode(this.nodes.NodeG2);
+            this.nodes.Custom3.AddNode(this.nodes.Bus1);
+            this.nodes.Bus1.AddNode(this.nodes.NodeG1);
             this.nodes.NodeE2.AddNode(this.nodes.NodeB2);
 
             this.nodes.NodeE1.AddNode(this.nodes.Custom30);

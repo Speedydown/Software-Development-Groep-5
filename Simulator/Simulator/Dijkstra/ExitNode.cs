@@ -12,8 +12,8 @@ namespace Simulator
     {
         public Direction ExitDirection { get; private set; }
 
-        public ExitNode(Position CurrentPosition, Direction ExitDirection, Color NodeColor, string Label = "")
-            : base(CurrentPosition, NodeColor, Label)
+        public ExitNode(Position CurrentPosition, Direction ExitDirection, string Label = "")
+            : base(CurrentPosition, Label)
         {
             this.FillColor = Colors.LightGreen;
             this.ExitDirection = ExitDirection;

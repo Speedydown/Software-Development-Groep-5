@@ -10,8 +10,8 @@ namespace Simulator
 {
     public class EntryNode : Node
     {
-        public EntryNode(Position CurrentPosition, Color NodeColor, string Label = "")
-            : base(CurrentPosition, NodeColor, Label)
+        public EntryNode(Position CurrentPosition, string Label = "")
+            : base(CurrentPosition, Label)
         {
             this.FillColor = Colors.Red;
         }
