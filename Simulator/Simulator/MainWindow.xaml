@@ -4,8 +4,10 @@
         xmlns:local="clr-namespace:Simulator.UserControls"
         Title="Stoplicht simulatie" ResizeMode="NoResize" WindowState="Maximized" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow">
     <Grid>
-        <Border BorderThickness="1" BorderBrush="Black" Height="786" Width="1366" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <local:Map x:Name="Map" Background="White"  />
-        </Border>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Border BorderThickness="1" BorderBrush="Black" Height="1055" Width="1915" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <local:Map x:Name="Map" Background="White"  />
+            </Border>
+        </ScrollViewer>
     </Grid>
 </Window>

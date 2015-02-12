@@ -12,13 +12,13 @@ namespace Simulator
         //StartingNodes
         public Node EntryNode1 = new EntryNode(new Position(1000, 0), Colors.Red, "s1");
         public Node EntryNode2 = new EntryNode(new Position(1025, 0), Colors.Red, "s2");
-        public Node EntryNode3 = new EntryNode(new Position(1368, 300), Colors.Red, "s3");
-        public Node EntryNode4 = new EntryNode(new Position(1368, 325), Colors.Red, "s4");
-        public Node EntryNode5 = new EntryNode(new Position(450, 786), Colors.Red, "s5");
-        public Node EntryNode6 = new EntryNode(new Position(425, 786), Colors.Red, "s6");
+        public Node EntryNode3 = new EntryNode(new Position(1915, 300), Colors.Red, "s3");
+        public Node EntryNode4 = new EntryNode(new Position(1915, 325), Colors.Red, "s4");
+        public Node EntryNode5 = new EntryNode(new Position(450, 1055), Colors.Red, "s5");
+        public Node EntryNode6 = new EntryNode(new Position(425, 1055), Colors.Red, "s6");
         public Node EntryNode7 = new EntryNode(new Position(0, 425), Colors.Red, "s7");
 
-        public Node EntryNode8 = new EntryNode(new Position(500, 786), Colors.Red, "s8");
+        public Node EntryNode8 = new EntryNode(new Position(500, 1055), Colors.Red, "s8");
 
         //Intersection Nodes
         public Node NodeA1 = new Node(new Position(350, 375), Colors.Red, "A1");
@@ -44,10 +44,10 @@ namespace Simulator
         //ExitNodes
         public Node ExitNode1 = new ExitNode(new Position(1075, 0), Direction.Noord, Colors.Red, "e1");
         public Node ExitNode2 = new ExitNode(new Position(1100, 0), Direction.Noord, Colors.Red, "e2");
-        public Node ExitNode3 = new ExitNode(new Position(1368, 400), Direction.Oost, Colors.Red, "e3");
-        public Node ExitNode4 = new ExitNode(new Position(1368, 425), Direction.Oost, Colors.Red, "e4");
-        public Node ExitNode5 = new ExitNode(new Position(350, 786), Direction.Zuid, Colors.Red, "e5");
-        public Node ExitNode6 = new ExitNode(new Position(325, 786), Direction.Zuid, Colors.Red, "e6");
+        public Node ExitNode3 = new ExitNode(new Position(1915, 400), Direction.Oost, Colors.Red, "e3");
+        public Node ExitNode4 = new ExitNode(new Position(1915, 425), Direction.Oost, Colors.Red, "e4");
+        public Node ExitNode5 = new ExitNode(new Position(350, 1055), Direction.Zuid, Colors.Red, "e5");
+        public Node ExitNode6 = new ExitNode(new Position(325, 1055), Direction.Zuid, Colors.Red, "e6");
         public Node ExitNode7 = new ExitNode(new Position(0, 325), Direction.West, Colors.Red, "e7");
         public Node ExitNode8 = new ExitNode(new Position(0, 300), Direction.West, Colors.Red, "e8");
 
