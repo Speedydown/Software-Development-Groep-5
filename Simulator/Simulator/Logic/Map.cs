@@ -60,6 +60,9 @@ namespace Simulator.UserControls
             StartPoints.Add(this.nodes.EntryNode2);
             StartPoints.Add(this.nodes.EntryNode3);
             StartPoints.Add(this.nodes.EntryNode4);
+            StartPoints.Add(this.nodes.EntryNode5);
+            StartPoints.Add(this.nodes.EntryNode6);
+            StartPoints.Add(this.nodes.EntryNode7);
             StartPoints.Add(this.nodes.EntryNode8);
         }
 
@@ -70,72 +73,80 @@ namespace Simulator.UserControls
 
         private void BuildRoadFromSouth()
         {
-            Color Red = Colors.Red;
+            this.nodes.EntryNode6.AddNode(this.nodes.Custom60);
+            this.nodes.Custom60.AddNode(this.nodes.Custom61);
+            this.nodes.Custom61.AddNode(this.nodes.Custom62);
+            this.nodes.Custom61.AddNode(this.nodes.NodeB2);
+            this.nodes.Custom62.AddNode(this.nodes.NodeB1);
 
-            Node CurrentNode = new EntryNode(new Position(400, 786), Red);
-            
+            this.nodes.NodeB1.AddNode(this.nodes.ExitNode7);
+            this.nodes.NodeB2.AddNode(this.nodes.ExitNode8);
 
+            this.nodes.Custom60.AddNode(this.nodes.NodeD1);
 
-            CurrentNode = CurrentNode.AddNode(this.nodes.NodeD); //Kruispunt 1 RechtsOnder
-            CurrentNode.AddNode(this.nodes.NodeB);  //Kruispunt 1 RechtsBoven
-
-            this.nodes.NodeB.AddNode(this.nodes.NodeA); //Kruispunt 1 LinksBoven
-
-            this.nodes.NodeA.AddNode(new ExitNode(new Position(0, 343), Direction.West, Red));
-
-            CurrentNode = CurrentNode.AddNode(this.nodes.NodeI); //EntraceFromVentweg
-
-            CurrentNode = CurrentNode.AddNode(this.nodes.NodeJ);  //ExitFromVentweg
-
-            CurrentNode = CurrentNode.AddNode(this.nodes.NodeG); //Kruispunt2 LinksOnder
-
-            CurrentNode = CurrentNode.AddNode(this.nodes.NodeH);//Kruispunt2 Rechtsonder
-
-            CurrentNode.AddNode(this.nodes.NodeF1); //Kruispunt2 RechtsBoven
-
-            //CurrentNode.AddNode(this.nodes.NodeF3); //Kruispunt2 RechtsBoven
-
-           // this.nodes.NodeF3.AddNode(this.nodes.ExitNode1);
-          //  CurrentNode.AddNode(this.nodes.ExitNode3);
+            this.nodes.EntryNode5.AddNode(this.nodes.NodeD2);
         }
+
 
         private void BuildRoadFromWest()
         {
-            Color Red = Colors.Red;
-
-            //First node (Entry point west)
-            Node CurrentNode = this.nodes.EntryNode8;
-            StartPoints.Add(CurrentNode);
-
-            //Second Node (First intersection)
-            CurrentNode = CurrentNode.AddNode(this.nodes.NodeC);
-
-            CurrentNode.AddNode(new ExitNode(new Position(350, 786), Direction.Oost, Red));
-            CurrentNode.AddNode(this.nodes.NodeD);
+            this.nodes.EntryNode7.AddNode(this.nodes.Custom50);
+            this.nodes.Custom50.AddNode(this.nodes.Custom51);
+            this.nodes.Custom50.AddNode(this.nodes.Custom53);
+            this.nodes.Custom50.AddNode(this.nodes.NodeD2);
+            this.nodes.Custom51.AddNode(this.nodes.Custom52);
+            this.nodes.Custom51.AddNode(this.nodes.NodeC1);
+            this.nodes.Custom52.AddNode(this.nodes.NodeC2);
+            this.nodes.NodeC1.AddNode(this.nodes.ExitNode5);
+            this.nodes.NodeC2.AddNode(this.nodes.ExitNode6);
+            this.nodes.Custom53.AddNode(this.nodes.NodeD1);
+            this.nodes.NodeD2.AddNode(this.nodes.NodeI);
+            this.nodes.NodeI.AddNode(this.nodes.NodeJ);
+            this.nodes.NodeJ.AddNode(this.nodes.NodeG2);
+            this.nodes.NodeD1.AddNode(this.nodes.Custom40);
+            this.nodes.Custom40.AddNode(this.nodes.Custom41);
+            this.nodes.Custom40.AddNode(this.nodes.NodeG1);
+            this.nodes.Custom41.AddNode(this.nodes.Custom42);
+            this.nodes.Custom41.AddNode(this.nodes.NodeH2);
+            this.nodes.Custom42.AddNode(this.nodes.NodeH1);
+            this.nodes.NodeG1.AddNode(this.nodes.ExitNode3);
+            this.nodes.NodeG2.AddNode(this.nodes.NodeK);
+            this.nodes.NodeK.AddNode(this.nodes.ExitNode4);
+            this.nodes.NodeH1.AddNode(this.nodes.NodeF1);
+            this.nodes.NodeH2.AddNode(this.nodes.NodeF2);
         }
 
         private void BuildRoadFromEast()
         {
-            this.nodes.EntryNode3.AddNode(this.nodes.Custom4);
-            this.nodes.Custom4.AddNode(this.nodes.Custom5);
-            this.nodes.Custom4.AddNode(this.nodes.Custom6);
-            this.nodes.Custom5.AddNode(this.nodes.NodeF3);
-            this.nodes.NodeF3.AddNode(this.nodes.ExitNode2);
-            
-            //this.nodes.Custom6.AddNode(this.nodes.NodeE3); uitgecomment om overzichtelijk te houden
-
-            //this.nodes.EntryNode4.AddNode(this.nodes.NodeE2); uitgecomment om overzichtelijk te houden
+            this.nodes.EntryNode3.AddNode(this.nodes.Custom20);
+            this.nodes.Custom20.AddNode(this.nodes.Custom21);
+            this.nodes.Custom21.AddNode(this.nodes.Custom22);
+            this.nodes.Custom21.AddNode(this.nodes.NodeF1);
+            this.nodes.Custom22.AddNode(this.nodes.NodeF2);
+            this.nodes.NodeF1.AddNode(this.nodes.ExitNode1);
+            this.nodes.NodeF2.AddNode(this.nodes.ExitNode2);
+            this.nodes.EntryNode4.AddNode(this.nodes.NodeE1);
+            this.nodes.Custom20.AddNode(this.nodes.NodeE2);
         }
 
         private void BuildRoadFromNorth()
         {
             this.nodes.EntryNode1.AddNode(this.nodes.Custom1);
             this.nodes.Custom1.AddNode(this.nodes.Custom2);
-            this.nodes.Custom2.AddNode(this.nodes.NodeE3);
-            this.nodes.Custom1.AddNode(this.nodes.Custom3);
-            this.nodes.Custom3.AddNode(this.nodes.NodeE2);
+            this.nodes.Custom2.AddNode(this.nodes.NodeE2);
+            this.nodes.Custom1.AddNode(this.nodes.NodeE1);
 
-            this.nodes.EntryNode2.AddNode(this.nodes.NodeE1);
+            this.nodes.EntryNode2.AddNode(this.nodes.NodeG2);
+            this.nodes.NodeE2.AddNode(this.nodes.NodeB2);
+
+            this.nodes.NodeE1.AddNode(this.nodes.Custom30);
+            this.nodes.Custom30.AddNode(this.nodes.Custom31);
+            this.nodes.Custom30.AddNode(this.nodes.NodeB1);
+            this.nodes.Custom31.AddNode(this.nodes.Custom32);
+            this.nodes.Custom31.AddNode(this.nodes.NodeA2);
+            this.nodes.Custom32.AddNode(this.nodes.NodeA1);
+            this.nodes.NodeA1.AddNode(this.nodes.NodeC1);
+            this.nodes.NodeA2.AddNode(this.nodes.NodeC2);
 
             
 
@@ -143,15 +154,11 @@ namespace Simulator.UserControls
 
         private void BuidVentweg()
         {
-            //First node (Entry point Ventweg)
-            Node CurrentNode = new EntryNode(new Position(580, 786), Colors.Red);
-            StartPoints.Add(CurrentNode);
-            CurrentNode = CurrentNode.AddNode(new Node(new Position(580, 443), Colors.Red));
-            CurrentNode.AddNode(this.nodes.NodeI);
-
-            CurrentNode = this.nodes.NodeJ.AddNode(new Node(new Position(790, 463), Colors.Red));
-            CurrentNode = CurrentNode.AddNode(new Node(new Position(1150, 463), Colors.Red));
-            CurrentNode.AddNode(new ExitNode(new Position(1368, 463), Direction.Ventweg, Colors.Red));
+            this.nodes.EntryNode8.AddNode(this.nodes.Custom70);
+            this.nodes.Custom70.AddNode(this.nodes.NodeI);
+            this.nodes.NodeJ.AddNode(this.nodes.Custom71);
+            this.nodes.Custom71.AddNode(this.nodes.Custom72);
+            this.nodes.Custom72.AddNode(this.nodes.NodeK);
         } 
     }
 }
