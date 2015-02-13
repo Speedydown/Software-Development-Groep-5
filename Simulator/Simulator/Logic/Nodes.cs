@@ -75,9 +75,10 @@ namespace Simulator
         public Node Custom52 = new Node(new Position(150, 475), "52");
         public Node Custom53 = new Node(new Position(100, 400), "53");
 
-        public Node Custom60 = new Node(new Position(425, 800), "60");
-        public Node Custom61 = new Node(new Position(400, 750), "61");
-        public Node Custom62 = new Node(new Position(375, 700), "62");
+        public Node Custom60 = new Node(new Position(425, 950), "60");
+        public Node Custom61 = new Node(new Position(400, 900), "61");
+        public Node Custom62 = new Node(new Position(375, 850), "62");
+        public Node Custom63 = new Node(new Position(450, 950), "63");
 
         public Node Custom70 = new Node(new Position(500, 500), "70");
         public Node Custom71 = new Node(new Position(690, 475), "71");
@@ -85,6 +86,8 @@ namespace Simulator
 
         //BusNodes
         public Node Bus1 = new BusNode(new Position(1250, 150), "b1");
+        public Node Bus2 = new BusNode(new Position(475, 900), "b2");
+        public Node Bus3 = new BusNode(new Position(475, 525), "b3");
         
 
         public Nodes()
