@@ -17,8 +17,10 @@ namespace Simulator
         public Node EntryNode5 = new EntryNode(new Position(450, 1055), "s5");
         public Node EntryNode6 = new EntryNode(new Position(425, 1055), "s6");
         public Node EntryNode7 = new EntryNode(new Position(0, 425), "s7");
-
         public Node EntryNode8 = new EntryNode(new Position(500, 1055), "s8");
+        public Node EntryNode9 = new EntryNode(new Position(0, 495), "s9", Colors.Purple);
+        public Node EntryNode10 = new EntryNode(new Position(395, 0), "s10", Colors.Purple);
+        
 
         //Intersection Nodes
         public Node NodeA1 = new Node(new Position(350, 375), "A1");
@@ -50,6 +52,9 @@ namespace Simulator
         public Node ExitNode6 = new ExitNode(new Position(325, 1055), Direction.Zuid, "e6");
         public Node ExitNode7 = new ExitNode(new Position(0, 325), Direction.West, "e7");
         public Node ExitNode8 = new ExitNode(new Position(0, 300), Direction.West, "e8");
+        public Node ExitNode9 = new ExitNode(new Position(0, 275), Direction.West, "e9", Colors.Purple);
+        public Node ExitNode10 = new ExitNode(new Position(405, 0), Direction.Noord, "e10", Colors.Purple);
+        public Node ExitNode11 = new ExitNode(new Position(312, 1055), Direction.Zuid, "e11", Colors.Purple);
 
         //CustomNodes
         public Node Custom1 = new Node(new Position(1200, 100), "1");
@@ -80,7 +85,7 @@ namespace Simulator
         public Node Custom62 = new Node(new Position(375, 850), "62");
         public Node Custom63 = new Node(new Position(450, 950), "63");
 
-        public Node Custom70 = new Node(new Position(500, 500), "70");
+        public Node Custom70 = new Node(new Position(500, 505), "70");
         public Node Custom71 = new Node(new Position(690, 475), "71");
         public Node Custom72 = new Node(new Position(1425, 475), "72");
 
@@ -89,6 +94,23 @@ namespace Simulator
         public Node Bus2 = new BusNode(new Position(475, 900), "b2");
         public Node Bus3 = new BusNode(new Position(475, 525), "b3");
         
+
+        //------------------Cycling routes---------------------------------------------
+        public Node Nodec1 = new BicycleNode(new Position(295, 495), "c1");
+        public Node Nodec2 = new BicycleNode(new Position(500, 275), "c2");
+        public Node Nodec3 = new BicycleNode(new Position(405, 205), "c3");
+        public Node Nodec4 = new BicycleNode(new Position(395, 205), "c4");
+        public Node Nodec5 = new BicycleNode(new Position(295, 275), "c5");
+        public Node Nodec6 = new BicycleNode(new Position(305, 505), "c6");
+        public Node Nodec7 = new BicycleNode(new Position(305, 495), "c7");
+        public Node Nodec8 = new BicycleNode(new Position(490, 495), "c8");
+        public Node Nodec9 = new BicycleNode(new Position(490, 275), "c9");
+        public Node Nodec10 = new BicycleNode(new Position(305, 275), "c10");
+        public Node Nodec11 = new BicycleNode(new Position(312, 600), "c11");
+        public Node Nodec12 = new BicycleNode(new Position(510, 500), "c12");
+        
+
+
 
         public Nodes()
         {

@@ -61,6 +61,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Dijkstra\BicycleNode.cs" />
     <Compile Include="Dijkstra\BusNode.cs" />
     <Compile Include="Dijkstra\ExitNode.cs" />
     <Compile Include="Dijkstra\Node.cs" />

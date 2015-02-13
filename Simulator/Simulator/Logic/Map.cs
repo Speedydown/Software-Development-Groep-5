@@ -44,6 +44,7 @@ namespace Simulator.UserControls
             this.BuildRoadFromEast();
             this.BuildRoadFromNorth();
             this.BuidVentweg();
+            this.BuildBycycleRoutes();
         }
 
         public void Draw()
@@ -64,6 +65,8 @@ namespace Simulator.UserControls
             StartPoints.Add(this.nodes.EntryNode6);
             StartPoints.Add(this.nodes.EntryNode7);
             StartPoints.Add(this.nodes.EntryNode8);
+            StartPoints.Add(this.nodes.EntryNode9);
+            StartPoints.Add(this.nodes.EntryNode10);
         }
 
         private void BuildIntersection1()
@@ -167,6 +170,34 @@ namespace Simulator.UserControls
             this.nodes.Custom71.AddNode(this.nodes.Custom72);
             this.nodes.Custom72.AddNode(this.nodes.NodeK);
         } 
+
+        private void BuildBycycleRoutes()
+        {
+            this.nodes.EntryNode10.AddNode(this.nodes.Nodec4);
+            this.nodes.EntryNode9.AddNode(this.nodes.Nodec1);
+            this.nodes.Nodec1.AddNode(this.nodes.Nodec6);
+            this.nodes.Nodec1.AddNode(this.nodes.Nodec11);
+            this.nodes.Custom70.AddNode(this.nodes.Nodec2);
+            this.nodes.Custom70.AddNode(this.nodes.Nodec8);
+            this.nodes.Custom70.AddNode(this.nodes.Nodec12);
+            this.nodes.Custom71.AddNode(this.nodes.Nodec8);
+            this.nodes.Nodec2.AddNode(this.nodes.Nodec3);
+            this.nodes.Nodec3.AddNode(this.nodes.Nodec4);
+            this.nodes.Nodec3.AddNode(this.nodes.ExitNode10);
+            this.nodes.Nodec4.AddNode(this.nodes.Nodec5);
+            this.nodes.Nodec4.AddNode(this.nodes.Nodec9);
+            this.nodes.Nodec5.AddNode(this.nodes.Nodec1);
+            this.nodes.Nodec5.AddNode(this.nodes.ExitNode9);
+            this.nodes.Nodec6.AddNode(this.nodes.Nodec7);
+            this.nodes.Nodec7.AddNode(this.nodes.Nodec10);
+            this.nodes.Nodec6.AddNode(this.nodes.Custom70);
+            this.nodes.Nodec8.AddNode(this.nodes.Nodec7);
+            this.nodes.Nodec8.AddNode(this.nodes.Custom70);
+            this.nodes.Nodec9.AddNode(this.nodes.Nodec8);
+            this.nodes.Nodec10.AddNode(this.nodes.Nodec3);
+            this.nodes.Nodec11.AddNode(this.nodes.ExitNode11);
+            this.nodes.Nodec12.AddNode(this.nodes.Custom71);
+        }
     }
 }
 

@@ -49,7 +49,7 @@ namespace Simulator
 
         public Node AddNode(Node DestinationNode)
         {
-            if (this is BusNode)
+            if (this is BusNode || this is BicycleNode)
             {
                 this.Paths.Add(new Path(this, DestinationNode, this.NodeColor)); 
             }
