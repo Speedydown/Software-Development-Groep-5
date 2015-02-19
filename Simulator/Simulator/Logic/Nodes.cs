@@ -20,6 +20,7 @@ namespace Simulator
         public Node EntryNode8 = new EntryNode(new Position(500, 1055), "s8");
         public Node EntryNode9 = new EntryNode(new Position(0, 495), "s9", Colors.Purple);
         public Node EntryNode10 = new EntryNode(new Position(395, 0), "s10", Colors.Purple);
+        public Node EntryNode11 = new EntryNode(new Position(1915, 225), "s11", Colors.Purple);
         
 
         //Intersection Nodes
@@ -55,6 +56,7 @@ namespace Simulator
         public Node ExitNode9 = new ExitNode(new Position(0, 275), Direction.West, "e9", Colors.Purple);
         public Node ExitNode10 = new ExitNode(new Position(405, 0), Direction.Noord, "e10", Colors.Purple);
         public Node ExitNode11 = new ExitNode(new Position(312, 1055), Direction.Zuid, "e11", Colors.Purple);
+        public Node ExitNode12 = new ExitNode(new Position(1915, 475), Direction.Oost, "e12", Colors.Purple);
 
         //CustomNodes
         public Node Custom1 = new Node(new Position(1200, 100), "1");
@@ -87,7 +89,8 @@ namespace Simulator
 
         public Node Custom70 = new Node(new Position(500, 505), "70");
         public Node Custom71 = new Node(new Position(690, 475), "71");
-        public Node Custom72 = new Node(new Position(1425, 475), "72");
+        public Node Custom72 = new Node(new Position(1350, 475), "72");
+        public Node Custom73 = new Node(new Position(1425, 475), "73");
 
         //BusNodes
         public Node Bus1 = new BusNode(new Position(1250, 150), "b1");
@@ -108,7 +111,9 @@ namespace Simulator
         public Node Nodec10 = new BicycleNode(new Position(305, 275), "c10");
         public Node Nodec11 = new BicycleNode(new Position(312, 600), "c11");
         public Node Nodec12 = new BicycleNode(new Position(510, 500), "c12");
-        
+        public Node Nodec13 = new BicycleNode(new Position(1350, 225), "c13");
+        public Node Nodec14 = new BicycleNode(new Position(1150, 225), "c14");
+        public Node Nodec15 = new BicycleNode(new Position(1080, 275), "c15");
 
 
 

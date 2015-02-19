@@ -15,7 +15,7 @@ namespace Simulator.UserControls
         public static Map Instance { get; private set; }
         
 
-        public List<Node> StartPoints { get; private set; }
+        public List<Node> EntryPoints { get; private set; }
         public Nodes nodes { get; private set; }
         
 
@@ -25,7 +25,7 @@ namespace Simulator.UserControls
             Instance = this;
 
             //Initialize Node List
-            this.StartPoints = new List<Node>();
+            this.EntryPoints = new List<Node>();
 
             this.nodes = new Nodes();
             //Create nodes to their end points
@@ -37,19 +37,14 @@ namespace Simulator.UserControls
 
         private void CreateNodes()
         {
-            //Eerst simpel daarna veel nodes maken
             this.AddStartNodes();
-            this.BuildRoadFromSouth();
-            this.BuildRoadFromWest();
-            this.BuildRoadFromEast();
-            this.BuildRoadFromNorth();
-            this.BuidVentweg();
+            this.BuildRoads();
             this.BuildBycycleRoutes();
         }
 
         public void Draw()
         {
-            foreach (Node n in this.StartPoints)
+            foreach (Node n in this.EntryPoints)
             {
                 n.Draw();
             }
@@ -57,46 +52,37 @@ namespace Simulator.UserControls
 
         public void AddStartNodes()
         {
-            StartPoints.Add(this.nodes.EntryNode1);
-            StartPoints.Add(this.nodes.EntryNode2);
-            StartPoints.Add(this.nodes.EntryNode3);
-            StartPoints.Add(this.nodes.EntryNode4);
-            StartPoints.Add(this.nodes.EntryNode5);
-            StartPoints.Add(this.nodes.EntryNode6);
-            StartPoints.Add(this.nodes.EntryNode7);
-            StartPoints.Add(this.nodes.EntryNode8);
-            StartPoints.Add(this.nodes.EntryNode9);
-            StartPoints.Add(this.nodes.EntryNode10);
+            EntryPoints.Add(this.nodes.EntryNode1);
+            EntryPoints.Add(this.nodes.EntryNode2);
+            EntryPoints.Add(this.nodes.EntryNode3);
+            EntryPoints.Add(this.nodes.EntryNode4);
+            EntryPoints.Add(this.nodes.EntryNode5);
+            EntryPoints.Add(this.nodes.EntryNode6);
+            EntryPoints.Add(this.nodes.EntryNode7);
+            EntryPoints.Add(this.nodes.EntryNode8);
+            EntryPoints.Add(this.nodes.EntryNode9);
+            EntryPoints.Add(this.nodes.EntryNode10);
+            EntryPoints.Add(this.nodes.EntryNode11);
         }
 
-        private void BuildIntersection1()
+        private void BuildRoads()
         {
-
-        }
-
-        private void BuildRoadFromSouth()
-        {
+            //south
             this.nodes.EntryNode6.AddNode(this.nodes.Custom60);
             this.nodes.Custom60.AddNode(this.nodes.Custom61);
             this.nodes.Custom61.AddNode(this.nodes.Custom62);
             this.nodes.Custom61.AddNode(this.nodes.NodeB2);
             this.nodes.Custom62.AddNode(this.nodes.NodeB1);
-
             this.nodes.NodeB1.AddNode(this.nodes.ExitNode7);
             this.nodes.NodeB2.AddNode(this.nodes.ExitNode8);
-
             this.nodes.Custom60.AddNode(this.nodes.NodeD1);
-
             this.nodes.EntryNode5.AddNode(this.nodes.Custom63);
             this.nodes.Custom63.AddNode(this.nodes.NodeD2);
             this.nodes.Custom63.AddNode(this.nodes.Bus2);
             this.nodes.Bus2.AddNode(this.nodes.Bus3);
             this.nodes.Bus3.AddNode(this.nodes.NodeD2);
-        }
 
-
-        private void BuildRoadFromWest()
-        {
+            //west
             this.nodes.EntryNode7.AddNode(this.nodes.Custom50);
             this.nodes.Custom50.AddNode(this.nodes.Custom51);
             this.nodes.Custom50.AddNode(this.nodes.Custom53);
@@ -121,10 +107,8 @@ namespace Simulator.UserControls
             this.nodes.NodeK.AddNode(this.nodes.ExitNode4);
             this.nodes.NodeH1.AddNode(this.nodes.NodeF1);
             this.nodes.NodeH2.AddNode(this.nodes.NodeF2);
-        }
 
-        private void BuildRoadFromEast()
-        {
+            //east
             this.nodes.EntryNode3.AddNode(this.nodes.Custom20);
             this.nodes.Custom20.AddNode(this.nodes.Custom21);
             this.nodes.Custom21.AddNode(this.nodes.Custom22);
@@ -134,10 +118,8 @@ namespace Simulator.UserControls
             this.nodes.NodeF2.AddNode(this.nodes.ExitNode2);
             this.nodes.EntryNode4.AddNode(this.nodes.NodeE1);
             this.nodes.Custom20.AddNode(this.nodes.NodeE2);
-        }
 
-        private void BuildRoadFromNorth()
-        {
+            //North
             this.nodes.EntryNode1.AddNode(this.nodes.Custom1);
             this.nodes.Custom1.AddNode(this.nodes.Custom2);
             this.nodes.Custom2.AddNode(this.nodes.NodeE2);
@@ -158,21 +140,18 @@ namespace Simulator.UserControls
             this.nodes.NodeA1.AddNode(this.nodes.NodeC1);
             this.nodes.NodeA2.AddNode(this.nodes.NodeC2);
 
-            
-
-        }
-
-        private void BuidVentweg()
-        {
+            //Ventweg
             this.nodes.EntryNode8.AddNode(this.nodes.Custom70);
             this.nodes.Custom70.AddNode(this.nodes.NodeI);
             this.nodes.NodeJ.AddNode(this.nodes.Custom71);
             this.nodes.Custom71.AddNode(this.nodes.Custom72);
-            this.nodes.Custom72.AddNode(this.nodes.NodeK);
-        } 
+            this.nodes.Custom72.AddNode(this.nodes.Custom73);
+            this.nodes.Custom73.AddNode(this.nodes.NodeK);
+        }
 
         private void BuildBycycleRoutes()
         {
+            this.nodes.EntryNode11.AddNode(this.nodes.Nodec13);
             this.nodes.EntryNode10.AddNode(this.nodes.Nodec4);
             this.nodes.EntryNode9.AddNode(this.nodes.Nodec1);
             this.nodes.Nodec1.AddNode(this.nodes.Nodec6);
@@ -197,6 +176,10 @@ namespace Simulator.UserControls
             this.nodes.Nodec10.AddNode(this.nodes.Nodec3);
             this.nodes.Nodec11.AddNode(this.nodes.ExitNode11);
             this.nodes.Nodec12.AddNode(this.nodes.Custom71);
+            this.nodes.Nodec13.AddNode(this.nodes.Nodec14);
+            this.nodes.Nodec14.AddNode(this.nodes.Nodec15);
+            this.nodes.Nodec15.AddNode(this.nodes.Nodec2);
+            this.nodes.Custom73.AddNode(this.nodes.ExitNode12);
         }
     }
 }

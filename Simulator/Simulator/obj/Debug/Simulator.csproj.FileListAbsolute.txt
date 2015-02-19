@@ -13,3 +13,5 @@ C:\Users\Teake\Documents\GitHub\Software-Development-Groep-5\Simulator\Simulator
 C:\Users\Teake\Documents\GitHub\Software-Development-Groep-5\Simulator\Simulator\obj\Debug\Simulator.pdb
 C:\Users\Teake\Documents\GitHub\Software-Development-Groep-5\Simulator\Simulator\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\Teake\Documents\GitHub\Software-Development-Groep-5\Simulator\Simulator\obj\Debug\Simulator_MarkupCompile.lref
+C:\Users\Teake\Documents\GitHub\Software-Development-Groep-5\Simulator\Simulator\obj\Debug\Login.baml
+C:\Users\Teake\Documents\GitHub\Software-Development-Groep-5\Simulator\Simulator\obj\Debug\Login.g.cs
