@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Simulator
+namespace Simulator.Network
 {
-    public class NetworkBuffer
+    internal class NetworkBuffer
     {
         private string Name;
         private Semaphore BufferSemaphore = new Semaphore(1, 1);
@@ -22,7 +22,7 @@ namespace Simulator
         public void Add(byte[] ByteArray)
         {
             Buffer.Enqueue(ByteArray);
-            System.Diagnostics.Debug.WriteLine("[Info] " + this.Name + " recieved: " + ByteArray);
+            LogHandler.Instance.Write(this.Name + " recieved: " + ByteArray);
         }
 
         public int GetQueueCount()
@@ -36,6 +36,7 @@ namespace Simulator
 
             if (this.Buffer.TryDequeue(out Output))
             {
+                LogHandler.Instance.Write(this.Name + " removed: " + Output);
                 System.Diagnostics.Debug.WriteLine("[Info] " + this.Name + " Removed: " + Output);
                 return Output;
             }

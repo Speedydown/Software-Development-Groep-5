@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Simulator
+namespace Simulator.Network
 {
     public class NetworkHandler
     {
         public static readonly NetworkHandler Instance = new NetworkHandler();
-        public static readonly NetworkBuffer InputBuffer = new NetworkBuffer("InputBuffer");
-        public static readonly NetworkBuffer OutputBuffer = new NetworkBuffer("OutputBuffer");
+        internal static readonly NetworkBuffer InputBuffer = new NetworkBuffer("InputBuffer");
+        internal static readonly NetworkBuffer OutputBuffer = new NetworkBuffer("OutputBuffer");
 
         public bool Connected { get; private set; }
         private TcpClient clientSocket = new TcpClient();
@@ -68,9 +68,9 @@ namespace Simulator
         }
 
 
-        public void Send()
+        internal void Send()
         {
-            System.Diagnostics.Debug.WriteLine("[Info] NetworkHandler is now sending commands");
+            LogHandler.Instance.Write("NetworkHandler is now sending commands");
 
             while (Connected)
             {
@@ -86,7 +86,7 @@ namespace Simulator
                     catch (Exception e)
                     {
                         //Something went wrong?
-                        System.Diagnostics.Debug.WriteLine("[Critical] Could not send data because: \n" + e.ToString());
+                        LogHandler.Instance.Write("Could not send data because: \n" + e.ToString(), LogType.Critical);
 
                         this.Disconnect();
                         break;
@@ -97,9 +97,9 @@ namespace Simulator
             } 
         }
 
-        public void Recv()
+        internal void Recv()
         {
-            System.Diagnostics.Debug.WriteLine("[Info] NetworkHandler is recieving commands");
+            LogHandler.Instance.Write("NetworkHandler is now recieving commands");
 
             while (Connected)
             {
@@ -112,7 +112,7 @@ namespace Simulator
                 catch (Exception e)
                 {
                     //Something went wrong?
-                    System.Diagnostics.Debug.WriteLine("[Critical] Could not recieve data because: \n" + e.ToString());
+                    LogHandler.Instance.Write("Could not recieve data because: \n" + e.ToString(), LogType.Critical);
 
                     this.Disconnect();
                     break;

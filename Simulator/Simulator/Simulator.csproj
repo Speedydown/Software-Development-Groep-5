@@ -53,12 +53,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Logic\LogHandler.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Network\NetworkBuffer.cs" />
+    <Compile Include="Network\NetworkCommandHandler.cs" />
     <Compile Include="Network\NetworkHandler.cs" />
     <Compile Include="Vehicles\Vehicle.cs" />
+    <Compile Include="Vehicles\VehicleHandler.cs" />
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
