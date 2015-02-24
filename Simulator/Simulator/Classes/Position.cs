@@ -8,10 +8,10 @@ namespace Simulator
 {
     public class Position
     {
-        public int X { get; private set; }
-        public int Y { get; private set; }
+        public float X { get; private set; }
+        public float Y { get; private set; }
 
-        public Position(int X, int Y)
+        public Position(float X, float Y)
         {
             this.X = X;
             this.Y = Y;

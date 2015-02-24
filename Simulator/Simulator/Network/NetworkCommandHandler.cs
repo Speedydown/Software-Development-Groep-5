@@ -50,8 +50,8 @@ namespace Simulator.Network
         {
             Byte[] Output = null;
 
-            //UItzoeken hoe een byte naar het formaat te converteren en in array stoppen.
             Byte b = Byte.Parse(StoplichtID.ToString());
+            Output = new byte[] { b };
 
             NetworkHandler.OutputBuffer.Add(Output);
 

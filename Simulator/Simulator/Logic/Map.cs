@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Simulator.Dijkstra;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,12 @@ namespace Simulator.UserControls
 
             //Draw Figures on canvas
             this.Draw();
+
+            //Open test window
+            TestControls TestControlWindow = new TestControls();
+            TestControlWindow.Show();
+
+            VehicleHandler.Instance.StartVehicleHandler();
         }
 
         private void CreateNodes()

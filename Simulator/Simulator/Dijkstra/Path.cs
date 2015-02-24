@@ -7,8 +7,9 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using Simulator.UserControls;
+using System.Windows;
 
-namespace Simulator
+namespace Simulator.Dijkstra
 {
     public class Path
     {
@@ -19,8 +20,8 @@ namespace Simulator
         {
             get
             {
-                int LengthX = (Source.CurrentPosition.X > Destination.CurrentPosition.X) ? Source.CurrentPosition.X - Destination.CurrentPosition.X : Destination.CurrentPosition.X - Source.CurrentPosition.X;
-                int LengthY = (Source.CurrentPosition.Y > Destination.CurrentPosition.Y) ? Source.CurrentPosition.Y - Destination.CurrentPosition.Y : Destination.CurrentPosition.Y - Source.CurrentPosition.Y;
+                float LengthX = (Source.CurrentPosition.X > Destination.CurrentPosition.X) ? Source.CurrentPosition.X - Destination.CurrentPosition.X : Destination.CurrentPosition.X - Source.CurrentPosition.X;
+                float LengthY = (Source.CurrentPosition.Y > Destination.CurrentPosition.Y) ? Source.CurrentPosition.Y - Destination.CurrentPosition.Y : Destination.CurrentPosition.Y - Source.CurrentPosition.Y;
 
                 return (int)Math.Sqrt(((LengthX * LengthX) + (LengthY * LengthY)));
             }
@@ -58,6 +59,10 @@ namespace Simulator
 
             this.MapCanvas.Children.Add(PathLine);
 
+
+            //Pathlength
+            //LogHandler.Instance.Write(this.Source.ToString() + " to " +  this.Destination.ToString() + ": " + this.Length.ToString());
+
             this.Destination.Draw();
         }
 
@@ -69,6 +74,25 @@ namespace Simulator
             }
 
             this.NumberOfVehicles--;
+        }
+
+        public int CalculateCostOfRoute(Direction TargetDirection, int CurrentCost, Vehicle vehicle, List<Path> VisitedPaths)
+        {
+            CurrentCost += this.CalculateCost();
+            VisitedPaths.Add(this);
+
+            return this.Destination.CalculateCostOfRoute(TargetDirection, CurrentCost, vehicle, VisitedPaths);
+        }
+
+        private int CalculateCost()
+        {
+            //Startwaarde niet statisch geven, nodes worden gestraft voor meerdere kruispunten terwijl dat niet hoeft
+            int Output = 0;
+
+            Output += this.Length;
+            Output += this.NumberOfVehicles * 5;
+
+            return Output;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Simulator.Dijkstra;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,17 +11,17 @@ namespace Simulator
     public class Nodes
     {
         //StartingNodes
-        public Node EntryNode1 = new EntryNode(new Position(1200, 0), "s1");
-        public Node EntryNode2 = new EntryNode(new Position(1225, 0), "s2");
-        public Node EntryNode3 = new EntryNode(new Position(1915, 300), "s3");
-        public Node EntryNode4 = new EntryNode(new Position(1915, 325), "s4");
-        public Node EntryNode5 = new EntryNode(new Position(450, 1055), "s5");
-        public Node EntryNode6 = new EntryNode(new Position(425, 1055), "s6");
-        public Node EntryNode7 = new EntryNode(new Position(0, 425), "s7");
-        public Node EntryNode8 = new EntryNode(new Position(500, 1055), "s8");
-        public Node EntryNode9 = new EntryNode(new Position(0, 495), "s9", Colors.Purple);
-        public Node EntryNode10 = new EntryNode(new Position(395, 0), "s10", Colors.Purple);
-        public Node EntryNode11 = new EntryNode(new Position(1915, 225), "s11", Colors.Purple);
+        public Node EntryNode1 = new EntryNode(new Position(1200, 0), Direction.Noord, "s1");
+        public Node EntryNode2 = new EntryNode(new Position(1225, 0), Direction.Noord, "s2");
+        public Node EntryNode3 = new EntryNode(new Position(1915, 300), Direction.Oost, "s3");
+        public Node EntryNode4 = new EntryNode(new Position(1915, 325), Direction.Oost, "s4");
+        public Node EntryNode5 = new EntryNode(new Position(450, 1055), Direction.Zuid, "s5");
+        public Node EntryNode6 = new EntryNode(new Position(425, 1055), Direction.Zuid, "s6");
+        public Node EntryNode7 = new EntryNode(new Position(0, 425), Direction.West, "s7");
+        public Node EntryNode8 = new EntryNode(new Position(500, 1055), Direction.Zuid, "s8");
+        public Node EntryNode9 = new EntryNode(new Position(0, 495), Direction.West, "s9", Colors.Purple);
+        public Node EntryNode10 = new EntryNode(new Position(395, 0), Direction.Noord, "s10", Colors.Purple);
+        public Node EntryNode11 = new EntryNode(new Position(1915, 225), Direction.Oost, "s11", Colors.Purple);
         
 
         //Intersection Nodes
@@ -114,8 +115,6 @@ namespace Simulator
         public Node Nodec13 = new BicycleNode(new Position(1350, 225), "c13");
         public Node Nodec14 = new BicycleNode(new Position(1150, 225), "c14");
         public Node Nodec15 = new BicycleNode(new Position(1080, 275), "c15");
-
-
 
         public Nodes()
         {

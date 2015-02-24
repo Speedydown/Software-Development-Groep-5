@@ -53,6 +53,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\DynamicObject.cs" />
+    <Compile Include="Dijkstra\DijkstraCalculationHandler.cs" />
     <Compile Include="Logic\LogHandler.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -60,6 +62,10 @@
     <Compile Include="Network\NetworkBuffer.cs" />
     <Compile Include="Network\NetworkCommandHandler.cs" />
     <Compile Include="Network\NetworkHandler.cs" />
+    <Compile Include="TestControls.xaml.cs">
+      <DependentUpon>TestControls.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vehicles\Car.cs" />
     <Compile Include="Vehicles\Vehicle.cs" />
     <Compile Include="Vehicles\VehicleHandler.cs" />
     <Page Include="Login.xaml">
@@ -87,6 +93,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="TestControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Position.cs" />

@@ -9,7 +9,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using Simulator.UserControls;
 
-namespace Simulator
+namespace Simulator.Dijkstra
 {
     public class Node
     {
@@ -33,11 +33,12 @@ namespace Simulator
         private string Label = "";
         private bool DrawnOnCanvas = false;
         public Color NodeColor { get; protected set; }
+        private VehicleType[] AllowedVehicles = new VehicleType[] { VehicleType.Auto };
 
         //Local variables
         protected Color FillColor = Colors.White;
 
-        public Node(Position CurrentPosition, string Label = "")
+        public Node(Position CurrentPosition, string Label = "", VehicleType[] AllowedVehicles = null)
             : base()
         {
             this.NodeColor = Colors.Red;
@@ -45,17 +46,22 @@ namespace Simulator
             this.CurrentPosition = CurrentPosition;
             this.NodeColor = NodeColor;
             this.Label = Label;
+
+            if (AllowedVehicles != null)
+            {
+                this.AllowedVehicles = AllowedVehicles;
+            }
         }
 
         public Node AddNode(Node DestinationNode)
         {
             if (this is BusNode || this is BicycleNode)
             {
-                this.Paths.Add(new Path(this, DestinationNode, this.NodeColor)); 
+                this.Paths.Add(new Path(this, DestinationNode, this.NodeColor));
             }
             else
             {
-                this.Paths.Add(new Path(this, DestinationNode, DestinationNode.NodeColor)); 
+                this.Paths.Add(new Path(this, DestinationNode, DestinationNode.NodeColor));
             }
 
             return DestinationNode;
@@ -89,8 +95,8 @@ namespace Simulator
 
                 this.MapCanvas.Children.Add(NodeEllipse);
                 this.MapCanvas.Children.Add(IDNumberTextblock);
-                Map.SetZIndex(NodeEllipse, 254);
-                Map.SetZIndex(IDNumberTextblock, 255);
+                Map.SetZIndex(NodeEllipse, 253);
+                Map.SetZIndex(IDNumberTextblock, 254);
             }
         }
 
@@ -101,13 +107,115 @@ namespace Simulator
 
         public override string ToString()
         {
-            return CurrentPosition.ToString();
+            return Label;
         }
 
         private static int CurrentIDCount = 0;
         private static int GenerateID()
         {
             return ++CurrentIDCount;
+        }
+
+        /// <summary>
+        /// Dijkstra implementation
+        /// </summary>
+        /// <param name="TargetDirection"></param>
+        /// <returns></returns>
+        internal int CalculateCostOfRoute(Direction TargetDirection, int CurrentCost, Vehicle vehicle, List<Path> VisitedPaths)
+        {
+            int LowestCost = int.MaxValue;
+
+            //vehicle allowed check
+
+            if (this is ExitNode && (this as ExitNode).ExitDirection != TargetDirection)
+            {
+                LowestCost = Int32.MaxValue;
+            }
+            else
+            {
+                if (this is ExitNode)
+                {
+                    LowestCost = CurrentCost;
+                }
+
+                foreach (Path p in this.Paths)
+                {
+                    if (VisitedPaths.Contains(p))
+                    {
+                        continue;
+                    }
+
+                    int CurrentPathCost = p.CalculateCostOfRoute(TargetDirection, CurrentCost, vehicle, VisitedPaths);
+
+                    if (CurrentPathCost < LowestCost)
+                    {
+                        LowestCost = CurrentPathCost;
+                    }
+                }
+            }
+
+            return LowestCost;
+        }
+
+        public Node GetNodeWithLowestCost(Direction TargetDirection, Vehicle vehicle)
+        {
+            int LowestCost = Int32.MaxValue;
+            Node NodeWithLowestCost = null;
+            
+
+            foreach (Path p in this.Paths)
+            {
+                if (this == Map.Instance.nodes.Custom50)
+                {
+
+                }
+
+                List<Path> VisitedPaths = new List<Path>();
+
+                int CurrentPathCost = p.CalculateCostOfRoute(TargetDirection, 0, vehicle, VisitedPaths);
+
+                if (CurrentPathCost < LowestCost)
+                {
+                    LowestCost = CurrentPathCost;
+                    NodeWithLowestCost = p.Destination;
+                }
+            }
+
+            if (NodeWithLowestCost == null)
+            {
+                vehicle.Dispose();
+                return null;
+            }
+
+            LogHandler.Instance.Write("New node:" + NodeWithLowestCost.ToString());
+            return NodeWithLowestCost;
+        }
+
+        protected bool VehicleAllowed(Vehicle vehicle)
+        {
+            foreach (VehicleType v in this.AllowedVehicles)
+            {
+                if (vehicle.VehicleType == v)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public Path GetPathByDestinationNode(Node node)
+        {
+            foreach (Path p in this.Paths)
+            {
+                if (p.Destination == node)
+                {
+                    return p;
+                }
+            }
+
+            LogHandler.Instance.Write("Destination node was not found in current node.", LogType.Critical);
+            return null;
         }
     }
 }
