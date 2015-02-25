@@ -84,6 +84,7 @@ namespace Simulator
         {
             try
             {
+                this.Rotation = (float)this.GetRotationAngle(this.CurrentNode.CurrentPosition, this.TargetNode.CurrentPosition);
                 this.DetermineSpeed();
 
                 this.CurrentDistanceOfPathTraveled += this.CurrentSpeed;
@@ -192,6 +193,13 @@ namespace Simulator
             return new Rect(new Point(LowestX, LowestY), new Point(HighestX, HighestY));
         }
 
+        private double GetRotationAngle(Position Source, Position Destination)
+        {
+            float xDiff = Destination.X - Source.X;
+            float yDiff = Destination.Y - Source.Y;
+            return Math.Atan2(yDiff, xDiff) * 180.0 / Math.PI;
+        }
+
         public void Dispose()
         {
             VehicleHandler.CurrentVehicles.Remove(this);
@@ -206,9 +214,7 @@ namespace Simulator
                 {
                     LogHandler.Instance.Write("Could not remove vehicle from the map", LogType.Warning);
                 }
-            })); 
-
-            
+            }));  
         }
     }
 }
