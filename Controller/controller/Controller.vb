@@ -42,7 +42,7 @@ Public Class Controller
         Do While Not _controllerThread.CancellationPending
             'TODO Controller routines here.
 
-            Thread.Sleep(1000)
+            Thread.Sleep(5000)
 
             'TESTING (SEND A RANDOM MESSAGE EVERY SECOND)
             'Generates a random message.
