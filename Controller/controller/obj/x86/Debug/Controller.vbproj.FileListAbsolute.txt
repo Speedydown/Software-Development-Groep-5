@@ -36,6 +36,3 @@ C:\Users\dalo1200\Desktop\Controller\Controller\obj\x86\Debug\Controller.MainWin
 C:\Users\dalo1200\Desktop\Controller\Controller\obj\x86\Debug\Controller.Resources.resources
 C:\Users\dalo1200\Desktop\Controller\Controller\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\dalo1200\Desktop\Controller\Controller\obj\x86\Debug\GenerateResource.write.1.tlog
-C:\Users\dalo1200\Desktop\Nieuwe map\Controller\Controller\obj\x86\Debug\Controller.exe
-C:\Users\dalo1200\Desktop\Nieuwe map\Controller\Controller\obj\x86\Debug\Controller.xml
-C:\Users\dalo1200\Desktop\Nieuwe map\Controller\Controller\obj\x86\Debug\Controller.pdb

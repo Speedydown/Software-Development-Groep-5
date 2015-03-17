@@ -7,7 +7,7 @@ Imports System.Threading
 Public Class Server
 
     Private WithEvents _serverThread As BackgroundWorker
-    Private _client As ConnectedClient
+    Private _connectedClient As ConnectedClient
     Private ReadOnly _listeningPortNumber As Integer
     Private ReadOnly _listeningIpAddress As IPAddress
     Private _controller As Controller
@@ -15,7 +15,7 @@ Public Class Server
 
     Private _clientSocket As Socket
 
-    Public Sub New(ByVal listeningIpAddress As String, ByVal listeningPortNumber As Integer, ByVal controllerInstance As Controller, ByVal mainWindow As MainWindow)
+    Public Sub New(ByVal listeningIpAddress As String, ByVal listeningPortNumber As Integer, ByVal mainWindow As MainWindow)
 
         _mainWindow = mainWindow
 
@@ -31,20 +31,20 @@ Public Class Server
     Public Sub StartServer()
 
         'Stop the controller if it started.
-        If _serverThread.IsBusy() Then
-            _mainWindow.LogMessage("Server is already started.")
-        Else
+        If Not _serverThread.IsBusy() And Not _serverThread.CancellationPending Then
             _mainWindow.LogMessage("Starting server...")
 
-            'TODO Check (if the server is already started).
             _serverThread.RunWorkerAsync()
+        Else
+            _mainWindow.LogMessage("Server is already started.")
+
         End If
     End Sub
 
     Public Sub StopServer()
 
         'Stop the controller if it started.
-        If _serverThread.IsBusy() Then
+        If _serverThread.IsBusy() And Not _serverThread.CancellationPending Then
             _serverThread.CancelAsync()
 
             'Close the client socket, if a simulator is connected.
@@ -52,6 +52,13 @@ Public Class Server
                 _clientSocket.Close()
 
                 _mainWindow.LogMessage("Client socket closed.")
+            End If
+
+            'Remove the client from the server.
+            If _connectedClient IsNot Nothing Then
+                _connectedClient = Nothing
+
+                _mainWindow.LogMessage("Client removed from server.")
             End If
 
             'Stop the thread.
@@ -65,49 +72,70 @@ Public Class Server
 
     Private Sub Server(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles _serverThread.DoWork
 
-        'Listen for the simulator to connect.
-        Dim tcpListener As New TcpListener(_listeningIpAddress, _listeningPortNumber)
-        tcpListener.Start()
+        Try
+            'Listen for the simulator to connect.
+            Dim tcpListener As New TcpListener(_listeningIpAddress, _listeningPortNumber)
+            tcpListener.Start()
 
-        _mainWindow.LogMessage("Server is listening on port " + _listeningPortNumber.ToString + "...")
-        _mainWindow.LogMessage("Waiting for simulator to connect...")
+            _mainWindow.LogMessage("Server is listening on port " + _listeningPortNumber.ToString + "...")
+            _mainWindow.LogMessage("Waiting for simulator to connect...")
 
-        While Not _serverThread.CancellationPending
+            While Not _serverThread.CancellationPending
 
-            'Sleep to avoid locking up the CPU.
-            Thread.Sleep(10)
+                'Sleep to avoid locking up the CPU.
+                Thread.Sleep(10)
 
-            'Check if there is a connection pending.
-            If tcpListener.Pending Then
-                'Accept the connection.
-                _clientSocket = tcpListener.AcceptSocket()
+                'Check if there is a connection pending.
+                If tcpListener.Pending Then
+                    If _connectedClient Is Nothing Then
+                        'Accept the connection.
+                        _clientSocket = tcpListener.AcceptSocket()
 
-                'Log the IP address from the connected simulator.
-                Dim clientIpAddress As IPEndPoint = CType(_clientSocket.RemoteEndPoint, IPEndPoint)
-                _mainWindow.LogMessage("Simulator connected. IP: " + clientIpAddress.Address.ToString() + ".")
+                        'Log the IP address from the connected simulator.
+                        Dim clientIpAddress As IPEndPoint = CType(_clientSocket.RemoteEndPoint, IPEndPoint)
+                        _mainWindow.LogMessage("Simulator connected. IP: " + clientIpAddress.Address.ToString() + ".")
 
-                'Start the controller.
-                _controller = New Controller(Me, _mainWindow)
-                _controller.StartController()
+                        'Start the controller.
+                        _controller = New Controller(Me, _mainWindow)
+                        _controller.StartController()
 
-                'Create a new client object.
-                _client = New ConnectedClient(Me, _clientSocket)
-            End If
-        End While
+                        'Create a new client object.
+                        _connectedClient = New ConnectedClient(Me, _clientSocket, _mainWindow)
+                    End If
+                End If
+            End While
 
-        tcpListener.Stop()
+            tcpListener.Stop()
+
+        Catch exception As Exception
+            _mainWindow.LogMessage("ERROR: " + exception.Message)
+        End Try
     End Sub
 
     Public Sub IncomingMessage(ByVal message As Byte())
-        '_controller.ReceiveMessage(New Message().DecodeMessage(message))
         _controller.ReceiveMessage(message)
         _mainWindow.LogMessage("MESSAGE RECEIVED: " + New Message().MessageToString(message))
     End Sub
 
     Public Sub OutgoingMessage(ByVal message As Byte())
-        'Send a message to the simulator.
-        _client.SendMessage(message)
-        _mainWindow.LogMessage("MESSAGE SENT: " + New Message().MessageToString(message))
+
+        'Check if client is connected before sending a message.
+        If _connectedClient IsNot Nothing Then
+            If _connectedClient.ClientSocket().Connected() Then
+
+                'Send a message to the simulator.
+                _connectedClient.SendMessage(message)
+                _mainWindow.LogMessage("MESSAGE SENT: " + New Message().MessageToString(message))
+            End If
+        End If
+    End Sub
+
+    Public Sub ClientDisconnected(ByVal connectedClient As ConnectedClient)
+
+        'Remove the client and stop the controller when the client disconnects.
+        _connectedClient = Nothing
+        _controller.StopController()
+        _mainWindow.LogMessage("Client disconnected")
     End Sub
 
 End Class

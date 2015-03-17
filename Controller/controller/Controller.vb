@@ -6,7 +6,7 @@ Public Class Controller
     Private ReadOnly _server As Server
     Private ReadOnly _mainWindow As MainWindow
     Private _message As Byte()
-    Private Shared random As New Random(DateTime.UtcNow.Millisecond)
+    Private Shared ReadOnly Random As New Random(DateTime.UtcNow.Millisecond)
 
     Public Sub New(ByVal server As Server, ByVal mainWindow As MainWindow)
         _server = server
@@ -18,19 +18,19 @@ Public Class Controller
     End Sub
 
     Public Sub StartController()
+
         'Start the controller if it is not already started.
-        If Not _controllerThread.IsBusy() Then
+        If Not _controllerThread.IsBusy() And Not _controllerThread.CancellationPending Then
             _controllerThread.RunWorkerAsync()
             _mainWindow.LogMessage("Controller started.")
         Else
             _mainWindow.LogMessage("Controller is already started.")
         End If
-
     End Sub
 
     Public Sub StopController()
         'Stop the controller if it started.
-        If _controllerThread.IsBusy() Then
+        If _controllerThread.IsBusy And Not _controllerThread.CancellationPending Then
             _controllerThread.CancelAsync()
             _mainWindow.LogMessage("Controller stopped.")
         Else
@@ -46,15 +46,15 @@ Public Class Controller
 
             'TESTING (SEND A RANDOM MESSAGE EVERY SECOND)
             'Generates a random message.
-            Dim randomMessage = random.Next(0, 2)
+            Dim randomMessage = Random.Next(0, 2)
 
             Dim numbers As Byte()
 
             If randomMessage = 0 Then
-                numbers = New Byte() {1, random.Next(0, 5), random.Next(0, 5), random.Next(0, 4)}
+                numbers = New Byte() {1, Random.Next(0, 5), Random.Next(0, 5), Random.Next(0, 4)}
             End If
             If randomMessage = 1 Then
-                numbers = New Byte() {2, random.Next(0, 256), random.Next(0, 3)}
+                numbers = New Byte() {2, Random.Next(0, 256), Random.Next(0, 3)}
             End If
 
             SendMessage(numbers)
