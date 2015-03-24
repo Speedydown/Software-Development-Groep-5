@@ -1,20 +1,18 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Controller", "Controller\Controller.vbproj", "{6BBFDF96-7477-4B26-9BD2-4C2762272E55}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Controller", "Controller\Controller.vbproj", "{EF58C0F6-3BA2-49F3-87CB-7273569BF6C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6BBFDF96-7477-4B26-9BD2-4C2762272E55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BBFDF96-7477-4B26-9BD2-4C2762272E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6BBFDF96-7477-4B26-9BD2-4C2762272E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6BBFDF96-7477-4B26-9BD2-4C2762272E55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF58C0F6-3BA2-49F3-87CB-7273569BF6C6}.Debug|x86.ActiveCfg = Debug|x86
+		{EF58C0F6-3BA2-49F3-87CB-7273569BF6C6}.Debug|x86.Build.0 = Debug|x86
+		{EF58C0F6-3BA2-49F3-87CB-7273569BF6C6}.Release|x86.ActiveCfg = Release|x86
+		{EF58C0F6-3BA2-49F3-87CB-7273569BF6C6}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

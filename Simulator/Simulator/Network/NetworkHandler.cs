@@ -106,7 +106,7 @@ namespace Simulator.Network
                 try
                 {
                     byte[] inStream = new byte[4];
-                    serverStream.Read(inStream, 0, 1024);
+                    serverStream.Read(inStream, 0, 4);
                     NetworkHandler.InputBuffer.Add(inStream);
                 }
                 catch (Exception e)
