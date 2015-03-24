@@ -6,7 +6,7 @@
     End Sub
 
     Private Sub MainWindow_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        LogMessage("Application started. Click the button to start the server.")
+        LogMessage("Click the button to start the server.")
 
         'Create server instance.
         _server = New Server("127.0.0.1", 10000, Me)

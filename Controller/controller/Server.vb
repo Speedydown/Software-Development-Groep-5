@@ -135,7 +135,7 @@ Public Class Server
         'Remove the client and stop the controller when the client disconnects.
         _connectedClient = Nothing
         _controller.StopController()
-        _mainWindow.LogMessage("Client disconnected")
+        _mainWindow.LogMessage("Client disconnected.")
     End Sub
 
 End Class

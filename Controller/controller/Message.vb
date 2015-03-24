@@ -33,6 +33,8 @@ Public Class Message
                     messageAsString.Append("West, ")
                 Case 4
                     messageAsString.Append("Ventweg, ")
+                Case Else
+                    messageAsString.Append("Unknown, raw: " + message(1) + ", ")
             End Select
 
             Select Case message(2)
@@ -46,6 +48,8 @@ Public Class Message
                     messageAsString.Append("West, ")
                 Case 4
                     messageAsString.Append("Ventweg, ")
+                Case Else
+                    messageAsString.Append("Unknown, raw: " + message(2) + ", ")
             End Select
 
             Select Case message(3)
@@ -57,6 +61,8 @@ Public Class Message
                     messageAsString.Append("Bus.")
                 Case 3
                     messageAsString.Append("Voetganger.")
+                Case Else
+                    messageAsString.Append("Unknown, raw: " + message(3) + ".")
             End Select
         End If
 
@@ -71,7 +77,13 @@ Public Class Message
                     messageAsString.Append("Oranje.")
                 Case 2
                     messageAsString.Append("Groen.")
+                Case Else
+                    messageAsString.Append("Unknown, raw: " + message(2) + ".")
             End Select
+        End If
+
+        If message(0) <> 1 AndAlso message(0) <> 2 Then
+            messageAsString.Append("Unknow message, raw:" + message(0))
         End If
 
         Return messageAsString.ToString()
