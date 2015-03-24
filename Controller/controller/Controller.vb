@@ -42,9 +42,9 @@ Public Class Controller
         Do While Not _controllerThread.CancellationPending
             'TODO Controller routines here.
 
-            Thread.Sleep(5000)
+            Thread.Sleep(3000)
 
-            'TESTING (SEND A RANDOM MESSAGE EVERY SECOND)
+            'TESTING (SEND A RANDOM MESSAGE EVERY THREE SECONDS)
             'Generates a random message.
             Dim randomMessage = Random.Next(0, 2)
 

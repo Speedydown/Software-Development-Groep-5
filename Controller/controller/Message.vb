@@ -54,15 +54,15 @@ Public Class Message
 
             Select Case message(3)
                 Case 0
-                    messageAsString.Append("Auto.")
+                    messageAsString.Append("Auto")
                 Case 1
-                    messageAsString.Append("Fiets.")
+                    messageAsString.Append("Fiets")
                 Case 2
-                    messageAsString.Append("Bus.")
+                    messageAsString.Append("Bus")
                 Case 3
-                    messageAsString.Append("Voetganger.")
+                    messageAsString.Append("Voetganger")
                 Case Else
-                    messageAsString.Append("Unknown, raw: " + message(3) + ".")
+                    messageAsString.Append("Unknown, raw: " + message(3))
             End Select
         End If
 
@@ -72,13 +72,13 @@ Public Class Message
 
             Select Case message(2)
                 Case 0
-                    messageAsString.Append("Rood.")
+                    messageAsString.Append("Rood")
                 Case 1
-                    messageAsString.Append("Oranje.")
+                    messageAsString.Append("Oranje")
                 Case 2
-                    messageAsString.Append("Groen.")
+                    messageAsString.Append("Groen")
                 Case Else
-                    messageAsString.Append("Unknown, raw: " + message(2) + ".")
+                    messageAsString.Append("Unknown, raw: " + message(2))
             End Select
         End If
 

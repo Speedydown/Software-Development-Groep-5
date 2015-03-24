@@ -49,7 +49,7 @@ Public Class ConnectedClient
             Loop
 
         Catch exception As Exception
-            _mainWindow.LogMessage("XERROR: " + exception.Message)
+            _mainWindow.LogMessage("ERROR: " + exception.Message)
         Finally
             'Remove the client from the server when the connection is gone.
             _server.ClientDisconnected(Me)
@@ -57,9 +57,11 @@ Public Class ConnectedClient
     End Sub
 
     Public Sub SendMessage(ByVal message As Byte())
-        If _clientSocket IsNot Nothing Then
-            If _clientSocket.Connected Then
-                _clientSocket.Send(message)
+        If message IsNot Nothing Then
+            If _clientSocket IsNot Nothing Then
+                If _clientSocket.Connected Then
+                    _clientSocket.Send(message)
+                End If
             End If
         End If
     End Sub

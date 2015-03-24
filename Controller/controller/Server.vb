@@ -114,7 +114,7 @@ Public Class Server
 
     Public Sub IncomingMessage(ByVal message As Byte())
         _controller.ReceiveMessage(message)
-        _mainWindow.LogMessage("MESSAGE RECEIVED: " + New Message().MessageToString(message))
+        _mainWindow.LogMessage("MESSAGE RECEIVED: " + New Message().MessageToString(message) + ".")
     End Sub
 
     Public Sub OutgoingMessage(ByVal message As Byte())
@@ -125,7 +125,7 @@ Public Class Server
 
                 'Send a message to the simulator.
                 _connectedClient.SendMessage(message)
-                _mainWindow.LogMessage("MESSAGE SENT: " + New Message().MessageToString(message))
+                _mainWindow.LogMessage("MESSAGE SENT: " + New Message().MessageToString(message) + ".")
             End If
         End If
     End Sub
