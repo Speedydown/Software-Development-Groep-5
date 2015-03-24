@@ -21,5 +21,12 @@ namespace Simulator
         {
             return "[" + this.X + "][" + this.Y + "]";
         }
+
+        public static double GetAngleBetweenPoints(Position Source, Position Destination)
+        {
+            float xDiff = Destination.X - Source.X;
+            float yDiff = Destination.Y - Source.Y;
+            return Math.Atan2(yDiff, xDiff) * 180.0 / Math.PI;
+        }
     }
 }

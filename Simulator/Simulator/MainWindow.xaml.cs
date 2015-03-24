@@ -20,6 +20,7 @@ namespace Simulator
         public MainWindow()
         {
             InitializeComponent();
+            LogHandler.Instance.LogListview = this.LogListview;
         }
 
         protected override void OnClosed(EventArgs e)
@@ -27,6 +28,11 @@ namespace Simulator
             base.OnClosed(e);
 
             Application.Current.Shutdown();
+        }
+
+        private void Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
