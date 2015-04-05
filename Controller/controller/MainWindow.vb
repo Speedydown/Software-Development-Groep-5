@@ -1,15 +1,23 @@
-﻿Public Class MainWindow
+﻿Imports System.Net
+Imports System.Net.NetworkInformation
+Imports System.Net.Sockets
+
+Public Class MainWindow
     Dim _server As Server
 
-    Private Sub ExitToolStripMenuItemExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItemExit.Click
+    Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
         Application.Exit()
+    End Sub
+
+    Private Sub ShowIPAddressToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ShowIPAddressToolStripMenuItem.Click
+        MessageBox.Show("IP address: " + GetIpAddress() + ".", "IP address", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
     Private Sub MainWindow_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         LogMessage("Click the button to start the server.")
 
         'Create server instance.
-        _server = New Server("127.0.0.1", 10000, Me)
+        _server = New Server(1000, Me)
     End Sub
 
     Private Sub ToolStripButtonControllerStart_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripButtonControllerStart.Click
@@ -37,4 +45,21 @@
                End Sub)
     End Sub
 
+    Public Function GetIpAddress() As String
+        'Test if a network card is active.
+        Dim u As New UdpClient("74.125.133.94", 1)
+        Dim ipAddress As IPAddress = CType(u.Client.LocalEndPoint, IPEndPoint).Address
+
+        For Each networkInterface As NetworkInterface In networkInterface.GetAllNetworkInterfaces()
+            Dim ipInterfaceProperties As IPInterfaceProperties = networkInterface.GetIPProperties()
+
+            For Each unicastIpAddressInformation As UnicastIPAddressInformation In ipInterfaceProperties.UnicastAddresses
+                If ipAddress.Equals(unicastIpAddressInformation.Address) Then
+                    Return unicastIpAddressInformation.Address.ToString()
+                End If
+            Next unicastIpAddressInformation
+        Next networkInterface
+
+        Return False
+    End Function
 End Class

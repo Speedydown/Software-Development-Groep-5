@@ -9,17 +9,15 @@ Public Class Server
     Private WithEvents _serverThread As BackgroundWorker
     Private _connectedClient As ConnectedClient
     Private ReadOnly _listeningPortNumber As Integer
-    Private ReadOnly _listeningIpAddress As IPAddress
     Private _controller As Controller
     Private ReadOnly _mainWindow As MainWindow
 
     Private _clientSocket As Socket
 
-    Public Sub New(ByVal listeningIpAddress As String, ByVal listeningPortNumber As Integer, ByVal mainWindow As MainWindow)
+    Public Sub New(ByVal listeningPortNumber As Integer, ByVal mainWindow As MainWindow)
 
         _mainWindow = mainWindow
 
-        _listeningIpAddress = IPAddress.Parse(listeningIpAddress)
         _listeningPortNumber = listeningPortNumber
         '_controller = controllerInstance
 
@@ -74,10 +72,10 @@ Public Class Server
 
         Try
             'Listen for the simulator to connect.
-            Dim tcpListener As New TcpListener(_listeningIpAddress, _listeningPortNumber)
+            Dim tcpListener As New TcpListener(IPAddress.Any, _listeningPortNumber)
             tcpListener.Start()
 
-            _mainWindow.LogMessage("Server is listening on port " + _listeningPortNumber.ToString + "...")
+            _mainWindow.LogMessage("Server is listening on " + _mainWindow.GetIpAddress() + ":" + _listeningPortNumber.ToString + "...")
             _mainWindow.LogMessage("Waiting for simulator to connect...")
 
             While Not _serverThread.CancellationPending

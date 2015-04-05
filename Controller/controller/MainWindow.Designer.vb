@@ -25,20 +25,22 @@ Partial Class MainWindow
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainWindow))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LoadFileToolStripMenuItemLoadFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoadFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ExitToolStripMenuItemExit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButtonControllerStart = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButtonControllerStop = New System.Windows.Forms.ToolStripButton()
         Me.ListBoxStatus = New System.Windows.Forms.ListBox()
+        Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowIPAddressToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(542, 24)
@@ -47,27 +49,27 @@ Partial Class MainWindow
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadFileToolStripMenuItemLoadFile, Me.ToolStripSeparator1, Me.ExitToolStripMenuItemExit})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadFileToolStripMenuItem, Me.ToolStripSeparator1, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
         '
-        'LoadFileToolStripMenuItemLoadFile
+        'LoadFileToolStripMenuItem
         '
-        Me.LoadFileToolStripMenuItemLoadFile.Name = "LoadFileToolStripMenuItemLoadFile"
-        Me.LoadFileToolStripMenuItemLoadFile.Size = New System.Drawing.Size(152, 22)
-        Me.LoadFileToolStripMenuItemLoadFile.Text = "Load File..."
+        Me.LoadFileToolStripMenuItem.Name = "LoadFileToolStripMenuItem"
+        Me.LoadFileToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.LoadFileToolStripMenuItem.Text = "Load File..."
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(149, 6)
         '
-        'ExitToolStripMenuItemExit
+        'ExitToolStripMenuItem
         '
-        Me.ExitToolStripMenuItemExit.Name = "ExitToolStripMenuItemExit"
-        Me.ExitToolStripMenuItemExit.Size = New System.Drawing.Size(152, 22)
-        Me.ExitToolStripMenuItemExit.Text = "Exit"
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'ToolStrip1
         '
@@ -104,6 +106,19 @@ Partial Class MainWindow
         Me.ListBoxStatus.Size = New System.Drawing.Size(518, 316)
         Me.ListBoxStatus.TabIndex = 2
         '
+        'ToolsToolStripMenuItem
+        '
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ShowIPAddressToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
+        Me.ToolsToolStripMenuItem.Text = "Tools"
+        '
+        'ShowIPAddressToolStripMenuItem
+        '
+        Me.ShowIPAddressToolStripMenuItem.Name = "ShowIPAddressToolStripMenuItem"
+        Me.ShowIPAddressToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.ShowIPAddressToolStripMenuItem.Text = "Show IP address"
+        '
         'MainWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -127,12 +142,14 @@ Partial Class MainWindow
     End Sub
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
     Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents LoadFileToolStripMenuItemLoadFile As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LoadFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ExitToolStripMenuItemExit As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
     Friend WithEvents ToolStripButtonControllerStart As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButtonControllerStop As System.Windows.Forms.ToolStripButton
     Friend WithEvents ListBoxStatus As System.Windows.Forms.ListBox
+    Friend WithEvents ToolsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ShowIPAddressToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

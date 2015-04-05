@@ -34,7 +34,7 @@ Public Class Message
                 Case 4
                     messageAsString.Append("Ventweg, ")
                 Case Else
-                    messageAsString.Append("Unknown, raw: " + message(1) + ", ")
+                    messageAsString.Append("Unknown, raw: " + message(1).ToString() + ", ")
             End Select
 
             Select Case message(2)
@@ -49,7 +49,7 @@ Public Class Message
                 Case 4
                     messageAsString.Append("Ventweg, ")
                 Case Else
-                    messageAsString.Append("Unknown, raw: " + message(2) + ", ")
+                    messageAsString.Append("Unknown, raw: " + message(2).ToString() + ", ")
             End Select
 
             Select Case message(3)
@@ -72,18 +72,24 @@ Public Class Message
 
             Select Case message(2)
                 Case 0
-                    messageAsString.Append("Rood")
+                    messageAsString.Append("Red")
                 Case 1
-                    messageAsString.Append("Oranje")
+                    messageAsString.Append("Orange")
                 Case 2
-                    messageAsString.Append("Groen")
+                    messageAsString.Append("Green")
                 Case Else
-                    messageAsString.Append("Unknown, raw: " + message(2))
+                    messageAsString.Append("Unknown, raw: " + message(2).ToString())
             End Select
         End If
 
-        If message(0) <> 1 AndAlso message(0) <> 2 Then
-            messageAsString.Append("Unknow message, raw:" + message(0))
+        If message(0) = 3 Then
+            messageAsString.Append("Vehicle announcement message, ")
+            messageAsString.Append("Traffic Light Id: " + message(1).ToString + ", ")
+            messageAsString.Append("Distance: " + message(1).ToString + ", ")
+        End If
+
+        If message(0) <> 1 AndAlso message(0) <> 2 AndAlso message(0) <> 3 Then
+            messageAsString.Append("Unknow message, raw: " + message(0).ToString())
         End If
 
         Return messageAsString.ToString()
