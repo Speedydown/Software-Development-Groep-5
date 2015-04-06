@@ -24,26 +24,26 @@ Public Class Message
 
             Select Case message(1)
                 Case 0
-                    messageAsString.Append("Noord, ")
+                    messageAsString.Append("North, ")
                 Case 1
-                    messageAsString.Append("Oost, ")
+                    messageAsString.Append("East, ")
                 Case 2
-                    messageAsString.Append("Zuid, ")
+                    messageAsString.Append("South, ")
                 Case 3
                     messageAsString.Append("West, ")
                 Case 4
-                    messageAsString.Append("Ventweg, ")
+                    messageAsString.Append("Frontage road, ")
                 Case Else
                     messageAsString.Append("Unknown, raw: " + message(1).ToString() + ", ")
             End Select
 
             Select Case message(2)
                 Case 0
-                    messageAsString.Append("Noord, ")
+                    messageAsString.Append("North, ")
                 Case 1
-                    messageAsString.Append("Oost, ")
+                    messageAsString.Append("East, ")
                 Case 2
-                    messageAsString.Append("Zuid, ")
+                    messageAsString.Append("South, ")
                 Case 3
                     messageAsString.Append("West, ")
                 Case 4
@@ -54,21 +54,27 @@ Public Class Message
 
             Select Case message(3)
                 Case 0
-                    messageAsString.Append("Auto")
+                    messageAsString.Append("Car")
                 Case 1
-                    messageAsString.Append("Fiets")
+                    messageAsString.Append("Bicycle")
                 Case 2
                     messageAsString.Append("Bus")
                 Case 3
-                    messageAsString.Append("Voetganger")
+                    messageAsString.Append("Walker")
                 Case Else
-                    messageAsString.Append("Unknown, raw: " + message(3))
+                    messageAsString.Append("Unknown, raw: " + message(3).ToString())
             End Select
         End If
 
         If message(0) = 2 Then
-            messageAsString.Append("Traffic Light message, ")
-            messageAsString.Append("Stoplicht Id: " + message(1).ToString + ", ")
+            messageAsString.Append("Traffic light message, ")
+            messageAsString.Append("Traffic light Id: ")
+
+            If (message(1) >= 0 AndAlso message(1) <= 255) Then
+                messageAsString.Append(message(1).ToString() + ", ")
+            Else
+                messageAsString.Append("Unknown, raw:" + message(1).ToString() + ", ")
+            End If
 
             Select Case message(2)
                 Case 0
@@ -84,8 +90,21 @@ Public Class Message
 
         If message(0) = 3 Then
             messageAsString.Append("Vehicle announcement message, ")
-            messageAsString.Append("Traffic Light Id: " + message(1).ToString + ", ")
-            messageAsString.Append("Distance: " + message(1).ToString + ", ")
+            messageAsString.Append("Traffic light Id: ")
+
+            If (message(1) >= 0 AndAlso message(1) <= 255) Then
+                messageAsString.Append(message(1).ToString() + ", ")
+            Else
+                messageAsString.Append("Unknown, raw:" + message(1).ToString() + ", ")
+            End If
+
+            messageAsString.Append("Distance: ")
+
+            If (message(2) >= 0 AndAlso message(2) <= 255) Then
+                messageAsString.Append(message(2).ToString())
+            Else
+                messageAsString.Append("Unknown, raw:" + message(2).ToString())
+            End If
         End If
 
         If message(0) <> 1 AndAlso message(0) <> 2 AndAlso message(0) <> 3 Then
