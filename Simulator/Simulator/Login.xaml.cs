@@ -62,6 +62,8 @@ namespace Simulator
 
             if (NetworkHandler.Instance.Connected)
             {
+                MainWindow MainWindow = new MainWindow();
+                MainWindow.Show();
                 this.Close();
             }
 

@@ -1,4 +1,5 @@
 ﻿using Simulator.Dijkstra;
+using Simulator.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,10 @@ namespace Simulator.UserControls
             TestControlWindow.Show();
 
             VehicleHandler.Instance.StartVehicleHandler();
+
+
+            //ProcessCommands
+            NetworkCommandHandler.Instance.Start();
         }
 
         private void CreateNodes()

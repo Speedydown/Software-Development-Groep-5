@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Simulator.Network
 {
@@ -37,7 +38,25 @@ namespace Simulator.Network
 
                 if (Input != null)
                 {
-                    //process
+                    if (Input[0] == (byte)1)
+                    {
+                        Direction StartDirection = (Direction)Input[1];
+                        Direction DestinationDirection = (Direction)Input[2];
+                        VehicleType VehicleType = (VehicleType)Input[3];
+
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            try
+                            {
+                                VehicleHandler.Instance.SpawnVehicle(StartDirection, DestinationDirection, VehicleType);
+                            }
+                            catch (Exception)
+                            {
+                                Thread.CurrentThread.Abort();
+                            }
+                        }));
+                    }
+                    
 
                     this.CommandsRecieved++;
                 }

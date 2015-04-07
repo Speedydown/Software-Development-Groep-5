@@ -17,7 +17,7 @@ Public Class MainWindow
         LogMessage("Click the button to start the server.")
 
         'Create server instance.
-        _server = New Server(1000, Me)
+        _server = New Server(10000, Me)
     End Sub
 
     Private Sub ToolStripButtonControllerStart_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripButtonControllerStart.Click

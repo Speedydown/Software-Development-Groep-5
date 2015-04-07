@@ -103,6 +103,8 @@ namespace Simulator.Network
 
             while (Connected)
             {
+                //NetworkHandler.InputBuffer.Add(new byte[] { 1, 2, 3, 0 });
+
                 try
                 {
                     byte[] inStream = new byte[4];

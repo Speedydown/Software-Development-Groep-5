@@ -14,6 +14,7 @@ namespace Simulator
         public static readonly VehicleHandler Instance = new VehicleHandler();
         public static readonly List<Vehicle> CurrentVehicles = new List<Vehicle>();
         public static readonly Random RandomNumberGenerator = new Random();
+        public static readonly Dictionary<Direction, Direction> InvalidDirections = new Dictionary<Direction, Direction>();
 
         private Thread UpdateVehicleThread;
 
@@ -35,6 +36,14 @@ namespace Simulator
 
             foreach (EntryNode n in Map.Instance.EntryPoints)
             {
+                foreach (var Entry in InvalidDirections)
+                {
+                    if (Entry.Key == n.StartDirection && Entry.Value == EndDirection)
+                    {
+                        continue;
+                    }
+                }
+
                 if (n.StartDirection == StartDirection)
                 {
                     SuitableStartNodes.Add(n);
@@ -47,12 +56,16 @@ namespace Simulator
                 return;
             }
 
+            int DefaultRotation = (StartDirection == Direction.Noord || StartDirection == Direction.Zuid || StartDirection == Direction.Ventweg) ? 90 : 0;
+            Node StartNode = SuitableStartNodes[RandomNumberGenerator.Next(0, SuitableStartNodes.Count)];
+            Vehicle vehicle = null; 
+            
             if (Vehicle == VehicleType.Auto)
             {
-                int DefaultRotation = (StartDirection == Direction.Noord || StartDirection == Direction.Zuid || StartDirection == Direction.Ventweg) ? 90 : 0;
-
-                new Car(SuitableStartNodes[RandomNumberGenerator.Next(0, SuitableStartNodes.Count)], DefaultRotation, EndDirection); 
+                vehicle = new Car(StartNode, DefaultRotation, EndDirection);
             }
+
+            
         }
 
         private void UpdateVehicles()

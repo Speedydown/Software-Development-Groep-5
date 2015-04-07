@@ -9,7 +9,7 @@
                 <local:Map x:Name="Map" Background="White"  />
             </Border>
         </ScrollViewer>
-        <Grid Width="400" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Grid Width="400" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>

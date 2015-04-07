@@ -183,6 +183,21 @@ namespace Simulator.Dijkstra
 
             if (NodeWithLowestCost == null)
             {
+                if (vehicle.CurrentNode is EntryNode)
+                {
+                    try
+                    {
+                        VehicleHandler.InvalidDirections.Add((vehicle.CurrentNode as EntryNode).StartDirection, TargetDirection);
+                    }
+                    catch
+                    {
+
+                    }
+
+                    VehicleHandler.Instance.SpawnVehicle((vehicle.CurrentNode as EntryNode).StartDirection, TargetDirection, vehicle.VehicleType);
+
+                }
+
                 vehicle.Dispose();
                 return null;
             }
