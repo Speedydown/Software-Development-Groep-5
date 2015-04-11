@@ -11,7 +11,7 @@ using Simulator.UserControls;
 
 namespace Simulator.Dijkstra
 {
-    public class Node
+    public class Node : DynamicObject
     {
         private int _ID;
         public int ID
