@@ -11,7 +11,6 @@ namespace Simulator.Network
     internal class NetworkBuffer
     {
         private string Name;
-        private Semaphore BufferSemaphore = new Semaphore(1, 1);
         private ConcurrentQueue<byte[]> Buffer = new ConcurrentQueue<byte[]>();
 
         public NetworkBuffer(string Name)
@@ -22,7 +21,7 @@ namespace Simulator.Network
         public void Add(byte[] ByteArray)
         {
             Buffer.Enqueue(ByteArray);
-            LogHandler.Instance.Write(this.Name + " recieved: " + ByteArray);
+            LogHandler.Instance.Write(this.Name + " recieved: " + BitConverter.ToString(ByteArray).Replace("-", ""));
         }
 
         public int GetQueueCount()
@@ -36,8 +35,7 @@ namespace Simulator.Network
 
             if (this.Buffer.TryDequeue(out Output))
             {
-                LogHandler.Instance.Write(this.Name + " removed: " + Output);
-                System.Diagnostics.Debug.WriteLine("[Info] " + this.Name + " Removed: " + Output);
+                LogHandler.Instance.Write(this.Name + " removed: " + BitConverter.ToString(Output).Replace("-", ""));
                 return Output;
             }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Simulator.Network;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,11 @@ namespace Simulator.Dijkstra
 
             this.NodeColor = Colors.Black;
             this.FillColor = (IsVehicleSignupNode ? Colors.Lime : Colors.LightCoral);
+        }
+
+        public void Notify()
+        {
+            NetworkCommandHandler.Instance.ProcessVehicleCheckpoint(this.TrafficLightID, this.IsVehicleSignupNode);
         }
     }
 }

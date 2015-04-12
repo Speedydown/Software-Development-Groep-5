@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Simulator.Dijkstra;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,6 +41,7 @@ namespace Simulator.Network
                 {
                     if (Input[0] == (byte)1)
                     {
+                        //VehiclePacket
                         Direction StartDirection = (Direction)Input[1];
                         Direction DestinationDirection = (Direction)Input[2];
                         VehicleType VehicleType = (VehicleType)Input[3];
@@ -56,6 +58,33 @@ namespace Simulator.Network
                             }
                         }));
                     }
+                    else if (Input[0] == (byte)2)
+                    {
+                        //TrafficLightPacket
+                        int TrafficLightID = (int)Input[1];
+                        TrafficLightState State = (TrafficLightState)Input[2];
+
+                        foreach (TrafficLight TL in TrafficLight.TrafficLights)
+                        {
+                            if (TrafficLightID == TL.TrafficLightID)
+                            {
+                                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                                {
+                                    try
+                                    {
+                                        TL.ChangeState(State);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        LogHandler.Instance.Write(Thread.CurrentThread.Name + " is terminated!");
+                                        Thread.CurrentThread.Abort();
+                                    }
+                                }));
+
+                                break;
+                            }
+                        }
+                    }
                     
 
                     this.CommandsRecieved++;
@@ -65,12 +94,13 @@ namespace Simulator.Network
             }
         }
 
-        public void ProcessVehicleCheckpoint(int StoplichtID)
+        public void ProcessVehicleCheckpoint(int StoplichtID, bool CheckinNode)
         {
-            Byte[] Output = null;
+            byte[] Output = null;
 
-            Byte b = Byte.Parse(StoplichtID.ToString());
-            Output = new byte[] { b };
+            byte TrafficLightID = byte.Parse(StoplichtID.ToString());
+            byte NodeType = CheckinNode ? (byte)1 : (byte)0;
+            Output = new byte[] { (byte)3, TrafficLightID , NodeType, (byte)0 };
 
             NetworkHandler.OutputBuffer.Add(Output);
 

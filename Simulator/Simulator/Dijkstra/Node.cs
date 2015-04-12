@@ -203,6 +203,14 @@ namespace Simulator.Dijkstra
             }
 
             LogHandler.Instance.Write("New node:" + NodeWithLowestCost.ToString());
+
+            //Send Trafficlight Queue Signal:
+            if (NodeWithLowestCost is NotificationNode)
+            {
+                (NodeWithLowestCost as NotificationNode).Notify();
+            }
+
+
             return NodeWithLowestCost;
         }
 
