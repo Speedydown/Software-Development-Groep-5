@@ -55,6 +55,7 @@
     </ApplicationDefinition>
     <Compile Include="Classes\DynamicObject.cs" />
     <Compile Include="Dijkstra\DijkstraCalculationHandler.cs" />
+    <Compile Include="Dijkstra\LaneSwitcher.cs" />
     <Compile Include="Dijkstra\TrafficLights\NotificationNode.cs" />
     <Compile Include="Dijkstra\TrafficLights\TrafficLight.cs" />
     <Compile Include="Logic\LogHandler.cs" />
@@ -119,6 +120,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

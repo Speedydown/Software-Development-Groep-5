@@ -80,8 +80,6 @@ namespace Simulator.Network
                                         Thread.CurrentThread.Abort();
                                     }
                                 }));
-
-                                break;
                             }
                         }
                     }

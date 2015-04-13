@@ -24,16 +24,17 @@ namespace Simulator.Dijkstra
             {
                 _State = value;
                 OnPropertyChanged("State");
+                OnPropertyChanged("FillColor");
             }
         }
 
 
-        public TrafficLight(int TrafficLightID, Position CurrentPosition, VehicleType[] AllowedVehicles = null)
+        public TrafficLight(int TrafficLightID, Position CurrentPosition, VehicleType[] AllowedVehicles = null, Color? NodeColor = null)
             : base(CurrentPosition, TrafficLightID.ToString(), AllowedVehicles)
         {
             this.State = TrafficLightState.Rood;
             this.TrafficLightID = TrafficLightID;
-            this.NodeColor = Colors.Black;
+            this.NodeColor = NodeColor == null ? Colors.Red : (Color)NodeColor;
             this.FillColor = Colors.Red;
             TrafficLight.TrafficLights.Add(this);
         }
@@ -41,7 +42,7 @@ namespace Simulator.Dijkstra
         public void ChangeState(TrafficLightState State)
         {
             this.State = State;
-            
+
             if (this.State == TrafficLightState.Groen)
             {
                 this.FillColor = Colors.Green;
@@ -54,6 +55,8 @@ namespace Simulator.Dijkstra
             {
                 this.FillColor = Colors.Red;
             }
+            
+            this.NodeEllipse.Fill = (new SolidColorBrush(this.FillColor));
         }
     }
 }

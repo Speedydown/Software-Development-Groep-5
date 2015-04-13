@@ -83,16 +83,43 @@ namespace Simulator.UserControls
             this.nodes.EntryNode6.AddNode(this.nodes.Custom60);
             this.nodes.Custom60.AddNode(this.nodes.Custom61);
             this.nodes.Custom61.AddNode(this.nodes.Custom62);
-            this.nodes.Custom61.AddNode(this.nodes.NodeB2);
-            this.nodes.Custom62.AddNode(this.nodes.NodeB1);
+            
+            //Trafflight4r
+            this.nodes.Custom61.AddNode(this.nodes.TrafficLight4EntryRight);
+            this.nodes.TrafficLight4EntryRight.AddNode(this.nodes.TrafficLight4Right);
+            this.nodes.TrafficLight4Right.AddNode(this.nodes.TrafficLight4ExitRight);
+            this.nodes.TrafficLight4ExitRight.AddNode(this.nodes.NodeB2);
+
+            //TrafficLight4l
+            this.nodes.Custom62.AddNode(this.nodes.TrafficLight4EntryLeft);
+            this.nodes.TrafficLight4EntryLeft.AddNode(this.nodes.TrafficLight4Left);
+            this.nodes.TrafficLight4Left.AddNode(this.nodes.TrafficLight4ExitLeft);
+            this.nodes.TrafficLight4ExitLeft.AddNode(this.nodes.NodeB1);
+
             this.nodes.NodeB1.AddNode(this.nodes.ExitNode7);
             this.nodes.NodeB2.AddNode(this.nodes.ExitNode8);
-            this.nodes.Custom60.AddNode(this.nodes.NodeD1);
+
+            //TrafficLight5l
+            this.nodes.Custom60.AddNode(this.nodes.TrafficLight5EntryLeft);
+            this.nodes.TrafficLight5EntryLeft.AddNode(this.nodes.TrafficLight5Left);
+            this.nodes.TrafficLight5Left.AddNode(this.nodes.TrafficLight5ExitLeft);
+            this.nodes.TrafficLight5ExitLeft.AddNode(this.nodes.NodeD1);
+
             this.nodes.EntryNode5.AddNode(this.nodes.Custom63);
-            this.nodes.Custom63.AddNode(this.nodes.NodeD2);
+
+            //TrafficLight5r
+            this.nodes.Custom63.AddNode(this.nodes.TrafficLight5EntryRight);
+            this.nodes.TrafficLight5EntryRight.AddNode(this.nodes.TrafficLight5Right);
+            this.nodes.TrafficLight5Right.AddNode(this.nodes.TrafficLight5ExitRight);
+            this.nodes.TrafficLight5ExitRight.AddNode(this.nodes.NodeD2);
+
             this.nodes.Custom63.AddNode(this.nodes.Bus2);
-            this.nodes.Bus2.AddNode(this.nodes.Bus3);
-            this.nodes.Bus3.AddNode(this.nodes.NodeD2);
+
+            //TrafficLight 6 -> bus3 is a leftover
+            this.nodes.Bus2.AddNode(this.nodes.TrafficLight6Entry);
+            this.nodes.TrafficLight6Entry.AddNode(this.nodes.TrafficLight6);
+            this.nodes.TrafficLight6.AddNode(this.nodes.TrafficLight6Exit);
+            this.nodes.TrafficLight6Exit.AddNode(this.nodes.NodeD2);
 
             //west
             this.nodes.EntryNode7.AddNode(this.nodes.Custom50);

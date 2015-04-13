@@ -1,4 +1,5 @@
-﻿using Simulator.UserControls;
+﻿using Simulator.Dijkstra;
+using Simulator.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace Simulator
             this.VehicleStartDirectionComboBox.ItemsSource = Enum.GetValues(typeof(Direction)).Cast<Direction>();
             this.VehicleEndDirectionComboBox.ItemsSource = Enum.GetValues(typeof(Direction)).Cast<Direction>();
 
+            this.TrafficLightIDComboBox.ItemsSource = TrafficLight.TrafficLights;
             this.TrafficLigtStateComboBox.ItemsSource = Enum.GetValues(typeof(TrafficLightState)).Cast<TrafficLightState>();
         }
 
@@ -38,7 +40,7 @@ namespace Simulator
 
         private void ChangeLightButton_Click(object sender, RoutedEventArgs e)
         {
-
+            (this.TrafficLightIDComboBox.SelectedItem as TrafficLight).ChangeState((TrafficLightState)TrafficLigtStateComboBox.SelectedItem);
         }
     }
 }

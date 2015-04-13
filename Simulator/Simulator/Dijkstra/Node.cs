@@ -34,6 +34,7 @@ namespace Simulator.Dijkstra
         private bool DrawnOnCanvas = false;
         public Color NodeColor { get; protected set; }
         private VehicleType[] AllowedVehicles = new VehicleType[] { VehicleType.Auto };
+        protected Shape NodeEllipse = new System.Windows.Shapes.Ellipse();
 
         //Local variables
         protected Color FillColor = Colors.White;
@@ -72,7 +73,6 @@ namespace Simulator.Dijkstra
             if (!this.DrawnOnCanvas)
             {
                 this.DrawnOnCanvas = true;
-                Ellipse NodeEllipse = new System.Windows.Shapes.Ellipse();
                 NodeEllipse.Height = 20;
                 NodeEllipse.Width = 20;
                 NodeEllipse.StrokeThickness = 2;
@@ -205,9 +205,9 @@ namespace Simulator.Dijkstra
             LogHandler.Instance.Write("New node:" + NodeWithLowestCost.ToString());
 
             //Send Trafficlight Queue Signal:
-            if (NodeWithLowestCost is NotificationNode)
+            if (this is NotificationNode)
             {
-                (NodeWithLowestCost as NotificationNode).Notify();
+                (this as NotificationNode).Notify();
             }
 
 

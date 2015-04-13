@@ -116,6 +116,32 @@ namespace Simulator
         public Node Nodec14 = new BicycleNode(new Position(1150, 225), "c14");
         public Node Nodec15 = new BicycleNode(new Position(1080, 275), "c15");
 
+
+        //------------------Traffic lights---------------------------------------------
+        public NotificationNode TrafficLight4EntryLeft = new NotificationNode(4, true, new Position(375, 750), null);
+        public TrafficLight TrafficLight4Left = new TrafficLight(4, new Position(375, 475), null);
+        public NotificationNode TrafficLight4ExitLeft = new NotificationNode(4, false, new Position(375, 450), null);
+
+        public NotificationNode TrafficLight4EntryRight = new NotificationNode(4, true, new Position(400, 750), null);
+        public TrafficLight TrafficLight4Right = new TrafficLight(4, new Position(400, 475), null);
+        public NotificationNode TrafficLight4ExitRight = new NotificationNode(4, false, new Position(400, 450), null);
+
+        public NotificationNode TrafficLight5EntryLeft = new NotificationNode(5, true, new Position(425, 750), null);
+        public TrafficLight TrafficLight5Left = new TrafficLight(5, new Position(425, 475), null);
+        public NotificationNode TrafficLight5ExitLeft = new NotificationNode(5, false, new Position(425, 450), null);
+
+        public NotificationNode TrafficLight5EntryRight = new NotificationNode(5, true, new Position(450, 750), null);
+        public TrafficLight TrafficLight5Right = new TrafficLight(5, new Position(450, 475), null);
+        public NotificationNode TrafficLight5ExitRight = new NotificationNode(5, false, new Position(450, 450), null);
+
+        public NotificationNode TrafficLight6Entry = new NotificationNode(6, true, new Position(475, 750), null, Colors.Gold);
+        public TrafficLight TrafficLight6 = new TrafficLight(6, new Position(475, 475), null, Colors.Gold);
+        public NotificationNode TrafficLight6Exit = new NotificationNode(6, false, new Position(465, 450), null, Colors.Gold);
+
+
+        //------------------Lane switchers---------------------------------------------
+
+
         public Nodes()
         {
             
