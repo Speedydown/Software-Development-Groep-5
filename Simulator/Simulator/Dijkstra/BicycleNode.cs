@@ -11,7 +11,7 @@ namespace Simulator.Dijkstra
     public class BicycleNode : Node
     {
         public BicycleNode(Position CurrentPosition, string Label = "")
-            : base(CurrentPosition, Label)
+            : base(CurrentPosition, Label, new VehicleType[] { })
         {
             this.NodeColor = Colors.Purple;
         }

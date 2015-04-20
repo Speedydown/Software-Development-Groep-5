@@ -27,5 +27,12 @@ namespace Simulator.Dijkstra
         {
             NetworkCommandHandler.Instance.ProcessVehicleCheckpoint(this.TrafficLightID, this.IsVehicleSignupNode);
         }
+
+        public override Node GetNodeWithLowestCost(Direction TargetDirection, Vehicle vehicle)
+        {
+            this.Notify();
+
+            return base.GetNodeWithLowestCost(TargetDirection, vehicle);
+        }
     }
 }

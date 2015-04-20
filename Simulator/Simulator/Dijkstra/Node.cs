@@ -125,7 +125,10 @@ namespace Simulator.Dijkstra
         {
             int LowestCost = int.MaxValue;
 
-            //vehicle allowed check
+            if (!this.VehicleAllowed(vehicle))
+            {
+                return Int32.MaxValue;
+            }
 
             if (this is ExitNode && (this as ExitNode).ExitDirection != TargetDirection)
             {
@@ -157,7 +160,7 @@ namespace Simulator.Dijkstra
             return LowestCost;
         }
 
-        public Node GetNodeWithLowestCost(Direction TargetDirection, Vehicle vehicle)
+        public virtual Node GetNodeWithLowestCost(Direction TargetDirection, Vehicle vehicle)
         {
             int LowestCost = Int32.MaxValue;
             Node NodeWithLowestCost = null;
@@ -203,12 +206,6 @@ namespace Simulator.Dijkstra
             }
 
             LogHandler.Instance.Write("New node:" + NodeWithLowestCost.ToString());
-
-            //Send Trafficlight Queue Signal:
-            if (this is NotificationNode)
-            {
-                (this as NotificationNode).Notify();
-            }
 
 
             return NodeWithLowestCost;

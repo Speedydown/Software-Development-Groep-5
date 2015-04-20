@@ -10,7 +10,7 @@ namespace Simulator.Dijkstra
 {
     public class BusNode : Node
     {
-        public BusNode(Position CurrentPosition, string Label = "") : base(CurrentPosition, Label)
+        public BusNode(Position CurrentPosition, string Label = "") : base(CurrentPosition, Label, new VehicleType[] { })
         {
             this.NodeColor = Colors.Gold;
         }
