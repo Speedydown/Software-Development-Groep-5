@@ -14,10 +14,11 @@ Public Class MainWindow
     End Sub
 
     Private Sub MainWindow_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        LogMessage("Click the button to start the server.")
 
         'Create server instance.
         _server = New Server(10000, Me)
+
+        LogMessage(1, "Controller, Build " + DateTime.Now.ToString("dMyyyyhmm"))
     End Sub
 
     Private Sub ToolStripButtonControllerStart_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolStripButtonControllerStart.Click
@@ -32,12 +33,30 @@ Public Class MainWindow
         _server.StopServer()
     End Sub
 
-    Public Sub LogMessage(ByVal message As String)
-        'TODO Check if windows is created.
+    Public Sub LogMessage(ByVal type As Integer, ByVal message As String)
+        'TODO Check if window is created.
+
+        Dim formattedMessage As String = Nothing
+
+        If type = 1 Then
+            formattedMessage = formattedMessage + "[INFO]"
+        End If
+        If type = 2 Then
+            formattedMessage = formattedMessage + "[ERROR]"
+        End If
+        If type = 3 Then
+            formattedMessage = formattedMessage + "[SENT]"
+        End If
+        If type = 4 Then
+            formattedMessage = formattedMessage + "[INCOMING]"
+        End If
+
+        formattedMessage = formattedMessage + (" " + message)
+
 
         'Adds a (log) message to the main window.
         Invoke(Sub()
-                   ListBoxStatus.Items.Add(message)
+                   ListBoxStatus.Items.Add(formattedMessage)
 
                    'Autoscroll the listbox.
                    ListBoxStatus.SelectedIndex = ListBoxStatus.Items.Count - 1

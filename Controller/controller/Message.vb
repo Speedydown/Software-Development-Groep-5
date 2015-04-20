@@ -1,28 +1,45 @@
 ﻿Imports System.Text
 
 Public Class Message
-    'Public Function EncodeMessage(ByVal parameters As Byte()) As String
-    '    Dim builder As New StringBuilder()
+    Private _type As Integer
+    Private _parameters As Integer()
 
-    '    For Each value As Byte In parameters
-    '        builder.Append(value)
-    '    Next value
+    Public Property Type() As Integer
+        Get
+            Return _type
+        End Get
+        Set(ByVal value As Integer)
+            _type = value
+        End Set
+    End Property
 
-    '    Return builder.ToString()
-    'End Function
+    Public Property Parameters() As Integer()
+        Get
+            Return _parameters
+        End Get
+        Set(ByVal value As Integer())
+            _parameters = value
+        End Set
+    End Property
 
-    'Public Function DecodeMessage(message As Byte()) As Byte()
+    Public Sub New(ByVal type As Integer, ByVal parameters As Integer())
+        _type = type
+        _parameters = parameters
+    End Sub
 
-    'End Function
+    Public Sub ClearMessage()
+        _parameters = Nothing
 
-    Public Function MessageToString(ByVal message As Byte()) As String
+    End Sub
+
+    Public Function MessageToString() As String
 
         Dim messageAsString As New StringBuilder
 
-        If message(0) = 1 Then
+        If _type = 1 Then
             messageAsString.Append("Vehicle message, ")
 
-            Select Case message(1)
+            Select Case _parameters(0)
                 Case 0
                     messageAsString.Append("North, ")
                 Case 1
@@ -34,10 +51,10 @@ Public Class Message
                 Case 4
                     messageAsString.Append("Frontage road, ")
                 Case Else
-                    messageAsString.Append("Unknown, raw: " + message(1).ToString() + ", ")
+                    messageAsString.Append("Unknown, raw: " + _parameters(0).ToString() + ", ")
             End Select
 
-            Select Case message(2)
+            Select Case _parameters(1)
                 Case 0
                     messageAsString.Append("North, ")
                 Case 1
@@ -49,10 +66,10 @@ Public Class Message
                 Case 4
                     messageAsString.Append("Ventweg, ")
                 Case Else
-                    messageAsString.Append("Unknown, raw: " + message(2).ToString() + ", ")
+                    messageAsString.Append("Unknown, raw: " + _parameters(1).ToString() + ", ")
             End Select
 
-            Select Case message(3)
+            Select Case _parameters(2)
                 Case 0
                     messageAsString.Append("Car")
                 Case 1
@@ -62,21 +79,21 @@ Public Class Message
                 Case 3
                     messageAsString.Append("Walker")
                 Case Else
-                    messageAsString.Append("Unknown, raw: " + message(3).ToString())
+                    messageAsString.Append("Unknown, raw: " + _parameters(2).ToString())
             End Select
         End If
 
-        If message(0) = 2 Then
+        If _type = 2 Then
             messageAsString.Append("Traffic light message, ")
             messageAsString.Append("Traffic light Id: ")
 
-            If (message(1) >= 0 AndAlso message(1) <= 255) Then
-                messageAsString.Append(message(1).ToString() + ", ")
+            If (_parameters(0) >= 0 AndAlso _parameters(0) <= 255) Then
+                messageAsString.Append(_parameters(0).ToString() + ", ")
             Else
-                messageAsString.Append("Unknown, raw:" + message(1).ToString() + ", ")
+                messageAsString.Append("Unknown, raw:" + _parameters(0).ToString() + ", ")
             End If
 
-            Select Case message(2)
+            Select Case _parameters(1)
                 Case 0
                     messageAsString.Append("Red")
                 Case 1
@@ -84,33 +101,35 @@ Public Class Message
                 Case 2
                     messageAsString.Append("Green")
                 Case Else
-                    messageAsString.Append("Unknown, raw: " + message(2).ToString())
+                    messageAsString.Append("Unknown, raw: " + _parameters(1).ToString())
             End Select
         End If
 
-        If message(0) = 3 Then
+        If _type = 3 Then
             messageAsString.Append("Vehicle announcement message, ")
             messageAsString.Append("Traffic light Id: ")
 
-            If (message(1) >= 0 AndAlso message(1) <= 255) Then
-                messageAsString.Append(message(1).ToString() + ", ")
+            If (_parameters(0) >= 0 AndAlso _parameters(0) <= 255) Then
+                messageAsString.Append(_parameters(0).ToString() + ", ")
             Else
-                messageAsString.Append("Unknown, raw:" + message(1).ToString() + ", ")
+                messageAsString.Append("Unknown, raw:" + _parameters(0).ToString() + ", ")
             End If
 
             messageAsString.Append("Distance: ")
 
-            If (message(2) >= 0 AndAlso message(2) <= 255) Then
-                messageAsString.Append(message(2).ToString())
+            If (_parameters(1) >= 0 AndAlso _parameters(1) <= 255) Then
+                messageAsString.Append(_parameters(1).ToString())
             Else
-                messageAsString.Append("Unknown, raw:" + message(2).ToString())
+                messageAsString.Append("Unknown, raw:" + _parameters(1).ToString())
             End If
         End If
 
-        If message(0) <> 1 AndAlso message(0) <> 2 AndAlso message(0) <> 3 Then
-            messageAsString.Append("Unknow message, raw: " + message(0).ToString())
+        If _type <> 1 AndAlso _type <> 2 AndAlso _type <> 3 Then
+            messageAsString.Append("Unknow message, raw: " + _type.ToString())
         End If
 
         Return messageAsString.ToString()
     End Function
+
+
 End Class
