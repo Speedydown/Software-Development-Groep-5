@@ -38,11 +38,18 @@ namespace Simulator
 
             if (this.LogListview != null)
             {
-                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                try
                 {
-                    this.LogListview.ItemsSource = null;
-                    this.LogListview.ItemsSource = this.Log.ToArray().Reverse();
-                }));
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        this.LogListview.ItemsSource = null;
+                        this.LogListview.ItemsSource = this.Log.ToArray().Reverse();
+                    }));
+                }
+                catch
+                {
+
+                }
             }
 
             System.Diagnostics.Debug.WriteLine(Value);

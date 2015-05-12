@@ -144,8 +144,15 @@ namespace Simulator
 
                         Rect BoundingBox = this.GetBoundingBox(new Point[] { TransformedTopLeft, TransformedTopRight, TransformedBottomLeft, TransformedBottomRight });
 
-                        this.CurrentShape.Margin = new Thickness(this.CurrentPosition.X - (BoundingBox.Width / 2), this.CurrentPosition.Y - (BoundingBox.Height / 2), 0, 0);
-                        this.CurrentShape.LayoutTransform = CurrentTransformation;
+                        try
+                        {
+                            this.CurrentShape.Margin = new Thickness(this.CurrentPosition.X - (BoundingBox.Width / 2), this.CurrentPosition.Y - (BoundingBox.Height / 2), 0, 0);
+                            this.CurrentShape.LayoutTransform = CurrentTransformation;
+                        }
+                        catch
+                        {
+
+                        }
                     }
                     catch (Exception)
                     {
