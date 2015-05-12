@@ -2,35 +2,15 @@
 Imports System.Net.Sockets
 Imports System.Threading
 
-Class TrafficLight
+Public Class TrafficLight
+    Public Property State As Integer
+    Public Property Sequence As Integer
+    Public Property Id As Integer
     Private _queue As New Integer
-    Private WithEvents _trafficLightThread As BackgroundWorker
-    Private _id As Integer
-    Private _state As Integer
-    Private ReadOnly _controller As Controller
 
-    Sub New(ByVal controller As Controller)
-        _controller = controller
-
-        _trafficLightThread = New BackgroundWorker
-        _trafficLightThread.WorkerSupportsCancellation = True
+    Sub New(ByVal id As Integer)
+        Me.Id = id
     End Sub
-
-    Public Function GetState() As Integer
-        Return _state
-    End Function
-
-    Public Sub SetState(ByVal state As Integer)
-        _state = state
-    End Sub
-
-    Public Sub SetId(ByVal id As Integer)
-        _id = id
-    End Sub
-
-    Public Function GetId() As Integer
-        Return _id
-    End Function
 
     Public Sub AddVehicle()
         _queue = _queue + 1
@@ -40,21 +20,26 @@ Class TrafficLight
         _queue = _queue - 1
     End Sub
 
-    Public Sub ChangeState()
-        If Not _trafficLightThread.IsBusy And Not _trafficLightThread.CancellationPending Then
-            _trafficLightThread.RunWorkerAsync()
-        End If
-    End Sub
-
     Public Function GetVehicleCount() As Integer
         Return _queue
     End Function
 
-    Private Sub ChangeStateWorker(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles _trafficLightThread.DoWork
+    Public Sub ResetVehicleCount()
+        _queue = 0
+    End Sub
 
-        Thread.Sleep(2000)
-        _controller.SendMessage(New Message(2, New Integer() {_id, 0, 0}))
+    Public Sub ChangeStateToGreen()
+        Controller.SendMessage(New Message(2, New Integer() {Id, 2, 0}))
+        State = 2
+    End Sub
 
-        _trafficLightThread.CancelAsync()
+    Public Sub ChangeStateToOrange()
+        Controller.SendMessage(New Message(2, New Integer() {Id, 1, 0}))
+        State = 1
+    End Sub
+
+    Public Sub ChangeStateToRed()
+        Controller.SendMessage(New Message(2, New Integer() {Id, 0, 0}))
+        State = 0
     End Sub
 End Class

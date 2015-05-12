@@ -64,7 +64,7 @@ Public Class Message
                 Case 3
                     messageAsString.Append("West, ")
                 Case 4
-                    messageAsString.Append("Ventweg, ")
+                    messageAsString.Append("Frontage road, ")
                 Case Else
                     messageAsString.Append("Unknown, raw: " + _parameters(1).ToString() + ", ")
             End Select
@@ -107,7 +107,7 @@ Public Class Message
 
         If _type = 3 Then
             messageAsString.Append("Vehicle announcement message, ")
-            messageAsString.Append("Traffic light Id: ")
+            messageAsString.Append("Traffic light ID: ")
 
             If (_parameters(0) >= 0 AndAlso _parameters(0) <= 255) Then
                 messageAsString.Append(_parameters(0).ToString() + ", ")
