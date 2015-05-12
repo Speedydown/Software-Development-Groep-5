@@ -66,7 +66,6 @@ namespace Simulator
 
         public Node Custom20 = new Node(new Position(1700, 300), "20");
         public Node Custom21 = new Node(new Position(1650, 275), "21");
-        public Node Custom22 = new Node(new Position(1600, 250), "22");
 
         public Node Custom30 = new Node(new Position(920, 325), "30");
         public Node Custom31 = new Node(new Position(870, 350), "31");
@@ -97,7 +96,7 @@ namespace Simulator
         public Node Bus1 = new BusNode(new Position(1250, 150), "b1");
         public Node Bus2 = new BusNode(new Position(475, 900), "b2");
         public Node Bus3 = new BusNode(new Position(475, 525), "b3");
-        
+        public Node Bus4 = new BusNode(new Position(1600, 250), "b4");
 
         //------------------Cycling routes---------------------------------------------
         public Node Nodec1 = new BicycleNode(new Position(295, 495), "c1");
@@ -118,6 +117,38 @@ namespace Simulator
 
 
         //------------------Traffic lights---------------------------------------------
+        public NotificationNode TrafficLight0EntryLeft = new NotificationNode(0, true, new Position(820, 325), null);
+        public TrafficLight TrafficLight0Left = new TrafficLight(0, new Position(525, 325), null);
+        public NotificationNode TrafficLight0ExitLeft = new NotificationNode(0, false, new Position(500, 325), null);
+
+        public NotificationNode TrafficLight0EntryRight = new NotificationNode(0, true, new Position(820, 300), null);
+        public TrafficLight TrafficLight0Right = new TrafficLight(0, new Position(525, 300), null);
+        public NotificationNode TrafficLight0ExitRight = new NotificationNode(0, false, new Position(500, 300), null);
+
+        public NotificationNode TrafficLight1EntryLeft = new NotificationNode(1, true, new Position(820, 375), null);
+        public TrafficLight TrafficLight1Left = new TrafficLight(1, new Position(525, 375), null);
+        public NotificationNode TrafficLight1ExitLeft = new NotificationNode(1, false, new Position(500, 375), null);
+
+        public NotificationNode TrafficLight1EntryRight = new NotificationNode(1, true, new Position(820, 350), null);
+        public TrafficLight TrafficLight1Right = new TrafficLight(1, new Position(525, 350), null);
+        public NotificationNode TrafficLight1ExitRight = new NotificationNode(1, false, new Position(500, 350), null);
+
+        public NotificationNode TrafficLight2EntryLeft = new NotificationNode(2, true, new Position(150, 450), null);
+        public TrafficLight TrafficLight2Left = new TrafficLight(2, new Position(275, 450), null);
+        public NotificationNode TrafficLight2ExitLeft = new NotificationNode(2, false, new Position(300, 450), null);
+
+        public NotificationNode TrafficLight2EntryRight = new NotificationNode(2, true, new Position(150, 475), null);
+        public TrafficLight TrafficLight2Right = new TrafficLight(2, new Position(275, 475), null);
+        public NotificationNode TrafficLight2ExitRight = new NotificationNode(2, false, new Position(300, 475), null);
+
+        public NotificationNode TrafficLight3EntryLeft = new NotificationNode(3, true, new Position(150, 400), null);
+        public TrafficLight TrafficLight3Left = new TrafficLight(3, new Position(275, 400), null);
+        public NotificationNode TrafficLight3ExitLeft = new NotificationNode(3, false, new Position(300, 400), null);
+
+        public NotificationNode TrafficLight3EntryRight = new NotificationNode(3, true, new Position(150, 425), null);
+        public TrafficLight TrafficLight3Right = new TrafficLight(3, new Position(275, 425), null);
+        public NotificationNode TrafficLight3ExitRight = new NotificationNode(3, false, new Position(300, 425), null);
+
         public NotificationNode TrafficLight4EntryLeft = new NotificationNode(4, true, new Position(375, 750), null);
         public TrafficLight TrafficLight4Left = new TrafficLight(4, new Position(375, 475), null);
         public NotificationNode TrafficLight4ExitLeft = new NotificationNode(4, false, new Position(375, 450), null);
@@ -138,6 +169,53 @@ namespace Simulator
         public TrafficLight TrafficLight6 = new TrafficLight(6, new Position(475, 475), null, Colors.Gold);
         public NotificationNode TrafficLight6Exit = new NotificationNode(6, false, new Position(465, 450), null, Colors.Gold);
 
+        public NotificationNode TrafficLight7EntryLeft = new NotificationNode(7, true, new Position(970, 350), null);
+        public TrafficLight TrafficLigh7Left = new TrafficLight(7, new Position(1200, 350), null);
+        public NotificationNode TrafficLight7ExitLeft = new NotificationNode(7, false, new Position(1225, 350), null);
+
+        public NotificationNode TrafficLight7EntryRight = new NotificationNode(7, true, new Position(970, 375), null);
+        public TrafficLight TrafficLight7Right = new TrafficLight(7, new Position(1200, 375), null);
+        public NotificationNode TrafficLight7ExitRight = new NotificationNode(7, false, new Position(1225, 375), null);
+
+        public NotificationNode TrafficLight8EntryLeft = new NotificationNode(8, true, new Position(970, 400), null);
+        public TrafficLight TrafficLigh8Left = new TrafficLight(8, new Position(1200, 400), null);
+        public NotificationNode TrafficLight8ExitLeft = new NotificationNode(8, false, new Position(1225, 400), null);
+
+        public NotificationNode TrafficLight8EntryRight = new NotificationNode(8, true, new Position(970, 425), null);
+        public TrafficLight TrafficLight8Right = new TrafficLight(8, new Position(1200, 425), null);
+        public NotificationNode TrafficLight8ExitRight = new NotificationNode(8, false, new Position(1225, 425), null);
+
+        public NotificationNode TrafficLight9EntryLeft = new NotificationNode(9, true, new Position(1600, 325), null);
+        public TrafficLight TrafficLight9Left = new TrafficLight(9, new Position(1325, 325), null);
+        public NotificationNode TrafficLight9ExitLeft = new NotificationNode(9, false, new Position(1300, 325), null);
+
+        public NotificationNode TrafficLight9EntryRight = new NotificationNode(9, true, new Position(1600, 300), null);
+        public TrafficLight TrafficLight9Right = new TrafficLight(9, new Position(1325, 300), null);
+        public NotificationNode TrafficLight9ExitRight = new NotificationNode(9, false, new Position(1300, 300), null);
+
+        public NotificationNode TrafficLight10Entry = new NotificationNode(10, true, new Position(1600, 275), null);
+        public TrafficLight TrafficLight10 = new TrafficLight(10, new Position(1325, 275), null);
+        public NotificationNode TrafficLight10Exit = new NotificationNode(10, false, new Position(1300, 275), null);
+
+        public NotificationNode TrafficLight11EntryLeft = new NotificationNode(11, true, new Position(1200, 150), null);
+        public TrafficLight TrafficLight11Left = new TrafficLight(11, new Position(1200, 250), null);
+        public NotificationNode TrafficLight11ExitLeft = new NotificationNode(11, false, new Position(1200, 275), null);
+
+        public NotificationNode TrafficLight11EntryRight = new NotificationNode(11, true, new Position(1175, 150), null);
+        public TrafficLight TrafficLight11Right = new TrafficLight(11, new Position(1175, 250), null);
+        public NotificationNode TrafficLight11ExitRight = new NotificationNode(11, false, new Position(1175, 275), null);
+
+        public NotificationNode TrafficLight12Entry = new NotificationNode(12, true, new Position(1225, 150), null);
+        public TrafficLight TrafficLight12 = new TrafficLight(12, new Position(1225, 250), null);
+        public NotificationNode TrafficLight12Exit = new NotificationNode(12, false, new Position(1225, 275), null);
+
+        public NotificationNode TrafficLight13Entry = new NotificationNode(13, true, new Position(1250, 150), null);
+        public TrafficLight TrafficLight13 = new TrafficLight(13, new Position(1250, 250), null);
+        public NotificationNode TrafficLight13Exit = new NotificationNode(13, false, new Position(1250, 275), null);
+
+        public NotificationNode TrafficLight14Entry = new NotificationNode(14, true, new Position(1600, 250), null);
+        public TrafficLight TrafficLight14 = new TrafficLight(14, new Position(1325, 250), null);
+        public NotificationNode TrafficLight14Exit = new NotificationNode(14, false, new Position(1300, 250), null);
 
         //------------------Lane switchers---------------------------------------------
 

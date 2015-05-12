@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\Config.cs" />
     <Compile Include="Classes\DynamicObject.cs" />
     <Compile Include="Dijkstra\DijkstraCalculationHandler.cs" />
     <Compile Include="Dijkstra\LaneSwitcher.cs" />
