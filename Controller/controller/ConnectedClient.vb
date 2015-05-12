@@ -8,27 +8,25 @@ Imports System.Threading
 
 Public Class ConnectedClient
 
-    Private WithEvents _clientThread As BackgroundWorker
+    Private WithEvents _clientThread As Thread
     Private ReadOnly _clientSocket As TcpClient
-    Private ReadOnly _server As Server
-    Private ReadOnly _mainWindow As MainWindow
     Private _networkStream As NetworkStream
-    Private _outgoingMessage() As Byte
+    Private ReadOnly _mainWindow As MainWindow
 
-    Public Sub New(ByVal server As Server, ByVal clientSocket As TcpClient, ByVal mainWindow As MainWindow)
+    Public Sub New(ByVal clientSocket As TcpClient, mainWindow As MainWindow)
 
-        _mainWindow = mainWindow
-        _server = server
         _clientSocket = clientSocket
+        _mainWindow = mainWindow
 
         'Create a new thread.
-        _clientThread = New BackgroundWorker
-        _clientThread.WorkerSupportsCancellation = True
-        _clientThread.RunWorkerAsync()
+        _clientThread = New Thread(AddressOf ConnectedClientWorker)
+        _clientThread.IsBackground = True
+        _clientThread.Start()
     End Sub
 
-    Private Sub Client(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles _clientThread.DoWork
+    Private Sub ConnectedClientWorker()
 
+        _mainWindow.LogMessage(5, "Connected Client Worker started.")
         _networkStream = _clientSocket.GetStream
 
         Try
@@ -43,15 +41,23 @@ Public Class ConnectedClient
                     messageProcessed = messageProcessed + bytesProcessed
                 Loop
 
-                _server.IncomingMessage(message)
+                Server.IncomingMessage(message)
             Loop
 
         Catch exception As Exception
             _mainWindow.LogMessage(2, exception.Message + ".")
         Finally
             'Remove the client from the server when the connection is gone.
-            _server.ClientDisconnected(Me)
+            _mainWindow.LogMessage(5, "Disconnecting client from server.")
+
+            If Not Server.CancelPending Then
+                Server.StopServer()
+            End If
         End Try
+
+        _mainWindow.LogMessage(5, "Connected Client Worker stopped.")
+        _clientThread = Nothing
+
     End Sub
 
     Public Sub SendMessage(ByVal message As Message)

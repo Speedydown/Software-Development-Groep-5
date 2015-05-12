@@ -1,67 +1,64 @@
 ﻿Imports System.ComponentModel
 Imports System.Threading
+Imports System.Threading.Tasks
 
-Public Class Controller
-    Private WithEvents _controllerThread As BackgroundWorker
-    Private ReadOnly _server As Server
-    Private ReadOnly _mainWindow As MainWindow
+Public Module Controller
+    Private WithEvents _controllerThread As Thread
+    Public Property TrafficLightList As List(Of TrafficLight)
     Private _receivedMessage As Message
-    Private ReadOnly _trafficLightList As List(Of TrafficLight)
+    Private _threadStarted As Byte
+    Private _mainWindow As MainWindow
 
-    Public Sub New(ByVal server As Server, ByVal mainWindow As MainWindow)
-        _server = server
-        _mainWindow = mainWindow
+    Sub New()
+        TrafficLightList = New List(Of TrafficLight)()
 
-        'Create a new thread.
-        _controllerThread = New BackgroundWorker
-        _controllerThread.WorkerSupportsCancellation = True
-        _trafficLightList = New List(Of TrafficLight)
-
-        'Initialize traffic lights
-        Dim trafficLightLeft4 As TrafficLight = New TrafficLight(Me)
-        trafficLightLeft4.SetId(4)
-        _trafficLightList.Add(trafficLightLeft4)
-
-        Dim trafficLightLeft5 As TrafficLight = New TrafficLight(Me)
-        trafficLightLeft5.SetId(5)
-        _trafficLightList.Add(trafficLightLeft5)
-
+        For i As Integer = 0 To 50
+            TrafficLightList.Add(New TrafficLight(i))
+        Next i
     End Sub
 
     Public Sub StartController()
+        If _controllerThread Is Nothing Then
+            'Create a new thread.
+            _controllerThread = New Thread(AddressOf ControllerWorker)
+            _controllerThread.IsBackground = True
 
-        'Start the controller if it is not already started.
-        If Not _controllerThread.IsBusy() And Not _controllerThread.CancellationPending Then
-            _controllerThread.RunWorkerAsync()
+            _controllerThread.Start()
         Else
             _mainWindow.LogMessage(1, "Controller is already started.")
+
         End If
     End Sub
 
     Public Sub StopController()
         'Stop the controller if it started.
-        If _controllerThread.IsBusy And Not _controllerThread.CancellationPending Then
-            _controllerThread.CancelAsync()
+        If _controllerThread IsNot Nothing AndAlso _controllerThread.IsAlive() Then
+            Thread.VolatileWrite(_threadStarted, 0)
+
+            _mainWindow.LogMessage(5, "Resetting all queues.")
+            ResetQueue(Nothing)
         Else
             _mainWindow.LogMessage(1, "Controller has not been started.")
         End If
     End Sub
 
-    Private Sub Controller(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles _controllerThread.DoWork
-        Dim spawn As Boolean
+    Private Sub ControllerWorker()
+        Thread.VolatileWrite(_threadStarted, 1)
+
+        Thread.Sleep(2000)
+
         _mainWindow.LogMessage(1, "Controller started.")
 
-        Do While Not _controllerThread.CancellationPending
+        If My.Settings.StartTrafficLichtsRed Then
+            _mainWindow.LogMessage(1, "Setting all traffic lights to red.")
 
-            If Not spawn Then
-                _mainWindow.LogMessage(1, "Waiting 5 seconds for the test vehicle to spawn...")
+            For Each trafficLicht In TrafficLightList
+                trafficLicht.ChangeStateToRed()
+                Thread.Sleep(100)
+            Next
+        End If
 
-                Thread.Sleep(5000)
-                SendMessage(New Message(1, New Integer() {2, 3, 0}))
-
-                spawn = True
-            End If
-
+        Do While Thread.VolatileRead(_threadStarted) = 1
             If _receivedMessage IsNot Nothing Then
                 If _receivedMessage.Type = 1 Then
 
@@ -71,21 +68,20 @@ Public Class Controller
                 End If
                 If _receivedMessage.Type = 3 Then
 
-                    For Each trafficLight As TrafficLight In _trafficLightList
-                        If trafficLight.GetId() = _receivedMessage.Parameters(0) Then
+                    For Each trafficLight As TrafficLight In TrafficLightList
+                        If trafficLight.Id = _receivedMessage.Parameters(0) Then
+
+                            If Not FirstAnnouncement Then
+                                FirstAnnouncement = 1
+                            End If
 
                             If _receivedMessage.Parameters(1) = 1 Then
                                 trafficLight.AddVehicle()
-                                SendMessage(New Message(2, New Integer() {trafficLight.GetId(), 2, 0}))
                             End If
 
                             If _receivedMessage.Parameters(1) = 0 Then
                                 trafficLight.RemoveVehicle()
-
-                                _mainWindow.LogMessage(1, "Changing state of traffic light " + trafficLight.GetId() + " in 2 seconds.")
-                                trafficLight.ChangeState()
                             End If
-
                         End If
                     Next
                 End If
@@ -96,7 +92,20 @@ Public Class Controller
             Thread.Sleep(10)
         Loop
 
+        If TrafficLightController.CheckTrafficLightControllerStarted() Then
+            _mainWindow.LogMessage(1, "Stopping Traffic Light controller.")
+
+            TrafficLightController.StopTrafficLightController()
+
+            If TrafficLightController.GetThread() IsNot Nothing Then
+                If TrafficLightController.GetThread().IsAlive Then
+                    TrafficLightController.GetThread.Join()
+                End If
+            End If
+        End If
+
         _mainWindow.LogMessage(1, "Controller stopped.")
+        _controllerThread = Nothing
     End Sub
 
     Public Sub ReceiveMessage(ByVal message As Message)
@@ -104,6 +113,58 @@ Public Class Controller
     End Sub
 
     Public Sub SendMessage(ByVal message As Message)
-        _server.OutgoingMessage(message)
+        Server.OutgoingMessage(message)
     End Sub
-End Class
+
+    Public Function CheckControllerStarted() As Boolean
+
+        If _controllerThread IsNot Nothing Then
+            If _controllerThread.IsAlive Then
+                Return True
+            End If
+        End If
+
+        Return False
+    End Function
+
+    Public Function GetThread() As Thread
+        Return _controllerThread
+    End Function
+
+    Public Sub StartTest()
+
+        If Not TrafficLightController.CheckTrafficLightControllerStarted() Then
+            TrafficLightController.StartTrafficLightController()
+        End If
+
+        Dim messages(3) As Message
+
+        messages(0) = New Message(1, New Integer() {2, 3, 0})
+        messages(1) = New Message(1, New Integer() {3, 2, 0})
+        messages(2) = New Message(1, New Integer() {1, 2, 0})
+        messages(3) = New Message(1, New Integer() {2, 1, 0})
+
+        Parallel.ForEach(messages, Sub(message)
+                                       SendMessage(message)
+                                   End Sub)
+
+    End Sub
+
+    Public Sub SetMainWindow(ByVal mainWindow As MainWindow)
+
+        _mainWindow = mainWindow
+    End Sub
+
+    Public Sub ResetQueue(ByVal id As Integer)
+        For Each trafficLight In TrafficLightList
+
+            If id = Nothing Then
+                trafficLight.ResetVehicleCount()
+            Else
+                If id = trafficLight.Id Then
+                    trafficLight.ResetVehicleCount()
+                End If
+            End If
+        Next
+    End Sub
+End Module
