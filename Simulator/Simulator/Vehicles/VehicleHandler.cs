@@ -64,8 +64,6 @@ namespace Simulator
             {
                 vehicle = new Car(StartNode, DefaultRotation, EndDirection);
             }
-
-            
         }
 
         private void UpdateVehicles()
@@ -74,8 +72,6 @@ namespace Simulator
 
             while (true)
             {
-             //   LogHandler.Instance.Write("Updating vehicles", LogType.Info);
-
                 try
                 {
                     foreach (Vehicle v in CurrentVehicles)

@@ -12,7 +12,7 @@ namespace Simulator
     public class Car : Vehicle
     {
         public Car(Node StartNode, int DefaultRotation, Direction EndDirection)
-            : base(StartNode, 0.02f, DefaultRotation, 10, 20, VehicleType.Auto, Colors.Orange, EndDirection)
+            : base(StartNode, 0.02f, 0.0002f, DefaultRotation, 10, 20, VehicleType.Auto, Colors.Orange, EndDirection)
         {
             
         }

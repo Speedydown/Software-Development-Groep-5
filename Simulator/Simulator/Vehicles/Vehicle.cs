@@ -18,9 +18,11 @@ namespace Simulator
         //Default settings
         public int ID { get; private set; }
         protected float MaxSpeed { get; private set; }
+        protected float Acceleration { get; private set; }
         protected int DefaultRotation { get; private set; }
         public VehicleType VehicleType { get; private set; }
         public Direction EndDirection { get; private set; }
+        public VehicleState vehicleState { get; protected set; }
 
         public int Height { get; private set; }
         public int Width { get; private set; }
@@ -41,11 +43,13 @@ namespace Simulator
         public Color Color { get; protected set; }
         
 
-        protected Vehicle(Node StartNode, float MaxSpeed, int DefaultRotation, int Height, int Width, VehicleType VehicleType, Color VehicleColor, Direction EndDirection) : base()
+        protected Vehicle(Node StartNode, float MaxSpeed, float Acceleration, int DefaultRotation, int Height, int Width, VehicleType VehicleType, Color VehicleColor, Direction EndDirection) : base()
         {
             this.ID = Vehicle.GenerateID();
             this.CurrentNode = StartNode;
+            this.CurrentSpeed = MaxSpeed;
             this.MaxSpeed = MaxSpeed;
+            this.Acceleration = Acceleration;
             this.DefaultRotation = DefaultRotation;
             this.Height = Height;
             this.Width = Width;
@@ -85,6 +89,7 @@ namespace Simulator
             try
             {
                 this.Rotation = (float)Position.GetAngleBetweenPoints(this.CurrentNode.CurrentPosition, this.TargetNode.CurrentPosition);
+                this.DetermineVehicleState();
                 this.DetermineSpeed();
 
                 this.CurrentDistanceOfPathTraveled += this.CurrentSpeed;
@@ -119,9 +124,59 @@ namespace Simulator
             }
         }
 
+        private void DetermineVehicleState()
+        {
+            VehicleState vehicleState = VehicleState.Driving;
+
+            if (TargetNode.LastPassed > DateTime.Now.AddSeconds(-2))
+            {
+                vehicleState = VehicleState.Stopping;
+            }
+
+            if (TargetNode is TrafficLight && (TargetNode as TrafficLight).State != TrafficLightState.Groen)
+            {
+                vehicleState = VehicleState.Stopping;
+            }
+
+            if (TargetNode.LastPassedVehicle != null)
+            {
+                //calculate vehicle diffrene
+                float DifX = TargetNode.LastPassedVehicle.CurrentPosition.X - CurrentPosition.X;
+                float DifY = TargetNode.LastPassedVehicle.CurrentPosition.Y - CurrentPosition.Y;
+
+                DifX = (DifX < 0) ? DifX * -1 : DifX;
+                DifY = (DifY < 0) ? DifY * -1 : DifY;
+
+                if (DifX < 150 && DifY < 150)
+                {
+                    vehicleState = VehicleState.Stopping;
+                }
+            }
+
+            this.vehicleState = vehicleState;
+        }
+
         private void DetermineSpeed()
         {
-            this.CurrentSpeed = this.MaxSpeed;
+            if (this.vehicleState == VehicleState.Driving && this.CurrentSpeed < this.MaxSpeed)
+            {
+                this.CurrentSpeed += Acceleration;
+
+                if (this.CurrentSpeed > this.MaxSpeed)
+                {
+                    this.CurrentSpeed = this.MaxSpeed;
+                }
+            }
+
+            if (this.vehicleState == VehicleState.Stopping && this.CurrentSpeed > 0)
+            {
+                this.CurrentSpeed -= Acceleration;
+
+                if (this.CurrentSpeed < 0)
+                {
+                    this.CurrentSpeed = 0;
+                }
+            }
         }
 
         private void UpdateCarShape()

@@ -27,6 +27,8 @@ namespace Simulator.Dijkstra
             }
         }
 
+        public DateTime LastPassed { get; private set; }
+        public Vehicle LastPassedVehicle { get; private set; }
         private Canvas MapCanvas = Map.Instance;
         public Position CurrentPosition { get; private set; }
         public List<Path> Paths { get; private set; }
@@ -162,17 +164,15 @@ namespace Simulator.Dijkstra
 
         public virtual Node GetNodeWithLowestCost(Direction TargetDirection, Vehicle vehicle)
         {
+            this.LastPassed = DateTime.Now;
+            this.LastPassedVehicle = vehicle;
+
             int LowestCost = Int32.MaxValue;
             Node NodeWithLowestCost = null;
             
 
             foreach (Path p in this.Paths)
             {
-                if (this == Map.Instance.nodes.Custom50)
-                {
-
-                }
-
                 List<Path> VisitedPaths = new List<Path>();
 
                 int CurrentPathCost = p.CalculateCostOfRoute(TargetDirection, 0, vehicle, VisitedPaths);
@@ -204,9 +204,6 @@ namespace Simulator.Dijkstra
                 vehicle.Dispose();
                 return null;
             }
-
-            LogHandler.Instance.Write("New node:" + NodeWithLowestCost.ToString());
-
 
             return NodeWithLowestCost;
         }

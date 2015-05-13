@@ -8,15 +8,23 @@ namespace Simulator.Dijkstra
 {
     public class LaneSwitcher
     {
-        public DateTime LastPassed { get; private set; }
         public Node EntryNodeLeft { get; private set; }
         public Node EntryNodeRight { get; private set; }
         public Node ExitNodeLeft { get; private set; }
         public Node ExitNodeRight { get; private set; }
 
-        public LaneSwitcher()
+        public LaneSwitcher(Node EntryNodeLeft, Node EntryNodeRight, Node ExitNodeLeft, Node ExitNodeRight)
         {
-            //#Afmaken
+            this.EntryNodeLeft = EntryNodeLeft;
+            this.EntryNodeRight = EntryNodeRight;
+            this.ExitNodeLeft = ExitNodeLeft;
+            this.ExitNodeRight = ExitNodeRight;
+
+            this.EntryNodeLeft.AddNode(this.ExitNodeLeft);
+            this.EntryNodeRight.AddNode(this.ExitNodeRight);
+
+            this.EntryNodeLeft.AddNode(this.ExitNodeRight);
+            this.EntryNodeRight.AddNode(this.ExitNodeLeft);
         }
     }
 }

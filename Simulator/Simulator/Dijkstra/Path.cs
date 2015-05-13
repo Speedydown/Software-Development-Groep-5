@@ -59,10 +59,6 @@ namespace Simulator.Dijkstra
 
             this.MapCanvas.Children.Add(PathLine);
 
-
-            //Pathlength
-            //LogHandler.Instance.Write(this.Source.ToString() + " to " +  this.Destination.ToString() + ": " + this.Length.ToString());
-
             this.Destination.Draw();
         }
 
