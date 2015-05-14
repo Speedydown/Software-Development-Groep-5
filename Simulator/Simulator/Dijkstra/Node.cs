@@ -28,7 +28,7 @@ namespace Simulator.Dijkstra
         }
 
         public DateTime LastPassed { get; private set; }
-        public Vehicle LastPassedVehicle { get; private set; }
+        public Vehicle LastPassedVehicle { get; internal set; }
         private Canvas MapCanvas = Map.Instance;
         public Position CurrentPosition { get; private set; }
         public List<Path> Paths { get; private set; }

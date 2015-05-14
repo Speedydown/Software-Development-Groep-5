@@ -68,18 +68,26 @@ namespace Simulator.Network
                         {
                             if (TrafficLightID == TL.TrafficLightID)
                             {
-                                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                                try
                                 {
-                                    try
+                                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                                     {
-                                        TL.ChangeState(State);
-                                    }
-                                    catch (Exception)
-                                    {
-                                        LogHandler.Instance.Write(Thread.CurrentThread.Name + " is terminated!");
-                                        Thread.CurrentThread.Abort();
-                                    }
-                                }));
+                                        try
+                                        {
+                                            TL.ChangeState(State);
+                                        }
+                                        catch (Exception)
+                                        {
+                                            LogHandler.Instance.Write(Thread.CurrentThread.Name + " is terminated!");
+                                            Thread.CurrentThread.Abort();
+                                        }
+                                    }));
+                                }
+                                catch (Exception)
+                                {
+                                    LogHandler.Instance.Write(Thread.CurrentThread.Name + " is terminated!");
+                                    Thread.CurrentThread.Abort();
+                                }
                             }
                         }
                     }

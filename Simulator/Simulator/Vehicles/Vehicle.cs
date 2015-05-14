@@ -23,6 +23,8 @@ namespace Simulator
         public VehicleType VehicleType { get; private set; }
         public Direction EndDirection { get; private set; }
         public VehicleState vehicleState { get; protected set; }
+        protected Vehicle VehicleInFront { get; private set; }
+        private bool Disposed = false;
 
         public int Height { get; private set; }
         public int Width { get; private set; }
@@ -47,6 +49,12 @@ namespace Simulator
         {
             this.ID = Vehicle.GenerateID();
             this.CurrentNode = StartNode;
+
+            if (this.CurrentNode.LastPassedVehicle != null && !this.CurrentNode.LastPassedVehicle.Disposed)
+            {
+                this.VehicleInFront = this.CurrentNode.LastPassedVehicle;
+            }
+
             this.CurrentSpeed = MaxSpeed;
             this.MaxSpeed = MaxSpeed;
             this.Acceleration = Acceleration;
@@ -75,6 +83,7 @@ namespace Simulator
 
             VehicleHandler.CurrentVehicles.Add(this);
             this.TargetNode = DijkstraCalculationHandler.Instance.CalculateNextNodeForVehicle(this);
+
             this.CurrentPath = this.CurrentNode.GetPathByDestinationNode(this.TargetNode);
         }
 
@@ -109,7 +118,9 @@ namespace Simulator
                     }
 
                     this.CurrentNode = this.TargetNode;
+                    this.VehicleInFront = this.CurrentNode.LastPassedVehicle;
                     this.TargetNode = DijkstraCalculationHandler.Instance.CalculateNextNodeForVehicle(this);
+
                     this.CurrentPath = this.CurrentNode.GetPathByDestinationNode(this.TargetNode);
                     this.CurrentDistanceOfPathTraveled = 0;
                 }
@@ -128,29 +139,39 @@ namespace Simulator
         {
             VehicleState vehicleState = VehicleState.Driving;
 
-            if (TargetNode.LastPassed > DateTime.Now.AddSeconds(-2))
+            if (CurrentNode is TrafficLightWaitNode && ((CurrentNode as TrafficLightWaitNode).Paths.First().Destination as TrafficLight).State != TrafficLightState.Groen)
             {
                 vehicleState = VehicleState.Stopping;
             }
 
-            if (TargetNode is TrafficLight && (TargetNode as TrafficLight).State != TrafficLightState.Groen)
-            {
-                vehicleState = VehicleState.Stopping;
-            }
-
-            if (TargetNode.LastPassedVehicle != null)
+            if (this.VehicleInFront != null && !this.VehicleInFront.Disposed && this.VehicleInFront != this &&
+                (
+                (this.TargetNode == this.VehicleInFront.TargetNode || this.TargetNode == this.VehicleInFront.CurrentNode) 
+                ||  this.CurrentNode.Paths.Count == 1))
             {
                 //calculate vehicle diffrene
-                float DifX = TargetNode.LastPassedVehicle.CurrentPosition.X - CurrentPosition.X;
-                float DifY = TargetNode.LastPassedVehicle.CurrentPosition.Y - CurrentPosition.Y;
+                float DifX = this.VehicleInFront.CurrentPosition.X - CurrentPosition.X;
+                float DifY = this.VehicleInFront.CurrentPosition.Y - CurrentPosition.Y;
 
                 DifX = (DifX < 0) ? DifX * -1 : DifX;
                 DifY = (DifY < 0) ? DifY * -1 : DifY;
 
-                if (DifX < 150 && DifY < 150)
+                if (DifX < 45 && DifY < 45)
                 {
                     vehicleState = VehicleState.Stopping;
                 }
+
+                if (DifX < 20 && DifY < 20)
+                {
+                    this.CurrentSpeed = 0;    
+                }
+            }
+
+            if (this.TargetNode is LaneSwitchNode && (this.TargetNode as LaneSwitchNode).VehicleQueue.Count > 0 &&
+                (this.TargetNode as LaneSwitchNode).VehicleQueue.First() != this && this.TargetNode.LastPassed > DateTime.Now.AddSeconds(-1))
+            {
+                vehicleState = VehicleState.Stopping;
+                this.CurrentSpeed = 0;
             }
 
             this.vehicleState = vehicleState;
@@ -258,6 +279,7 @@ namespace Simulator
         public void Dispose()
         {
             VehicleHandler.CurrentVehicles.Remove(this);
+            this.Disposed = true;
 
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
