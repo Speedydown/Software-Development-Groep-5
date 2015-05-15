@@ -29,6 +29,7 @@ namespace Simulator.Dijkstra
 
         public DateTime LastPassed { get; private set; }
         public Vehicle LastPassedVehicle { get; internal set; }
+        public Vehicle LastPassedSecondLaneVehicle { get; internal set; }
         private Canvas MapCanvas = Map.Instance;
         public Position CurrentPosition { get; private set; }
         public List<Path> Paths { get; private set; }
@@ -165,7 +166,6 @@ namespace Simulator.Dijkstra
         public virtual Node GetNodeWithLowestCost(Direction TargetDirection, Vehicle vehicle)
         {
             this.LastPassed = DateTime.Now;
-            this.LastPassedVehicle = vehicle;
 
             int LowestCost = Int32.MaxValue;
             Node NodeWithLowestCost = null;
@@ -203,6 +203,15 @@ namespace Simulator.Dijkstra
 
                 vehicle.Dispose();
                 return null;
+            }
+
+            if (this.Paths.First().Destination != NodeWithLowestCost)
+            {
+                this.LastPassedSecondLaneVehicle = vehicle;
+            }
+            else
+            {
+                this.LastPassedVehicle = vehicle;
             }
 
             return NodeWithLowestCost;
