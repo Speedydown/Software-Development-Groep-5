@@ -121,7 +121,9 @@ namespace Simulator
                     this.VehicleInFront = this.CurrentNode.LastPassedVehicle;
                     this.TargetNode = DijkstraCalculationHandler.Instance.CalculateNextNodeForVehicle(this);
 
+                    this.CurrentPath.RemoveVehicle();
                     this.CurrentPath = this.CurrentNode.GetPathByDestinationNode(this.TargetNode);
+                    this.CurrentPath.AddVehicle();
                     this.CurrentDistanceOfPathTraveled = 0;
                 }
 
@@ -168,7 +170,7 @@ namespace Simulator
             }
 
             if (this.TargetNode is LaneSwitchNode && (this.TargetNode as LaneSwitchNode).VehicleQueue.Count > 0 &&
-                (this.TargetNode as LaneSwitchNode).VehicleQueue.First() != this && this.TargetNode.LastPassed > DateTime.Now.AddSeconds(-1))
+                (this.TargetNode as LaneSwitchNode).VehicleQueue.First() != this && this.TargetNode.LastPassed > DateTime.Now.AddMilliseconds(-1500))
             {
                 vehicleState = VehicleState.Stopping;
                 this.CurrentSpeed = 0;

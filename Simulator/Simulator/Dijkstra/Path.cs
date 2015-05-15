@@ -66,7 +66,7 @@ namespace Simulator.Dijkstra
         {
             if (this.NumberOfVehicles == 0)
             {
-                throw new Exception("Number of vehicles below 0!");
+                return;
             }
 
             this.NumberOfVehicles--;
@@ -86,7 +86,7 @@ namespace Simulator.Dijkstra
             int Output = 0;
 
             Output += this.Length;
-            Output += this.NumberOfVehicles * 5;
+            Output += this.NumberOfVehicles * 10;
 
             return Output;
         }

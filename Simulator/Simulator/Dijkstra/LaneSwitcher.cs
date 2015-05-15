@@ -40,6 +40,7 @@ namespace Simulator.Dijkstra
                 if (vehicle.CurrentNode == EntryNodeRight)
                 {
                     ExitNodeRight.VehicleQueue.Add(vehicle);
+                    EntryNodeLeft.LastPassedVehicle = EntryNodeRight.LastPassedVehicle;
                 }
             }
             else if (Node == ExitNodeRight)
@@ -49,6 +50,7 @@ namespace Simulator.Dijkstra
                 if (vehicle.CurrentNode == EntryNodeLeft)
                 {
                     ExitNodeLeft.VehicleQueue.Add(vehicle);
+                    EntryNodeRight.LastPassedVehicle = EntryNodeLeft.LastPassedVehicle;
                 }
             }
             else
