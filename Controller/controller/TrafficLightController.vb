@@ -1,13 +1,24 @@
 ﻿Imports System.ComponentModel
 Imports System.Threading
+Imports System.Threading.Tasks
 
 Public Module TrafficLightController
     Private WithEvents _trafficLightControllerThread As Thread
     Private ReadOnly StateList As List(Of State)
-    Private _threadStarted As Byte
+    Private ReadOnly BusStateList As List(Of State)
+    Public Property PreviousState As State
+    Public Property NextState As State
     Public Property FirstAnnouncement As Byte
+    Private _previousBusState As Boolean
+    Private _busStateQueued As Boolean
+    Private _test As Boolean
+
+    Private _nonBusStatesPassed As Integer
+    Private _threadStarted As Byte
     Private _maxQueue As Integer
     Private _mainWindow As MainWindow
+    Private _firstRun As Boolean
+    ReadOnly Random As New Random()
 
     Sub New()
         StateList = New List(Of State)()
@@ -17,14 +28,14 @@ Public Module TrafficLightController
         '3
         '4
         Dim state1 As New State(Controller.TrafficLightList)
-        state1.Sequence = 1
+        state1.Id = 1
         state1.AffectedTrafficLightList.Add(Controller.TrafficLightList(2))
         state1.AffectedTrafficLightList.Add(Controller.TrafficLightList(4))
         state1.AffectedTrafficLightList.Add(Controller.TrafficLightList(5))
         StateList.Add(state1)
 
         Dim state2 As New State(Controller.TrafficLightList)
-        state2.Sequence = 2
+        state2.Id = 2
         state2.AffectedTrafficLightList.Add(Controller.TrafficLightList(0))
         state2.AffectedTrafficLightList.Add(Controller.TrafficLightList(3))
         state2.AffectedTrafficLightList.Add(Controller.TrafficLightList(43))
@@ -38,7 +49,7 @@ Public Module TrafficLightController
         StateList.Add(state2)
 
         Dim state3 As New State(Controller.TrafficLightList)
-        state3.Sequence = 3
+        state3.Id = 3
         state3.AffectedTrafficLightList.Add(Controller.TrafficLightList(38))
         state3.AffectedTrafficLightList.Add(Controller.TrafficLightList(32))
         state3.AffectedTrafficLightList.Add(Controller.TrafficLightList(37))
@@ -52,7 +63,7 @@ Public Module TrafficLightController
         StateList.Add(state3)
 
         Dim state4 As New State(Controller.TrafficLightList)
-        state4.Sequence = 4
+        state4.Id = 4
         state4.AffectedTrafficLightList.Add(Controller.TrafficLightList(2))
         state4.AffectedTrafficLightList.Add(Controller.TrafficLightList(4))
         state4.AffectedTrafficLightList.Add(Controller.TrafficLightList(26))
@@ -64,10 +75,26 @@ Public Module TrafficLightController
         state4.AffectedTrafficLightList.Add(Controller.TrafficLightList(48))
         state4.AffectedTrafficLightList.Add(Controller.TrafficLightList(30))
         StateList.Add(state4)
+
+        BusStateList = New List(Of State)()
+
+        Dim busState1 As New State(Controller.TrafficLightList)
+        busState1.Id = 5
+        busState1.AffectedTrafficLightList.Add(Controller.TrafficLightList(2))
+        busState1.AffectedTrafficLightList.Add(Controller.TrafficLightList(4))
+        busState1.AffectedTrafficLightList.Add(Controller.TrafficLightList(6))
+        BusStateList.Add(busState1)
+
+        Dim busState2 As New State(Controller.TrafficLightList)
+        busState2.Id = 5
+        busState2.AffectedTrafficLightList.Add(Controller.TrafficLightList(2))
+        busState2.AffectedTrafficLightList.Add(Controller.TrafficLightList(3))
+        busState2.AffectedTrafficLightList.Add(Controller.TrafficLightList(6))
+        BusStateList.Add(busState2)
     End Sub
 
-
-    Public Sub StartTrafficLightController()
+    Public Sub StartTrafficLightController(ByVal test As Boolean)
+        _test = test
 
         If _trafficLightControllerThread Is Nothing Then
             'Create a new thread.
@@ -95,7 +122,16 @@ Public Module TrafficLightController
 
         _mainWindow.LogMessage(1, "Traffic Light Controller started.")
 
+        _firstRun = True
+        _nonBusStatesPassed = My.Settings.MinimumBusStateDelay + 1
+
         Dim stopwatch As Stopwatch = stopwatch.StartNew()
+
+        If _test Then
+            If _test Then
+                Test()
+            End If
+        End If
 
         While Thread.VolatileRead(_threadStarted) = 1
 
@@ -110,12 +146,39 @@ Public Module TrafficLightController
                 End While
             End If
 
-            For Each state In StateList
+            Dim i As Integer = 0
 
+            While i <= StateList.Count - 1
                 If Thread.VolatileRead(_threadStarted) = 1 Then
+
+                    If _busStateQueued AndAlso _nonBusStatesPassed >= My.Settings.MinimumBusStateDelay Then
+                        Dim randomNumber As Integer = Random.Next(2)
+
+                        StateList.Insert(i, BusStateList(randomNumber))
+                        _nonBusStatesPassed = 0
+                    Else
+                        If i <> StateList.Count - 1 Then
+                            NextState = StateList(i + 1)
+                        Else
+                            NextState = StateList(0)
+                        End If
+                    End If
+
+                    If Not _firstRun Then
+                        If Not _previousBusState Then
+                            If i <> 0 Then
+                                PreviousState = StateList(i - 1)
+                            Else
+                                PreviousState = StateList(StateList.Count - 1)
+                            End If
+                        End If
+
+                        _previousBusState = False
+                    End If
+
                     _maxQueue = 0
 
-                    For Each trafficLight In state.AffectedTrafficLightList
+                    For Each trafficLight In StateList(i).AffectedTrafficLightList
                         If trafficLight.GetVehicleCount() > _maxQueue Then
                             _maxQueue = _maxQueue + trafficLight.GetVehicleCount()
                         End If
@@ -123,13 +186,13 @@ Public Module TrafficLightController
 
                     _mainWindow.LogMessage(5, "Longest queue: " + _maxQueue.ToString() + ".")
 
-                    state.StartState(_mainWindow, _maxQueue)
+                    StateList(i).StartState(_mainWindow, _maxQueue)
                 End If
 
                 If Thread.VolatileRead(_threadStarted) = 1 Then
-                    _mainWindow.LogMessage(5, "Waiting for state " + state.Sequence.ToString() + " to finish.")
+                    _mainWindow.LogMessage(5, "Waiting for state " + StateList(i).Id.ToString() + " to finish.")
 
-                    While state.GetThread() IsNot Nothing AndAlso state.GetThread().IsAlive
+                    While StateList(i).GetThread() IsNot Nothing AndAlso StateList(i).GetThread().IsAlive
                         If Thread.VolatileRead(_threadStarted) = 0 Then
                             Exit While
                         End If
@@ -139,12 +202,35 @@ Public Module TrafficLightController
 
                     If Thread.VolatileRead(_threadStarted) = 1 Then
 
-                        If state.GetThread() IsNot Nothing Then
-                            state.GetThread().Join()
+                        If StateList(i).GetThread() IsNot Nothing Then
+                            StateList(i).GetThread().Join()
+                        End If
+
+                        If StateList(i).Id = 5 Then
+
+                            PreviousState = StateList(i)
+                            _previousBusState = True
+
+                            RemoveBus()
+                        Else
+                            _nonBusStatesPassed = _nonBusStatesPassed + 1
                         End If
                     End If
                 End If
-            Next
+
+                If _previousBusState Then
+                    If i <> 0 Then
+                        'i = i - 1
+                    End If
+                Else
+                    i = i + 1
+                End If
+
+                If _firstRun Then
+                    _firstRun = False
+                End If
+
+            End While
 
             If Thread.VolatileRead(_threadStarted) = 1 Then
                 _mainWindow.LogMessage(1, "Processed all states. Starting over.")
@@ -184,6 +270,40 @@ Public Module TrafficLightController
 
         Return False
     End Function
+
+    Public Sub Test()
+        SendMessage(New Message(1, New Integer() {2, 3, 0}))
+        SendMessage(New Message(1, New Integer() {3, 2, 0}))
+        SendMessage(New Message(1, New Integer() {1, 2, 0}))
+        SendMessage(New Message(1, New Integer() {2, 1, 0}))
+    End Sub
+
+    Private Sub RemoveBus()
+        For i As Integer = StateList.Count() - 1 To 0 Step -1
+
+            If StateList(i).Id = 5 Then
+                StateList.Remove(StateList(i))
+            End If
+        Next i
+
+        If Controller.TrafficLightList(6).GetVehicleCount() <> 0 Then
+            _busStateQueued = False
+
+        End If
+
+        _mainWindow.LogMessage(5, "Bus state was removed.")
+    End Sub
+
+    Public Sub AddBus()
+
+        If Not _busStateQueued Then
+            _busStateQueued = True
+
+            _mainWindow.LogMessage(1, "A bus has arrived. Bus state will be executed as soon as possible.")
+        Else
+            _mainWindow.LogMessage(1, "A bus has arrived, a bus state is already queued.")
+        End If
+    End Sub
 
     Public Sub ResetMaxQueue()
         _maxQueue = 0

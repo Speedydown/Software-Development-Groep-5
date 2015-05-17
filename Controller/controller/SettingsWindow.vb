@@ -25,6 +25,9 @@
         If Not Integer.TryParse(TextBoxDelayBetweenStates.Text, textBoxValue) Then
             valueError = True
         End If
+        If Not Integer.TryParse(TextBoxMinimumDelayBetweenBusStates.Text, textBoxValue) Then
+            valueError = True
+        End If
 
         If Not valueError Then
             If CheckBoxGeneralStartTrafficLightsRed.Checked Then
@@ -44,20 +47,21 @@
             My.Settings.OrangeToRedDelay = TextBoxDelayOrangeToRed.Text
             My.Settings.ExtraVehicleDelay = TextBoxDelayVehicleQueue.Text
             My.Settings.StateDelay = TextBoxDelayBetweenStates.Text
+            My.Settings.MinimumBusStateDelay = TextBoxMinimumDelayBetweenBusStates.Text
             My.Settings.Save()
 
-            MessageBox.Show("The settings were saved successfully.", "Settings Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Close()
         Else
             MessageBox.Show("Could not save settings. Please check if the entered values are valid.", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 
     End Sub
 
-    Private Sub ButtonClose_Click(sender As Object, e As EventArgs) Handles ButtonClose.Click
+    Private Sub ButtonClose_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ButtonClose.Click
         Close()
     End Sub
 
-    Private Sub SettingsWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub SettingsWindow_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
         If My.Settings.StartTrafficLichtsRed = True Then
             CheckBoxGeneralStartTrafficLightsRed.Checked = True
@@ -76,9 +80,10 @@
         TextBoxDelayOrangeToRed.Text = My.Settings.OrangeToRedDelay
         TextBoxDelayVehicleQueue.Text = My.Settings.ExtraVehicleDelay
         TextBoxDelayBetweenStates.Text = My.Settings.StateDelay
+        TextBoxMinimumDelayBetweenBusStates.Text = My.Settings.MinimumBusStateDelay
     End Sub
 
-    Private Sub ButtonRestoreDefaults_Click(sender As Object, e As EventArgs) Handles ButtonRestoreDefaults.Click
+    Private Sub ButtonRestoreDefaults_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ButtonRestoreDefaults.Click
 
         My.Settings.ListeningPortNumber = 10000
         My.Settings.StartTrafficLichtsRed = True

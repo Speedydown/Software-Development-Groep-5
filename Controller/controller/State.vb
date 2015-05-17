@@ -6,7 +6,7 @@ Public Class State
     Private WithEvents _stateThread As Thread
     Private ReadOnly _trafficLightList As List(Of TrafficLight)
     Public Property AffectedTrafficLightList As List(Of TrafficLight)
-    Public Property Sequence As Integer
+    Public Property Id As Integer
     Private _maxQueue As Integer
     Private _mainWindow As MainWindow
     Private _threadStarted As Byte
@@ -46,7 +46,7 @@ Public Class State
     Private Sub StateWorker()
         Thread.VolatileWrite(_threadStarted, 1)
 
-        _mainWindow.LogMessage(1, "Executing state " + Sequence.ToString() + "...")
+        _mainWindow.LogMessage(1, "Executing state " + Id.ToString() + "...")
 
         Dim stopwatch As Stopwatch = stopwatch.StartNew()
 
@@ -55,7 +55,19 @@ Public Class State
 
             Parallel.ForEach(_trafficLightList, Sub(trafficLight)
                                                     If AffectedTrafficLightList.Contains(trafficLight) Then
-                                                        trafficLight.ChangeStateToGreen()
+
+                                                        Dim excluded As Boolean
+                                                        If TrafficLightController.PreviousState IsNot Nothing Then
+                                                            If TrafficLightController.PreviousState.AffectedTrafficLightList.Contains(trafficLight) Then
+
+                                                                _mainWindow.LogMessage(1, "Traffic light " + trafficLight.Id.ToString() + " was excluded from switching to green.")
+                                                                excluded = True
+                                                            End If
+                                                        End If
+
+                                                        If Not excluded Then
+                                                            trafficLight.ChangeStateToGreen()
+                                                        End If
                                                     Else
                                                         If trafficLight.State <> 0 Then
                                                             trafficLight.ChangeStateToRed()
@@ -84,7 +96,19 @@ Public Class State
             stopwatch.Stop()
 
             Parallel.ForEach(AffectedTrafficLightList, Sub(trafficLight)
-                                                           trafficLight.ChangeStateToOrange()
+
+                                                           Dim excluded As Boolean
+
+                                                           If TrafficLightController.NextState IsNot Nothing Then
+                                                               If TrafficLightController.NextState.AffectedTrafficLightList.Contains(trafficLight) Then
+                                                                   excluded = True
+                                                                   _mainWindow.LogMessage(1, "Traffic light " + trafficLight.Id.ToString() + " was excluded from switching to orange.")
+                                                               End If
+                                                           End If
+
+                                                           If Not excluded Then
+                                                               trafficLight.ChangeStateToOrange()
+                                                           End If
                                                        End Sub)
         End If
 
@@ -107,7 +131,19 @@ Public Class State
             stopwatch.Stop()
 
             Parallel.ForEach(AffectedTrafficLightList, Sub(trafficLight)
-                                                           trafficLight.ChangeStateToRed()
+
+                                                           Dim excluded As Boolean
+
+                                                           If TrafficLightController.NextState IsNot Nothing Then
+                                                               If TrafficLightController.NextState.AffectedTrafficLightList.Contains(trafficLight) Then
+                                                                   excluded = True
+                                                                   _mainWindow.LogMessage(1, "Traffic light " + trafficLight.Id.ToString() + " was excluded from switching to red.")
+                                                               End If
+                                                           End If
+
+                                                           If Not excluded Then
+                                                               trafficLight.ChangeStateToRed()
+                                                           End If
                                                        End Sub)
 
             If Thread.VolatileRead(_threadStarted) = 1 Then
@@ -131,9 +167,9 @@ Public Class State
         End If
 
         If Thread.VolatileRead(_threadStarted) = 1 Then
-            _mainWindow.LogMessage(1, "Finished executing state " + Sequence.ToString() + ".")
+            _mainWindow.LogMessage(1, "Finished executing state " + Id.ToString() + ".")
         Else
-            _mainWindow.LogMessage(1, "Aborted state " + Sequence.ToString() + ".")
+            _mainWindow.LogMessage(1, "Aborted state " + Id.ToString() + ".")
         End If
 
         _stateThread = Nothing

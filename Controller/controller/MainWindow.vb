@@ -135,7 +135,11 @@ Public Class MainWindow
         If CheckServerReady() Then
 
             If Controller.CheckControllerStarted() Then
-                Controller.StartTest()
+                If Not TrafficLightController.CheckTrafficLightControllerStarted() Then
+                    Controller.StartTest()
+                Else
+                    TrafficLightController.Test()
+                End If
             End If
         End If
     End Sub
@@ -186,7 +190,7 @@ Public Class MainWindow
 
         If CheckServerReady() Then
             If Controller.CheckControllerStarted() Then
-                TrafficLightController.StartTrafficLightController()
+                TrafficLightController.StartTrafficLightController(False)
             End If
         End If
     End Sub

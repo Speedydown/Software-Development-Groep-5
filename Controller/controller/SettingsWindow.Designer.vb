@@ -32,6 +32,9 @@ Partial Class SettingsWindow
         Me.CheckBoxAutoClearLog = New System.Windows.Forms.CheckBox()
         Me.CheckBoxGeneralStartTrafficLightsRed = New System.Windows.Forms.CheckBox()
         Me.GroupBoxDelay = New System.Windows.Forms.GroupBox()
+        Me.TextBoxMinimumDelayBetweenBusStates = New System.Windows.Forms.TextBox()
+        Me.LabelMinimumDelayBetweenBusStates = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBoxDelayBetweenStates = New System.Windows.Forms.TextBox()
         Me.TextBoxDelayVehicleQueue = New System.Windows.Forms.TextBox()
         Me.TextBoxDelayOrangeToRed = New System.Windows.Forms.TextBox()
@@ -39,7 +42,6 @@ Partial Class SettingsWindow
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.ButtonSave = New System.Windows.Forms.Button()
         Me.ButtonRestoreDefaults = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBoxGeneral.SuspendLayout()
         Me.GroupBoxDelay.SuspendLayout()
         Me.SuspendLayout()
@@ -131,6 +133,8 @@ Partial Class SettingsWindow
         '
         'GroupBoxDelay
         '
+        Me.GroupBoxDelay.Controls.Add(Me.TextBoxMinimumDelayBetweenBusStates)
+        Me.GroupBoxDelay.Controls.Add(Me.LabelMinimumDelayBetweenBusStates)
         Me.GroupBoxDelay.Controls.Add(Me.Label1)
         Me.GroupBoxDelay.Controls.Add(Me.TextBoxDelayBetweenStates)
         Me.GroupBoxDelay.Controls.Add(Me.TextBoxDelayVehicleQueue)
@@ -142,10 +146,36 @@ Partial Class SettingsWindow
         Me.GroupBoxDelay.Controls.Add(Me.LabelDelayOrangeToRed)
         Me.GroupBoxDelay.Location = New System.Drawing.Point(7, 103)
         Me.GroupBoxDelay.Name = "GroupBoxDelay"
-        Me.GroupBoxDelay.Size = New System.Drawing.Size(349, 141)
+        Me.GroupBoxDelay.Size = New System.Drawing.Size(349, 167)
         Me.GroupBoxDelay.TabIndex = 5
         Me.GroupBoxDelay.TabStop = False
         Me.GroupBoxDelay.Text = "Delay"
+        '
+        'TextBoxMinimumDelayBetweenBusStates
+        '
+        Me.TextBoxMinimumDelayBetweenBusStates.Location = New System.Drawing.Point(209, 120)
+        Me.TextBoxMinimumDelayBetweenBusStates.Name = "TextBoxMinimumDelayBetweenBusStates"
+        Me.TextBoxMinimumDelayBetweenBusStates.Size = New System.Drawing.Size(121, 20)
+        Me.TextBoxMinimumDelayBetweenBusStates.TabIndex = 15
+        '
+        'LabelMinimumDelayBetweenBusStates
+        '
+        Me.LabelMinimumDelayBetweenBusStates.AutoSize = True
+        Me.LabelMinimumDelayBetweenBusStates.Location = New System.Drawing.Point(6, 120)
+        Me.LabelMinimumDelayBetweenBusStates.Name = "LabelMinimumDelayBetweenBusStates"
+        Me.LabelMinimumDelayBetweenBusStates.Size = New System.Drawing.Size(174, 13)
+        Me.LabelMinimumDelayBetweenBusStates.TabIndex = 14
+        Me.LabelMinimumDelayBetweenBusStates.Text = "Minimum delay between bus states:"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(7, 143)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(200, 13)
+        Me.Label1.TabIndex = 16
+        Me.Label1.Text = "The delay is specified in seconds."
         '
         'TextBoxDelayBetweenStates
         '
@@ -177,46 +207,36 @@ Partial Class SettingsWindow
         '
         'ButtonClose
         '
-        Me.ButtonClose.Location = New System.Drawing.Point(238, 257)
+        Me.ButtonClose.Location = New System.Drawing.Point(238, 281)
         Me.ButtonClose.Name = "ButtonClose"
         Me.ButtonClose.Size = New System.Drawing.Size(75, 23)
-        Me.ButtonClose.TabIndex = 16
+        Me.ButtonClose.TabIndex = 19
         Me.ButtonClose.Text = "Close"
         Me.ButtonClose.UseVisualStyleBackColor = True
         '
         'ButtonSave
         '
-        Me.ButtonSave.Location = New System.Drawing.Point(157, 257)
+        Me.ButtonSave.Location = New System.Drawing.Point(157, 281)
         Me.ButtonSave.Name = "ButtonSave"
         Me.ButtonSave.Size = New System.Drawing.Size(75, 23)
-        Me.ButtonSave.TabIndex = 15
+        Me.ButtonSave.TabIndex = 18
         Me.ButtonSave.Text = "Save"
         Me.ButtonSave.UseVisualStyleBackColor = True
         '
         'ButtonRestoreDefaults
         '
-        Me.ButtonRestoreDefaults.Location = New System.Drawing.Point(50, 257)
+        Me.ButtonRestoreDefaults.Location = New System.Drawing.Point(50, 281)
         Me.ButtonRestoreDefaults.Name = "ButtonRestoreDefaults"
         Me.ButtonRestoreDefaults.Size = New System.Drawing.Size(101, 23)
-        Me.ButtonRestoreDefaults.TabIndex = 14
+        Me.ButtonRestoreDefaults.TabIndex = 17
         Me.ButtonRestoreDefaults.Text = "Restore Defaults"
         Me.ButtonRestoreDefaults.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(6, 118)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(200, 13)
-        Me.Label1.TabIndex = 14
-        Me.Label1.Text = "The delay is specified in seconds."
         '
         'SettingsWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(363, 291)
+        Me.ClientSize = New System.Drawing.Size(363, 315)
         Me.Controls.Add(Me.ButtonSave)
         Me.Controls.Add(Me.ButtonRestoreDefaults)
         Me.Controls.Add(Me.ButtonClose)
@@ -253,4 +273,6 @@ Partial Class SettingsWindow
     Friend WithEvents ButtonRestoreDefaults As System.Windows.Forms.Button
     Friend WithEvents CheckBoxAutoClearLog As System.Windows.Forms.CheckBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents TextBoxMinimumDelayBetweenBusStates As System.Windows.Forms.TextBox
+    Friend WithEvents LabelMinimumDelayBetweenBusStates As System.Windows.Forms.Label
 End Class

@@ -77,11 +77,16 @@ Public Module Controller
 
                             If _receivedMessage.Parameters(1) = 1 Then
                                 trafficLight.AddVehicle()
+
+                                If trafficLight.Id = 6 Then
+                                    TrafficLightController.AddBus()
+                                End If
                             End If
 
                             If _receivedMessage.Parameters(1) = 0 Then
                                 trafficLight.RemoveVehicle()
                             End If
+
                         End If
                     Next
                 End If
@@ -134,20 +139,8 @@ Public Module Controller
     Public Sub StartTest()
 
         If Not TrafficLightController.CheckTrafficLightControllerStarted() Then
-            TrafficLightController.StartTrafficLightController()
+            TrafficLightController.StartTrafficLightController(True)
         End If
-
-        Dim messages(3) As Message
-
-        messages(0) = New Message(1, New Integer() {2, 3, 0})
-        messages(1) = New Message(1, New Integer() {3, 2, 0})
-        messages(2) = New Message(1, New Integer() {1, 2, 0})
-        messages(3) = New Message(1, New Integer() {2, 1, 0})
-
-        Parallel.ForEach(messages, Sub(message)
-                                       SendMessage(message)
-                                   End Sub)
-
     End Sub
 
     Public Sub SetMainWindow(ByVal mainWindow As MainWindow)
