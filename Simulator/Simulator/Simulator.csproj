@@ -71,6 +71,7 @@
     <Compile Include="TestControls.xaml.cs">
       <DependentUpon>TestControls.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vehicles\Bus.cs" />
     <Compile Include="Vehicles\Car.cs" />
     <Compile Include="Vehicles\Vehicle.cs" />
     <Compile Include="Vehicles\VehicleHandler.cs" />

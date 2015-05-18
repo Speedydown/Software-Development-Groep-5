@@ -13,8 +13,11 @@ namespace Simulator.Dijkstra
         public LaneSwitchNode ExitNodeLeft { get; private set; }
         public LaneSwitchNode ExitNodeRight { get; private set; }
 
+        public List<Vehicle> Last5Vehicle { get; private set; }
+
         public LaneSwitcher(LaneSwitchNode EntryNodeLeft, LaneSwitchNode EntryNodeRight, LaneSwitchNode ExitNodeLeft, LaneSwitchNode ExitNodeRight)
         {
+            this.Last5Vehicle = new List<Vehicle>();
             this.EntryNodeLeft = EntryNodeLeft;
             this.EntryNodeLeft.Parrent = this;
             this.EntryNodeRight = EntryNodeRight;
@@ -36,6 +39,8 @@ namespace Simulator.Dijkstra
             if (Node == ExitNodeLeft)
             {
                 ExitNodeLeft.VehicleQueue.Add(vehicle);
+                EntryNodeLeft.LastPassedSecondLaneVehicle = vehicle;
+                EntryNodeRight.LastPassedSecondLaneVehicle = vehicle;
 
                 if (vehicle.CurrentNode == EntryNodeRight)
                 {
@@ -61,6 +66,13 @@ namespace Simulator.Dijkstra
 
         public void Unlock(LaneSwitchNode Node, Vehicle vehicle)
         {
+            if (this.Last5Vehicle.Count == 5)
+            {
+                this.Last5Vehicle.Remove(this.Last5Vehicle.Last());
+            }
+
+            this.Last5Vehicle.Insert(0, vehicle);
+
             ExitNodeLeft.VehicleQueue.Remove(vehicle);
             ExitNodeRight.VehicleQueue.Remove(vehicle);
 

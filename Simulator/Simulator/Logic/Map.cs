@@ -156,12 +156,14 @@ namespace Simulator.UserControls
             this.nodes.TrafficLight3ExitLeft.AddNode(this.nodes.NodeD1);
             this.nodes.NodeD2.AddNode(this.nodes.NodeI);
             this.nodes.NodeI.AddNode(this.nodes.NodeJ);
-            this.nodes.NodeJ.AddNode(this.nodes.TrafficLight8EntryRight);
+            this.nodes.NodeJ.AddNode(this.nodes.LaneSwitcher2.EntryNodeRight);
+            this.nodes.LaneSwitcher2.ExitNodeRight.AddNode(this.nodes.TrafficLight8EntryRight);
             this.nodes.TrafficLight8EntryRight.AddNode(this.nodes.TrafficLight8WaitRight);
             this.nodes.TrafficLight8WaitRight.AddNode(this.nodes.TrafficLight8Right);
             this.nodes.TrafficLight8Right.AddNode(this.nodes.TrafficLight8ExitRight);
             this.nodes.TrafficLight8ExitRight.AddNode(this.nodes.NodeG2);
-            this.nodes.NodeD1.AddNode(this.nodes.Custom40);
+            this.nodes.NodeD1.AddNode(this.nodes.LaneSwitcher2.EntryNodeLeft);
+            this.nodes.LaneSwitcher2.ExitNodeLeft.AddNode(this.nodes.Custom40);
             this.nodes.Custom40.AddNode(this.nodes.Custom41);
             this.nodes.Custom40.AddNode(this.nodes.TrafficLight8EntryLeft);
             this.nodes.TrafficLight8EntryLeft.AddNode(this.nodes.TrafficLight8WaitLeft);
@@ -185,7 +187,8 @@ namespace Simulator.UserControls
             this.nodes.NodeH2.AddNode(this.nodes.NodeF2);
 
             //east
-            this.nodes.EntryNode3.AddNode(this.nodes.Custom20);
+            this.nodes.EntryNode3.AddNode(this.nodes.LaneSwitcher4.EntryNodeRight);
+            this.nodes.LaneSwitcher4.ExitNodeRight.AddNode(this.nodes.Custom20);
             this.nodes.Custom20.AddNode(this.nodes.Custom21);
             this.nodes.Custom21.AddNode(this.nodes.Bus4);
             this.nodes.Custom21.AddNode(this.nodes.TrafficLight10Entry);
@@ -200,7 +203,8 @@ namespace Simulator.UserControls
             this.nodes.TrafficLight14Exit.AddNode(this.nodes.NodeF2);
             this.nodes.NodeF1.AddNode(this.nodes.ExitNode1);
             this.nodes.NodeF2.AddNode(this.nodes.ExitNode2);
-            this.nodes.EntryNode4.AddNode(this.nodes.TrafficLight9EntryLeft);
+            this.nodes.EntryNode4.AddNode(this.nodes.LaneSwitcher4.EntryNodeLeft);
+            this.nodes.LaneSwitcher4.ExitNodeLeft.AddNode(this.nodes.TrafficLight9EntryLeft);
             this.nodes.TrafficLight9EntryLeft.AddNode(this.nodes.TrafficLight9WaitLeft);
             this.nodes.TrafficLight9WaitLeft.AddNode(this.nodes.TrafficLight9Left);
             this.nodes.TrafficLight9Left.AddNode(this.nodes.TrafficLight9ExitLeft);
@@ -212,7 +216,8 @@ namespace Simulator.UserControls
             this.nodes.TrafficLight9ExitRight.AddNode(this.nodes.NodeE2);
 
             //North
-            this.nodes.EntryNode1.AddNode(this.nodes.Custom1);
+            this.nodes.EntryNode1.AddNode(this.nodes.LaneSwitcher3.EntryNodeRight);
+            this.nodes.LaneSwitcher3.ExitNodeRight.AddNode(this.nodes.Custom1);
             this.nodes.Custom1.AddNode(this.nodes.TrafficLight11EntryRight);
             this.nodes.TrafficLight11EntryRight.AddNode(this.nodes.TrafficLight11WaitRight);
             this.nodes.TrafficLight11WaitRight.AddNode(this.nodes.TrafficLight11Right);
@@ -224,7 +229,8 @@ namespace Simulator.UserControls
             this.nodes.TrafficLight11Left.AddNode(this.nodes.TrafficLight11ExitLeft);
             this.nodes.TrafficLight11ExitLeft.AddNode(this.nodes.NodeE1);
 
-            this.nodes.EntryNode2.AddNode(this.nodes.Custom3);
+            this.nodes.EntryNode2.AddNode(this.nodes.LaneSwitcher3.EntryNodeLeft);
+            this.nodes.LaneSwitcher3.ExitNodeLeft.AddNode(this.nodes.Custom3);
             this.nodes.Custom3.AddNode(this.nodes.TrafficLight12Entry);
             this.nodes.TrafficLight12Entry.AddNode(this.nodes.TrafficLight12Wait);
             this.nodes.TrafficLight12Wait.AddNode(this.nodes.TrafficLight12);
@@ -236,13 +242,15 @@ namespace Simulator.UserControls
             this.nodes.TrafficLight13Wait.AddNode(this.nodes.TrafficLight13);
             this.nodes.TrafficLight13.AddNode(this.nodes.TrafficLight13Exit);
             this.nodes.TrafficLight13Exit.AddNode(this.nodes.NodeG1);
-            this.nodes.NodeE2.AddNode(this.nodes.TrafficLight0EntryRight);
+            this.nodes.NodeE2.AddNode(this.nodes.LaneSwitcher5.EntryNodeRight);
+            this.nodes.LaneSwitcher5.ExitNodeRight.AddNode(this.nodes.TrafficLight0EntryRight);
             this.nodes.TrafficLight0EntryRight.AddNode(this.nodes.TrafficLight0WaitRight);
             this.nodes.TrafficLight0WaitRight.AddNode(this.nodes.TrafficLight0Right);
             this.nodes.TrafficLight0Right.AddNode(this.nodes.TrafficLight0ExitRight);
             this.nodes.TrafficLight0ExitRight.AddNode(this.nodes.NodeB2);
 
-            this.nodes.NodeE1.AddNode(this.nodes.Custom30);
+            this.nodes.NodeE1.AddNode(this.nodes.LaneSwitcher5.EntryNodeLeft);
+            this.nodes.LaneSwitcher5.ExitNodeLeft.AddNode(this.nodes.Custom30);
             this.nodes.Custom30.AddNode(this.nodes.Custom31);
             this.nodes.Custom30.AddNode(this.nodes.TrafficLight0EntryLeft);
             this.nodes.TrafficLight0EntryLeft.AddNode(this.nodes.TrafficLight0WaitLeft);

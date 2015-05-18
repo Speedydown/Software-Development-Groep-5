@@ -36,7 +36,7 @@ namespace Simulator.Dijkstra
         private string Label = "";
         private bool DrawnOnCanvas = false;
         public Color NodeColor { get; protected set; }
-        private VehicleType[] AllowedVehicles = new VehicleType[] { VehicleType.Auto };
+        private VehicleType[] AllowedVehicles = new VehicleType[] { VehicleType.Auto, VehicleType.Bus };
         protected Shape NodeEllipse = new System.Windows.Shapes.Ellipse();
 
         //Local variables

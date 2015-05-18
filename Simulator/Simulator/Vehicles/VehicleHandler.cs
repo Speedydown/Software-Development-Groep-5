@@ -36,15 +36,18 @@ namespace Simulator
 
             foreach (EntryNode n in Map.Instance.EntryPoints)
             {
+                bool IsValid = true;
+
                 foreach (var Entry in InvalidDirections)
                 {
                     if (Entry.Key == n.StartDirection && Entry.Value == EndDirection)
                     {
-                        continue;
+                        IsValid = false;
+                        break;
                     }
                 }
 
-                if (n.StartDirection == StartDirection)
+                if (n.StartDirection == StartDirection && IsValid)
                 {
                     SuitableStartNodes.Add(n);
                 }
@@ -63,6 +66,10 @@ namespace Simulator
             if (Vehicle == VehicleType.Auto)
             {
                 vehicle = new Car(StartNode, DefaultRotation, EndDirection);
+            }
+            else if (Vehicle == VehicleType.Bus)
+            {
+                vehicle = new Bus(StartNode, DefaultRotation, EndDirection);
             }
         }
 

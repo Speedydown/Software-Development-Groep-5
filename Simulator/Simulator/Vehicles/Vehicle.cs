@@ -26,10 +26,11 @@ namespace Simulator
         protected Vehicle VehicleInFront { get; private set; }
         protected Vehicle SecondVehicleInFront { get; private set; }
         private bool Disposed = false;
+        public int VehicleDistance { get; private set; }
 
         public int Height { get; private set; }
         public int Width { get; private set; }
-        
+
         public float CurrentSpeed { get; protected set; }
         public Position CurrentPosition { get; protected set; }
         public Rectangle CurrentShape { get; protected set; }
@@ -44,9 +45,10 @@ namespace Simulator
         //Animation settings
         public float Rotation { get; protected set; }
         public Color Color { get; protected set; }
-        
 
-        protected Vehicle(Node StartNode, float MaxSpeed, float Acceleration, int DefaultRotation, int Height, int Width, VehicleType VehicleType, Color VehicleColor, Direction EndDirection) : base()
+
+        protected Vehicle(Node StartNode, float MaxSpeed, float Acceleration, int DefaultRotation, int Height, int Width, VehicleType VehicleType, Color VehicleColor, Direction EndDirection, int VehicleDistance)
+            : base()
         {
             this.ID = Vehicle.GenerateID();
             this.CurrentNode = StartNode;
@@ -73,6 +75,7 @@ namespace Simulator
             this.CurrentPosition = this.CurrentNode.CurrentPosition;
             this.EndDirection = EndDirection;
             this.Rotation = DefaultRotation;
+            this.VehicleDistance = VehicleDistance;
 
             this.CurrentShape = new Rectangle();
             this.CurrentShape.Height = this.Height;
@@ -134,7 +137,7 @@ namespace Simulator
                     this.CurrentDistanceOfPathTraveled = 0;
                 }
 
-                
+
 
                 this.UpdateCarShape();
             }
@@ -155,10 +158,26 @@ namespace Simulator
                 vehicleState = this.DetermineVehicleStateByVehicleInFront(this.SecondVehicleInFront);
             }
 
+            if (vehicleState == VehicleState.Driving && this.TargetNode is LaneSwitchNode)
+            {
+                foreach (Vehicle v in (this.TargetNode as LaneSwitchNode).Parrent.Last5Vehicle)
+                {
+                    vehicleState = this.DetermineVehicleStateByVehicleInFront(v);
+
+                    if (vehicleState != VehicleState.Driving)
+                    {
+                        break;
+                    }
+                }
+            }
+
             if (CurrentNode is TrafficLightWaitNode && ((CurrentNode as TrafficLightWaitNode).Paths.First().Destination as TrafficLight).State != TrafficLightState.Groen)
             {
-                vehicleState = VehicleState.Stopping;
-            }
+                if (!(((CurrentNode as TrafficLightWaitNode).Paths.First().Destination as TrafficLight).State == TrafficLightState.Oranje && this.CurrentPercentOfPathTraveled > 0.7f))
+                {
+                    vehicleState = VehicleState.Stopping;
+                }
+            }      
 
             if (this.TargetNode is LaneSwitchNode && (this.TargetNode as LaneSwitchNode).VehicleQueue.Count > 0 &&
                 (this.TargetNode as LaneSwitchNode).VehicleQueue.First() != this && this.TargetNode.LastPassed > DateTime.Now.AddMilliseconds(-1500))
@@ -186,7 +205,21 @@ namespace Simulator
                 DifX = (DifX < 0) ? DifX * -1 : DifX;
                 DifY = (DifY < 0) ? DifY * -1 : DifY;
 
-                if (DifX < 45 && DifY < 45)
+                int Distance = (this.VehicleDistance > vehicle.VehicleDistance ? this.VehicleDistance : vehicle.VehicleDistance);
+
+                //Car to Bus correction
+                if (vehicle is Bus && this is Car)
+                {
+                    Distance = Distance - 10;
+                }
+
+                //bus to car correction
+                if (vehicle is Car && this is Bus)
+                {
+                    Distance = Distance - 5;
+                }
+
+                if (DifX < Distance && DifY < Distance)
                 {
                     vehicleState = VehicleState.Stopping;
                 }
@@ -270,7 +303,7 @@ namespace Simulator
         {
             Double LowestX = double.MaxValue;
             Double HighestX = 0;
-            Double LowestY =  double.MaxValue;
+            Double LowestY = double.MaxValue;
             Double HighestY = 0;
 
             foreach (Point p in Points)
@@ -285,7 +318,7 @@ namespace Simulator
                     HighestX = p.X;
                 }
 
-                 if (p.Y < LowestY)
+                if (p.Y < LowestY)
                 {
                     LowestY = p.Y;
                 }
@@ -314,7 +347,7 @@ namespace Simulator
                 {
                     LogHandler.Instance.Write("Could not remove vehicle from the map", LogType.Warning);
                 }
-            }));  
+            }));
         }
     }
 }

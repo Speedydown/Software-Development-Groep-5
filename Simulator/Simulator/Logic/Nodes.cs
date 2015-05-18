@@ -11,18 +11,18 @@ namespace Simulator
     public class Nodes
     {
         //StartingNodes
-        public Node EntryNode1 = new EntryNode(new Position(1200, 0), Direction.Noord, "s1");
-        public Node EntryNode2 = new EntryNode(new Position(1225, 0), Direction.Noord, "s2");
-        public Node EntryNode3 = new EntryNode(new Position(1915, 300), Direction.Oost, "s3");
-        public Node EntryNode4 = new EntryNode(new Position(1915, 325), Direction.Oost, "s4");
+        public Node EntryNode1 = new EntryNode(new Position(1200, -100), Direction.Noord, "s1");
+        public Node EntryNode2 = new EntryNode(new Position(1225, -100), Direction.Noord, "s2");
+        public Node EntryNode3 = new EntryNode(new Position(2015, 300), Direction.Oost, "s3");
+        public Node EntryNode4 = new EntryNode(new Position(2015, 325), Direction.Oost, "s4");
         public Node EntryNode5 = new EntryNode(new Position(450, 1055), Direction.Zuid, "s5");
         public Node EntryNode6 = new EntryNode(new Position(425, 1055), Direction.Zuid, "s6");
         public Node EntryNode7 = new EntryNode(new Position(0, 425), Direction.West, "s7");
-        public Node EntryNode8 = new EntryNode(new Position(500, 1055), Direction.Zuid, "s8");
+        public Node EntryNode8 = new EntryNode(new Position(500, 1055), Direction.Ventweg, "s8");
         public Node EntryNode9 = new EntryNode(new Position(0, 495), Direction.West, "s9", Colors.Purple);
         public Node EntryNode10 = new EntryNode(new Position(395, 0), Direction.Noord, "s10", Colors.Purple);
         public Node EntryNode11 = new EntryNode(new Position(1915, 225), Direction.Oost, "s11", Colors.Purple);
-        
+
 
         //Intersection Nodes
         public Node NodeA1 = new Node(new Position(350, 375), "A1");
@@ -61,7 +61,6 @@ namespace Simulator
 
         //CustomNodes
         public Node Custom1 = new Node(new Position(1200, 70), "1");
-      //  public Node Custom2 = new Node(new Position(1175, 150), "2");
         public Node Custom3 = new Node(new Position(1225, 70), "3");
 
         public Node Custom20 = new Node(new Position(1700, 300), "20");
@@ -96,11 +95,35 @@ namespace Simulator
 
         //LaneSwitchers
         public LaneSwitcher LaneSwitcher1 = new LaneSwitcher(
-            new LaneSwitchNode(true, new Position(425, 1025)),
-            new LaneSwitchNode(true, new Position(450, 1025)),
-            new LaneSwitchNode(false, new Position(425, 980)),
-            new LaneSwitchNode(false, new Position(450, 980))
+            new LaneSwitchNode(true, new Position(425, 1045)),
+            new LaneSwitchNode(true, new Position(450, 1045)),
+            new LaneSwitchNode(false, new Position(425, 1000)),
+            new LaneSwitchNode(false, new Position(450, 1000))
             );
+
+        public LaneSwitcher LaneSwitcher2 = new LaneSwitcher(
+            new LaneSwitchNode(true, new Position(645, 400)),
+            new LaneSwitchNode(true, new Position(645, 425)),
+            new LaneSwitchNode(false, new Position(690, 400)),
+            new LaneSwitchNode(false, new Position(690, 425)));
+
+        public LaneSwitcher LaneSwitcher3 = new LaneSwitcher(
+            new LaneSwitchNode(true, new Position(1225, 0)),
+            new LaneSwitchNode(true, new Position(1200, 0)),
+            new LaneSwitchNode(false, new Position(1225, 45)),
+            new LaneSwitchNode(false, new Position(1200, 45)));
+
+        public LaneSwitcher LaneSwitcher4 = new LaneSwitcher(
+            new LaneSwitchNode(true, new Position(1915, 325)),
+            new LaneSwitchNode(true, new Position(1915, 300)),
+            new LaneSwitchNode(false, new Position(1870, 325)),
+            new LaneSwitchNode(false, new Position(1870, 300)));
+
+        public LaneSwitcher LaneSwitcher5 = new LaneSwitcher(
+            new LaneSwitchNode(true, new Position(1150, 325)),
+            new LaneSwitchNode(true, new Position(1150, 300)),
+            new LaneSwitchNode(false, new Position(1105, 325)),
+            new LaneSwitchNode(false, new Position(1105, 300)));
 
         //------------------Cycling routes---------------------------------------------
         public Node Nodec1 = new BicycleNode(new Position(295, 495), "c1");
@@ -249,7 +272,7 @@ namespace Simulator
 
         public Nodes()
         {
-            
+
         }
     }
 }
