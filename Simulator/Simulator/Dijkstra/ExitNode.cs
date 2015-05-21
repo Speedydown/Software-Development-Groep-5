@@ -13,8 +13,8 @@ namespace Simulator.Dijkstra
     {
         public Direction ExitDirection { get; private set; }
 
-        public ExitNode(Position CurrentPosition, Direction ExitDirection, string Label = "", Color? NodeColor = null)
-            : base(CurrentPosition, Label)
+        public ExitNode(Position CurrentPosition, Direction ExitDirection, VehicleType[] AllowedVehicles, string Label = "", Color? NodeColor = null)
+            : base(CurrentPosition, Label, AllowedVehicles)
         {
             if (NodeColor == null)
             {

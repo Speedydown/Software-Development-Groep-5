@@ -150,7 +150,6 @@ namespace Simulator
         private void DetermineVehicleState()
         {
             VehicleState vehicleState = VehicleState.Driving;
-
             vehicleState = this.DetermineVehicleStateByVehicleInFront(this.VehicleInFront);
 
             if (vehicleState == VehicleState.Driving)

@@ -36,7 +36,7 @@ namespace Simulator.Dijkstra
         private string Label = "";
         private bool DrawnOnCanvas = false;
         public Color NodeColor { get; protected set; }
-        private VehicleType[] AllowedVehicles = new VehicleType[] { VehicleType.Auto, VehicleType.Bus };
+        public VehicleType[] AllowedVehicles = new VehicleType[] { VehicleType.Auto, VehicleType.Bus };
         protected Shape NodeEllipse = new System.Windows.Shapes.Ellipse();
 
         //Local variables
@@ -198,7 +198,6 @@ namespace Simulator.Dijkstra
                     }
 
                     VehicleHandler.Instance.SpawnVehicle((vehicle.CurrentNode as EntryNode).StartDirection, TargetDirection, vehicle.VehicleType);
-
                 }
 
                 vehicle.Dispose();
@@ -227,7 +226,7 @@ namespace Simulator.Dijkstra
                 }
             }
 
-            return false;
+             return false;
         }
 
         public Path GetPathByDestinationNode(Node node)

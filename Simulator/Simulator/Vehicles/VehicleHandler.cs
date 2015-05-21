@@ -47,7 +47,7 @@ namespace Simulator
                     }
                 }
 
-                if (n.StartDirection == StartDirection && IsValid)
+                if (n.StartDirection == StartDirection && IsValid && n.AllowedVehicles.Contains(Vehicle))
                 {
                     SuitableStartNodes.Add(n);
                 }
@@ -70,6 +70,10 @@ namespace Simulator
             else if (Vehicle == VehicleType.Bus)
             {
                 vehicle = new Bus(StartNode, DefaultRotation, EndDirection);
+            }
+            else if (Vehicle == VehicleType.Fiets)
+            {
+                vehicle = new Bicycle(StartNode, DefaultRotation, EndDirection);
             }
         }
 

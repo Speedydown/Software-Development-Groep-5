@@ -58,6 +58,7 @@
     <Compile Include="Dijkstra\DijkstraCalculationHandler.cs" />
     <Compile Include="Dijkstra\LaneSwitcher.cs" />
     <Compile Include="Dijkstra\LaneSwitchNode.cs" />
+    <Compile Include="Dijkstra\PedestrianNode.cs" />
     <Compile Include="Dijkstra\TrafficLights\NotificationNode.cs" />
     <Compile Include="Dijkstra\TrafficLights\TrafficLight.cs" />
     <Compile Include="Dijkstra\TrafficLights\TrafficLightWaitNode.cs" />
@@ -71,8 +72,10 @@
     <Compile Include="TestControls.xaml.cs">
       <DependentUpon>TestControls.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vehicles\Bicycle.cs" />
     <Compile Include="Vehicles\Bus.cs" />
     <Compile Include="Vehicles\Car.cs" />
+    <Compile Include="Vehicles\Pedestrian.cs" />
     <Compile Include="Vehicles\Vehicle.cs" />
     <Compile Include="Vehicles\VehicleHandler.cs" />
     <Page Include="Login.xaml">
