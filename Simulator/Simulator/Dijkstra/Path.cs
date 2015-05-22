@@ -53,11 +53,31 @@ namespace Simulator.Dijkstra
             PathLine.X2 = this.Destination.CurrentPosition.X;
             PathLine.Y2 = this.Destination.CurrentPosition.Y;
 
-            PathLine.StrokeThickness = 2;
-            PathLine.Stroke = new SolidColorBrush(this.NodeColor);
+            int ZIndex = 9;
+
+            if (this.Destination.AllowedVehicles.Contains(VehicleType.Fiets) || this.Destination == Map.Instance.nodes.Custom71)
+            {
+                PathLine.Stroke = new SolidColorBrush(Colors.Orange);
+                PathLine.StrokeThickness = 6;
+                ZIndex = 11;
+            }
+
+            if ((this.Destination.AllowedVehicles.Contains(VehicleType.Auto) || this.Destination.AllowedVehicles.Contains(VehicleType.Bus)) && !(this.Source == Map.Instance.nodes.TrafficLight222ExitLeft || this.Source == Map.Instance.nodes.Nodec12 || this.Source == Map.Instance.nodes.Nodec8 || this.Source == Map.Instance.nodes.EntryNode12))
+            {
+                PathLine.Stroke = new SolidColorBrush(Colors.LightGray);
+                PathLine.StrokeThickness = 14;
+                ZIndex = 10;
+            }
+
+            if (Config.DisplayNodes)
+            {
+                PathLine.Stroke = new SolidColorBrush(this.NodeColor);
+                PathLine.StrokeThickness = 2;
+            }
 
 
             this.MapCanvas.Children.Add(PathLine);
+            Map.SetZIndex(PathLine, ZIndex);
 
             this.Destination.Draw();
         }

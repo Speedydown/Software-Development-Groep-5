@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace Simulator.UserControls
 {
@@ -56,6 +57,16 @@ namespace Simulator.UserControls
 
         public void Draw()
         {
+            if (!Config.DisplayNodes)
+            {
+                Rectangle BackGround = new Rectangle();
+                BackGround.Width = 1920;
+                BackGround.Height = 1080;
+                BackGround.Fill = new SolidColorBrush(Colors.LimeGreen);
+
+                this.Children.Add(BackGround);
+            }
+
             foreach (Node n in this.EntryPoints)
             {
                 n.Draw();
@@ -75,6 +86,7 @@ namespace Simulator.UserControls
             EntryPoints.Add(this.nodes.EntryNode9);
             EntryPoints.Add(this.nodes.EntryNode10);
             EntryPoints.Add(this.nodes.EntryNode11);
+            EntryPoints.Add(this.nodes.EntryNode12);
         }
 
         private void BuildRoads()
@@ -272,7 +284,8 @@ namespace Simulator.UserControls
             this.nodes.NodeA2.AddNode(this.nodes.NodeC2);
 
             //Ventweg
-            this.nodes.EntryNode8.AddNode(this.nodes.Custom70);
+            this.nodes.EntryNode8.AddNode(this.nodes.Custom74);
+            this.nodes.Custom74.AddNode(this.nodes.Custom70);
             this.nodes.Custom70.AddNode(this.nodes.NodeI);
             this.nodes.NodeJ.AddNode(this.nodes.Custom71);
             this.nodes.Custom71.AddNode(this.nodes.Custom72);
@@ -334,8 +347,10 @@ namespace Simulator.UserControls
             this.nodes.Nodec12.AddNode(this.nodes.Custom71);
             this.nodes.Nodec13.AddNode(this.nodes.Nodec14);
             this.nodes.Nodec14.AddNode(this.nodes.Nodec15);
-            this.nodes.Nodec15.AddNode(this.nodes.Nodec2);
+            this.nodes.Nodec15.AddNode(this.nodes.Nodec17);
+            this.nodes.Nodec17.AddNode(this.nodes.Nodec2);
             this.nodes.Custom73.AddNode(this.nodes.ExitNode12);
+            this.nodes.EntryNode12.AddNode(this.nodes.Custom74);
         }
     }
 }

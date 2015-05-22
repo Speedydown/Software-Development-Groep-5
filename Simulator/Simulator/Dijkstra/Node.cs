@@ -96,10 +96,27 @@ namespace Simulator.Dijkstra
                     p.Draw();
                 }
 
-                this.MapCanvas.Children.Add(NodeEllipse);
-                this.MapCanvas.Children.Add(IDNumberTextblock);
-                Map.SetZIndex(NodeEllipse, 253);
-                Map.SetZIndex(IDNumberTextblock, 254);
+                if (Config.DisplayNodes || this is TrafficLight)
+                {
+                    this.MapCanvas.Children.Add(NodeEllipse);
+                    Map.SetZIndex(NodeEllipse, 253);
+                }
+                else if (this.AllowedVehicles.Contains(VehicleType.Auto) || this.AllowedVehicles.Contains(VehicleType.Bus))
+                {
+                    NodeEllipse.Height = 14;
+                    NodeEllipse.Width = 14;
+                    NodeEllipse.Margin = new Thickness(CurrentPosition.X - 7, CurrentPosition.Y - 7, 0, 0);
+                    NodeEllipse.Stroke = new SolidColorBrush(Colors.LightGray);
+                    NodeEllipse.Fill = new SolidColorBrush(Colors.LightGray);
+                    this.MapCanvas.Children.Add(NodeEllipse);
+                    Map.SetZIndex(NodeEllipse, 10);
+                }
+
+                if (Config.DisplayNodes)
+                {
+                    this.MapCanvas.Children.Add(IDNumberTextblock);
+                    Map.SetZIndex(IDNumberTextblock, 254);
+                }
             }
         }
 

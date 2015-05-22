@@ -8,6 +8,6 @@ namespace Simulator
 {
     public static class Config
     {
-        public static readonly bool DisplayNodes = true;
+        public static readonly bool DisplayNodes = false;
     }
 }

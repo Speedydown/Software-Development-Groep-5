@@ -11,7 +11,7 @@ namespace Simulator
     public class Bicycle : Vehicle
     {
         public Bicycle(Node StartNode, int DefaultRotation, Direction EndDirection)
-            : base(StartNode, 0.015f, 0.015f, DefaultRotation, 6, 12, VehicleType.Fiets, Colors.DarkGreen, EndDirection, 20)
+            : base(StartNode, 0.015f, 0.015f, DefaultRotation, 6, 12, VehicleType.Fiets, Colors.DarkGreen, EndDirection, 16)
         {
 
         }
