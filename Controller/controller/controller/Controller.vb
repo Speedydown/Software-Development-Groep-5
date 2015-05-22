@@ -11,7 +11,7 @@ Public Module Controller
 
     Sub New()
         TrafficLightList = New List(Of TrafficLight)()
-        Dim walkerCyclistTrafficLightArray = New Integer() {46, 50, 15, 16, 43, 47, 35, 34, 36, 37, 38, 32, 48, 30, 25, 49, 26, 27}
+        Dim walkerCyclistTrafficLightArray = New Integer() {46, 50, 15, 16, 43, 47, 35, 34, 36, 37, 38, 32, 48, 30, 25, 49, 26, 27, 17, 18, 19, 20, 23, 39, 24, 21, 22, 40}
         Dim busTrafficLightArray = New Integer() {6, 13, 14}
 
         For i As Integer = 0 To 50
@@ -90,7 +90,7 @@ Public Module Controller
                                 trafficLight.AddVehicle()
 
                                 If trafficLight.Id = 6 Then
-                                    TrafficLightController.AddBus()
+                                    'TrafficLightController.AddBus()
                                 End If
                             End If
 

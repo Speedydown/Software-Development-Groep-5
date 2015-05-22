@@ -61,3 +61,6 @@ E:\Documents\Dropbox\SCHOOLNEW3\SDM\VB.NET\Controller\controller\Controller\obj\
 E:\Documents\Dropbox\SCHOOLNEW3\SDM\VB.NET\Controller\controller\Controller\obj\x86\Release\Controller.Resources.resources
 E:\Documents\Dropbox\SCHOOLNEW3\SDM\VB.NET\Controller\controller\Controller\obj\x86\Release\Controller.SettingsWindow.resources
 E:\Documents\Dropbox\SCHOOLNEW3\SDM\VB.NET\Controller\controller\Controller\obj\x86\Release\Controller.vbproj.GenerateResource.Cache
+E:\Dropbox\SCHOOLNEW3\SDM\VB.NET\Controller\Controller\Controller\bin\Release\Controller.exe
+E:\Dropbox\SCHOOLNEW3\SDM\VB.NET\Controller\Controller\Controller\bin\Release\Controller.pdb
+E:\Dropbox\SCHOOLNEW3\SDM\VB.NET\Controller\Controller\Controller\bin\Release\Controller.xml

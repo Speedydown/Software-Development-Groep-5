@@ -29,13 +29,28 @@ Public Module TrafficLightController
         '4
         Dim state1 As New State(Controller.TrafficLightList)
         state1.Id = 1
+
+        'Left
         state1.AffectedTrafficLightList.Add(Controller.TrafficLightList(2))
         state1.AffectedTrafficLightList.Add(Controller.TrafficLightList(4))
         state1.AffectedTrafficLightList.Add(Controller.TrafficLightList(5))
+
+        'Right
+        state1.AffectedTrafficLightList.Add(Controller.TrafficLightList(9))
+        state1.AffectedTrafficLightList.Add(Controller.TrafficLightList(8))
+        state1.AffectedTrafficLightList.Add(Controller.TrafficLightList(23))
+        state1.AffectedTrafficLightList.Add(Controller.TrafficLightList(24))
+        state1.AffectedTrafficLightList.Add(Controller.TrafficLightList(21))
+        state1.AffectedTrafficLightList.Add(Controller.TrafficLightList(22))
+        state1.AffectedTrafficLightList.Add(Controller.TrafficLightList(40))
+        state1.AffectedTrafficLightList.Add(Controller.TrafficLightList(39))
+
         StateList.Add(state1)
 
         Dim state2 As New State(Controller.TrafficLightList)
         state2.Id = 2
+
+        'Left
         state2.AffectedTrafficLightList.Add(Controller.TrafficLightList(0))
         state2.AffectedTrafficLightList.Add(Controller.TrafficLightList(3))
         state2.AffectedTrafficLightList.Add(Controller.TrafficLightList(44))
@@ -47,11 +62,17 @@ Public Module TrafficLightController
         state2.AffectedTrafficLightList.Add(Controller.TrafficLightList(16))
         state2.AffectedTrafficLightList.Add(Controller.TrafficLightList(43))
         state2.AffectedTrafficLightList.Add(Controller.TrafficLightList(47))
+
+        'Right
+        state2.AffectedTrafficLightList.Add(Controller.TrafficLightList(12))
+        state2.AffectedTrafficLightList.Add(Controller.TrafficLightList(10))
+
         StateList.Add(state2)
 
         Dim state3 As New State(Controller.TrafficLightList)
         state3.Id = 3
 
+        'Left
         state3.AffectedTrafficLightList.Add(Controller.TrafficLightList(31))
         state3.AffectedTrafficLightList.Add(Controller.TrafficLightList(33))
         state3.AffectedTrafficLightList.Add(Controller.TrafficLightList(1))
@@ -63,10 +84,16 @@ Public Module TrafficLightController
         state3.AffectedTrafficLightList.Add(Controller.TrafficLightList(37))
         state3.AffectedTrafficLightList.Add(Controller.TrafficLightList(38))
         state3.AffectedTrafficLightList.Add(Controller.TrafficLightList(32))
+
+        'Right
+        state3.AffectedTrafficLightList.Add(Controller.TrafficLightList(7))
+        state3.AffectedTrafficLightList.Add(Controller.TrafficLightList(8))
+
         StateList.Add(state3)
 
         Dim state4 As New State(Controller.TrafficLightList)
         state4.Id = 4
+        'Left
         state4.AffectedTrafficLightList.Add(Controller.TrafficLightList(2))
         state4.AffectedTrafficLightList.Add(Controller.TrafficLightList(4))
         state4.AffectedTrafficLightList.Add(Controller.TrafficLightList(28))
@@ -78,6 +105,14 @@ Public Module TrafficLightController
         state4.AffectedTrafficLightList.Add(Controller.TrafficLightList(49))
         state4.AffectedTrafficLightList.Add(Controller.TrafficLightList(26))
         state4.AffectedTrafficLightList.Add(Controller.TrafficLightList(27))
+
+        'Right
+        state4.AffectedTrafficLightList.Add(Controller.TrafficLightList(11))
+        state4.AffectedTrafficLightList.Add(Controller.TrafficLightList(7))
+        state4.AffectedTrafficLightList.Add(Controller.TrafficLightList(20))
+        state4.AffectedTrafficLightList.Add(Controller.TrafficLightList(19))
+        state4.AffectedTrafficLightList.Add(Controller.TrafficLightList(18))
+
         StateList.Add(state4)
 
         BusStateList = New List(Of State)()
