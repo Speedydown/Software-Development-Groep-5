@@ -38,11 +38,12 @@ namespace Simulator.Dijkstra
         public Color NodeColor { get; protected set; }
         public VehicleType[] AllowedVehicles = new VehicleType[] { VehicleType.Auto, VehicleType.Bus };
         protected Shape NodeEllipse = new System.Windows.Shapes.Ellipse();
+        public int ExtraCost { get; protected set; }
 
         //Local variables
         protected Color FillColor = Colors.White;
 
-        public Node(Position CurrentPosition, string Label = "", VehicleType[] AllowedVehicles = null)
+        public Node(Position CurrentPosition, string Label = "", VehicleType[] AllowedVehicles = null, int ExtraCost = 0)
             : base()
         {
             this.NodeColor = Colors.Red;
@@ -50,6 +51,7 @@ namespace Simulator.Dijkstra
             this.CurrentPosition = CurrentPosition;
             this.NodeColor = NodeColor;
             this.Label = Label;
+            this.ExtraCost = ExtraCost;
 
             if (AllowedVehicles != null)
             {

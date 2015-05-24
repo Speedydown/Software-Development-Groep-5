@@ -57,7 +57,14 @@ namespace Simulator.Dijkstra
 
             if (this.Destination.AllowedVehicles.Contains(VehicleType.Fiets) || this.Destination == Map.Instance.nodes.Custom71)
             {
-                PathLine.Stroke = new SolidColorBrush(Colors.Orange);
+                PathLine.Stroke = new SolidColorBrush(Colors.DarkOrange);
+                PathLine.StrokeThickness = 6;
+                ZIndex = 11;
+            }
+
+            if (this.Destination.AllowedVehicles.Contains(VehicleType.Voetganger))
+            {
+                PathLine.Stroke = new SolidColorBrush(Colors.DarkGray);
                 PathLine.StrokeThickness = 6;
                 ZIndex = 11;
             }

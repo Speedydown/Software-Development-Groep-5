@@ -16,13 +16,14 @@ namespace Simulator.UserControls
     {
         //Static instance
         public static Map Instance { get; private set; }
-        
+
 
         public List<Node> EntryPoints { get; private set; }
         public Nodes nodes { get; private set; }
-        
 
-        public Map() : base()
+
+        public Map()
+            : base()
         {
             //SetMap instance
             Instance = this;
@@ -38,8 +39,11 @@ namespace Simulator.UserControls
             this.Draw();
 
             //Open test window
-            TestControls TestControlWindow = new TestControls();
-            TestControlWindow.Show();
+            if (Config.DisplayDebugWindow)
+            {
+                TestControls TestControlWindow = new TestControls();
+                TestControlWindow.Show();
+            }
 
             VehicleHandler.Instance.StartVehicleHandler();
 
@@ -53,6 +57,7 @@ namespace Simulator.UserControls
             this.AddStartNodes();
             this.BuildRoads();
             this.BuildBycycleRoutes();
+            this.BuildPedestrianRoutes();
         }
 
         public void Draw()
@@ -87,6 +92,11 @@ namespace Simulator.UserControls
             EntryPoints.Add(this.nodes.EntryNode10);
             EntryPoints.Add(this.nodes.EntryNode11);
             EntryPoints.Add(this.nodes.EntryNode12);
+            EntryPoints.Add(this.nodes.EntryNode13);
+            EntryPoints.Add(this.nodes.EntryNode14);
+            EntryPoints.Add(this.nodes.EntryNode15);
+            EntryPoints.Add(this.nodes.EntryNode16);
+            EntryPoints.Add(this.nodes.EntryNode17);
         }
 
         private void BuildRoads()
@@ -96,7 +106,7 @@ namespace Simulator.UserControls
             this.nodes.LaneSwitcher1.ExitNodeLeft.AddNode(this.nodes.Custom60);
             this.nodes.Custom60.AddNode(this.nodes.Custom61);
             this.nodes.Custom61.AddNode(this.nodes.Custom62);
-            
+
             //Trafflight4r
             this.nodes.Custom61.AddNode(this.nodes.TrafficLight4EntryRight);
             this.nodes.TrafficLight4EntryRight.AddNode(this.nodes.TrafficLight4WaitRight);
@@ -295,7 +305,10 @@ namespace Simulator.UserControls
 
         private void BuildBycycleRoutes()
         {
-            this.nodes.EntryNode11.AddNode(this.nodes.Nodec13);
+            this.nodes.EntryNode11.AddNode(this.nodes.TrafficLight40EntryLeft);
+            this.nodes.TrafficLight40EntryLeft.AddNode(this.nodes.TrafficLight40WaitLeft);
+            this.nodes.TrafficLight40WaitLeft.AddNode(this.nodes.TrafficLight40Left);
+            this.nodes.TrafficLight40Left.AddNode(this.nodes.TrafficLight40ExitLeft);
             this.nodes.EntryNode10.AddNode(this.nodes.Nodec4);
             this.nodes.EntryNode9.AddNode(this.nodes.Nodec7);
             this.nodes.Nodec7.AddNode(this.nodes.Nodec1);
@@ -345,12 +358,114 @@ namespace Simulator.UserControls
             this.nodes.Nodec10.AddNode(this.nodes.Nodec3);
             this.nodes.Nodec11.AddNode(this.nodes.ExitNode11);
             this.nodes.Nodec12.AddNode(this.nodes.Custom71);
-            this.nodes.Nodec13.AddNode(this.nodes.Nodec14);
+            this.nodes.TrafficLight40ExitLeft.AddNode(this.nodes.Nodec14);
             this.nodes.Nodec14.AddNode(this.nodes.Nodec15);
             this.nodes.Nodec15.AddNode(this.nodes.Nodec17);
             this.nodes.Nodec17.AddNode(this.nodes.Nodec2);
             this.nodes.Custom73.AddNode(this.nodes.ExitNode12);
             this.nodes.EntryNode12.AddNode(this.nodes.Custom74);
+        }
+
+        private void BuildPedestrianRoutes()
+        {
+            nodes.EntryNode13.AddNode(nodes.Nodep1);
+            nodes.Nodep1.AddNode(nodes.Nodep2);
+            nodes.Nodep2.AddNode(nodes.TrafficLight38EntryLeft);
+            nodes.TrafficLight38EntryLeft.AddNode(nodes.TrafficLight38WaitLeft);
+            nodes.TrafficLight38WaitLeft.AddNode(nodes.TrafficLight38Left);
+            nodes.TrafficLight38Left.AddNode(nodes.TrafficLight38ExitLeft);
+            nodes.TrafficLight38ExitLeft.AddNode(nodes.TrafficLight36EntryLeft);
+            nodes.TrafficLight36EntryLeft.AddNode(nodes.TrafficLight36WaitLeft);
+            nodes.TrafficLight36WaitLeft.AddNode(nodes.TrafficLight36Left);
+            nodes.TrafficLight36Left.AddNode(nodes.TrafficLight36ExitLeft);
+            nodes.TrafficLight36ExitLeft.AddNode(nodes.Nodep3);
+            nodes.Nodep3.AddNode(nodes.Nodep4);
+            nodes.Nodep4.AddNode(nodes.ExitNode13);
+
+            nodes.EntryNode14.AddNode(nodes.Nodep4);
+            nodes.Nodep4.AddNode(nodes.Nodep3);
+            nodes.Nodep3.AddNode(nodes.TrafficLight35EntryLeft);
+            nodes.TrafficLight35EntryLeft.AddNode(nodes.TrafficLight35WaitLeft);
+            nodes.TrafficLight35WaitLeft.AddNode(nodes.TrafficLight35Left);
+            nodes.TrafficLight35Left.AddNode(nodes.TrafficLight35ExitLeft);
+            nodes.TrafficLight36ExitLeft.AddNode(nodes.TrafficLight37EntryLeft);
+            nodes.TrafficLight37EntryLeft.AddNode(nodes.TrafficLight37WaitLeft);
+            nodes.TrafficLight37WaitLeft.AddNode(nodes.TrafficLight37Left);
+            nodes.TrafficLight37Left.AddNode(nodes.TrafficLight37ExitLeft);
+            nodes.TrafficLight37ExitLeft.AddNode(nodes.Nodep2);
+            nodes.Nodep2.AddNode(nodes.Nodep1);
+            nodes.Nodep1.AddNode(nodes.ExitNode14);
+
+            nodes.Nodep3.AddNode(nodes.Nodep5);
+            nodes.Nodep5.AddNode(nodes.Nodep3);
+            nodes.Nodep5.AddNode(nodes.Nodep6);
+            nodes.Nodep6.AddNode(nodes.Nodep5);
+            nodes.EntryNode15.AddNode(nodes.Nodep6);
+            nodes.Nodep6.AddNode(nodes.ExitNode15);
+            nodes.Nodep6.AddNode(nodes.Nodep7);
+            nodes.Nodep7.AddNode(nodes.Nodep6);
+
+            nodes.Nodep7.AddNode(nodes.TrafficLight48EntryLeft);
+            nodes.TrafficLight48EntryLeft.AddNode(nodes.TrafficLight48WaitLeft);
+            nodes.TrafficLight48WaitLeft.AddNode(nodes.TrafficLight48Left);
+            nodes.TrafficLight48Left.AddNode(nodes.TrafficLight48ExitLeft);
+            nodes.TrafficLight48ExitLeft.AddNode(nodes.TrafficLight25EntryLeft);
+            nodes.TrafficLight25EntryLeft.AddNode(nodes.TrafficLight25WaitLeft);
+            nodes.TrafficLight25WaitLeft.AddNode(nodes.TrafficLight25Left);
+            nodes.TrafficLight25Left.AddNode(nodes.TrafficLight25ExitLeft);
+            nodes.TrafficLight25ExitLeft.AddNode(nodes.Nodep8);
+            nodes.Nodep8.AddNode(nodes.TrafficLight26EntryLeft);
+            nodes.TrafficLight26EntryLeft.AddNode(nodes.TrafficLight26WaitLeft);
+            nodes.TrafficLight26WaitLeft.AddNode(nodes.TrafficLight26Left);
+            nodes.TrafficLight26Left.AddNode(nodes.TrafficLight26ExitLeft);
+            nodes.TrafficLight26ExitLeft.AddNode(nodes.TrafficLight49EntryLeft);
+            nodes.TrafficLight49EntryLeft.AddNode(nodes.TrafficLight49WaitLeft);
+            nodes.TrafficLight49WaitLeft.AddNode(nodes.TrafficLight49Left);
+            nodes.TrafficLight49Left.AddNode(nodes.TrafficLight49ExitLeft);
+            nodes.TrafficLight49ExitLeft.AddNode(nodes.Nodep7);
+
+
+            nodes.Nodep8.AddNode(nodes.TrafficLight50EntryLeft);
+            nodes.TrafficLight50EntryLeft.AddNode(nodes.TrafficLight50WaitLeft);
+            nodes.TrafficLight50WaitLeft.AddNode(nodes.TrafficLight50Left);
+            nodes.TrafficLight50Left.AddNode(nodes.TrafficLight50ExitLeft);
+            nodes.TrafficLight50ExitLeft.AddNode(nodes.TrafficLight15EntryLeft);
+            nodes.TrafficLight15EntryLeft.AddNode(nodes.TrafficLight15WaitLeft);
+            nodes.TrafficLight15WaitLeft.AddNode(nodes.TrafficLight15Left);
+            nodes.TrafficLight15Left.AddNode(nodes.TrafficLight15ExitLeft);
+            nodes.TrafficLight15ExitLeft.AddNode(nodes.Nodep2);
+
+            nodes.Nodep2.AddNode(nodes.TrafficLight47EntryLeft);
+            nodes.TrafficLight47EntryLeft.AddNode(nodes.TrafficLight47WaitLeft);
+            nodes.TrafficLight47WaitLeft.AddNode(nodes.TrafficLight47Left);
+            nodes.TrafficLight47Left.AddNode(nodes.TrafficLight47ExitLeft);
+            nodes.TrafficLight47ExitLeft.AddNode(nodes.TrafficLight16EntryLeft);
+            nodes.TrafficLight16EntryLeft.AddNode(nodes.TrafficLight16WaitLeft);
+            nodes.TrafficLight16WaitLeft.AddNode(nodes.TrafficLight16Left);
+            nodes.TrafficLight16Left.AddNode(nodes.TrafficLight16ExitLeft);
+            nodes.TrafficLight16ExitLeft.AddNode(nodes.Nodep8);
+
+            nodes.Nodep1.AddNode(nodes.Nodep9);
+            nodes.Nodep2.AddNode(nodes.Nodep9);
+            nodes.Nodep9.AddNode(nodes.Nodep1);
+            nodes.Nodep9.AddNode(nodes.Nodep2);
+            nodes.Nodep9.AddNode(nodes.Nodep10);
+            nodes.Nodep10.AddNode(nodes.Nodep9);
+            nodes.Nodep10.AddNode(nodes.ExitNode16);
+            nodes.EntryNode16.AddNode(nodes.Nodep10);
+
+            nodes.Nodep8.AddNode(nodes.Nodep11);
+            nodes.Nodep11.AddNode(nodes.Nodep8);
+            nodes.Nodep11.AddNode(nodes.ExitNode17);
+            nodes.EntryNode17.AddNode(nodes.Nodep11);
+
+            nodes.Nodep7.AddNode(nodes.Nodep12);
+            nodes.Nodep12.AddNode(nodes.Nodep7);
+            nodes.Nodep12.AddNode(nodes.Nodep13);
+            nodes.Nodep13.AddNode(nodes.Nodep12);
+
+            nodes.Nodep13.AddNode(nodes.Nodep14);
+            nodes.Nodep14.AddNode(nodes.Nodep13);
         }
     }
 }

@@ -75,6 +75,10 @@ namespace Simulator
             {
                 vehicle = new Bicycle(StartNode, DefaultRotation, EndDirection);
             }
+            else if (Vehicle == VehicleType.Voetganger)
+            {
+                vehicle = new Pedestrian(StartNode, DefaultRotation, EndDirection);
+            }
         }
 
         private void UpdateVehicles()

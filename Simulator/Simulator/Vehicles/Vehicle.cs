@@ -206,6 +206,11 @@ namespace Simulator
 
                 int Distance = (this.VehicleDistance > vehicle.VehicleDistance ? this.VehicleDistance : vehicle.VehicleDistance);
 
+                if (vehicle.CurrentSpeed == 0 && !(this is Car || this is Bus))
+                {
+                    Distance = 0;
+                }
+
                 //Car to Bus correction
                 if (vehicle is Bus && this is Car)
                 {
@@ -223,7 +228,7 @@ namespace Simulator
                     vehicleState = VehicleState.Stopping;
                 }
 
-                if (DifX < 20 && DifY < 20)
+                if ((DifX < 20 && DifY < 20) && (this is Car || this is Bus))
                 {
                     this.CurrentSpeed = 0;
                 }

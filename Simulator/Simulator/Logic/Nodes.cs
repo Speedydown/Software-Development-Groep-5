@@ -21,9 +21,13 @@ namespace Simulator
         public Node EntryNode8 = new EntryNode(new Position(1000, 675), Direction.Ventweg, new VehicleType[] { VehicleType.Auto, VehicleType.Bus, VehicleType.Fiets }, "s8");
         public Node EntryNode9 = new EntryNode(new Position(0, 495), Direction.West, new VehicleType[] { VehicleType.Fiets }, "s9", Colors.Purple);
         public Node EntryNode10 = new EntryNode(new Position(395, 0), Direction.Noord, new VehicleType[] { VehicleType.Fiets }, "s10", Colors.Purple);
-        public Node EntryNode11 = new EntryNode(new Position(1915, 225), Direction.Oost, new VehicleType[] { VehicleType.Fiets }, "s11", Colors.Purple);
+        public Node EntryNode11 = new EntryNode(new Position(1915, 240), Direction.Oost, new VehicleType[] { VehicleType.Fiets }, "s11", Colors.Purple);
         public Node EntryNode12 = new EntryNode(new Position(510, 1055), Direction.Zuid, new VehicleType[] { VehicleType.Fiets }, "s12", Colors.Purple);
-
+        public Node EntryNode13 = new EntryNode(new Position(0, 505), Direction.West, new VehicleType[] { VehicleType.Voetganger }, "s13", Colors.Green);
+        public Node EntryNode14 = new EntryNode(new Position(0, 261), Direction.West, new VehicleType[] { VehicleType.Voetganger }, "s14", Colors.Green);
+        public Node EntryNode15 = new EntryNode(new Position(415, 0), Direction.Noord, new VehicleType[] { VehicleType.Voetganger }, "s15", Colors.Green);
+        public Node EntryNode16 = new EntryNode(new Position(302, 1055), Direction.Zuid, new VehicleType[] { VehicleType.Voetganger }, "s16", Colors.Green);
+        public Node EntryNode17 = new EntryNode(new Position(525, 1055), Direction.Zuid, new VehicleType[] { VehicleType.Voetganger }, "s17", Colors.Green);
 
         //Intersection Nodes
         public Node NodeA1 = new Node(new Position(343, 354), "A1");
@@ -59,6 +63,11 @@ namespace Simulator
         public Node ExitNode10 = new ExitNode(new Position(405, 0), Direction.Noord, new VehicleType[] { VehicleType.Fiets }, "e10", Colors.Purple);
         public Node ExitNode11 = new ExitNode(new Position(312, 1055), Direction.Zuid, new VehicleType[] { VehicleType.Fiets }, "e11", Colors.Purple);
         public Node ExitNode12 = new ExitNode(new Position(1915, 475), Direction.Oost, new VehicleType[] { VehicleType.Fiets }, "e12", Colors.Purple);
+        public Node ExitNode13 = new ExitNode(new Position(0, 261), Direction.West, new VehicleType[] { VehicleType.Voetganger }, "e13", Colors.Green);
+        public Node ExitNode14 = new ExitNode(new Position(0, 505), Direction.West, new VehicleType[] { VehicleType.Voetganger }, "e14", Colors.Green);
+        public Node ExitNode15 = new ExitNode(new Position(415, 0), Direction.Noord, new VehicleType[] { VehicleType.Voetganger }, "e15", Colors.Green);
+        public Node ExitNode16 = new ExitNode(new Position(302, 1055), Direction.Zuid, new VehicleType[] { VehicleType.Voetganger }, "e16", Colors.Green);
+        public Node ExitNode17 = new ExitNode(new Position(525, 1055), Direction.Zuid, new VehicleType[] { VehicleType.Voetganger }, "e17", Colors.Green);
 
         //CustomNodes
         public Node Custom1 = new Node(new Position(1200, 70), "1");
@@ -129,88 +138,102 @@ namespace Simulator
             new LaneSwitchNode(false, new Position(1105, 300)));
 
         //------------------Cycling routes---------------------------------------------
-        public Node Nodec1 = new BicycleNode(new Position(295, 545), "1");
+        public Node Nodec1 = new BicycleNode(new Position(278, 545), "1");
         public Node Nodec2 = new BicycleNode(new Position(510, 225), "2");
         public Node Nodec3 = new BicycleNode(new Position(405, 155), "3");
         public Node Nodec4 = new BicycleNode(new Position(395, 155), "4");
-        public Node Nodec5 = new BicycleNode(new Position(295, 225), "5");
-        public Node Nodec6 = new BicycleNode(new Position(300, 520), "6");
+        public Node Nodec5 = new BicycleNode(new Position(278, 230), "5");
+        public Node Nodec6 = new BicycleNode(new Position(287, 520), "6");
         public Node Nodec7 = new BicycleNode(new Position(225, 495), "7");
         public Node Nodec8 = new BicycleNode(new Position(500, 510), "8");
         public Node Nodec9 = new BicycleNode(new Position(500, 225), "9");
-        public Node Nodec10 = new BicycleNode(new Position(305, 225), "10");
+        public Node Nodec10 = new BicycleNode(new Position(287, 230), "10");
         public Node Nodec11 = new BicycleNode(new Position(312, 650), "11");
         public Node Nodec12 = new BicycleNode(new Position(560, 500), "12");
-        public Node Nodec13 = new BicycleNode(new Position(1350, 225), "13");
-        public Node Nodec14 = new BicycleNode(new Position(1150, 225), "14");
+        public Node Nodec14 = new BicycleNode(new Position(1150, 240), "14");
         public Node Nodec15 = new BicycleNode(new Position(1080, 275), "15");
         public Node Nodec16 = new BicycleNode(new Position(225, 275), "16");
         public Node Nodec17 = new BicycleNode(new Position(580, 275), "17");
 
+        //------------------Pedestrian routes---------------------------------------------
+        public Node Nodep1 = new PedestrianNode(new Position(225, 505), "1");
+        public Node Nodep2 = new PedestrianNode(new Position(267, 505), "2");
+        public Node Nodep3 = new PedestrianNode(new Position(267, 225), "3");
+        public Node Nodep4 = new PedestrianNode(new Position(225, 261), "4");
+        public Node Nodep5 = new PedestrianNode(new Position(386, 150), "5");
+        public Node Nodep6 = new PedestrianNode(new Position(415, 150), "6");
+        public Node Nodep7 = new PedestrianNode(new Position(489, 200), "7");
+        public Node Nodep8 = new PedestrianNode(new Position(489, 505), "8");
+        public Node Nodep9 = new PedestrianNode(new Position(267, 555), "9");
+        public Node Nodep10 = new PedestrianNode(new Position(302, 650), "10");
+        public Node Nodep11 = new PedestrianNode(new Position(525, 525), "11");
+        public Node Nodep12 = new PedestrianNode(new Position(580, 265), "12");
+        public Node Nodep13 = new PedestrianNode(new Position(1080, 265), "13");
+        public Node Nodep14 = new PedestrianNode(new Position(1150, 230), "14");
 
         //------------------Traffic lights---------------------------------------------
         public NotificationNode TrafficLight0EntryLeft = new NotificationNode(0, true, new Position(820, 318), null);
-        public TrafficLightWaitNode TrafficLight0WaitLeft = new TrafficLightWaitNode(new Position(525, 318));
+        public TrafficLightWaitNode TrafficLight0WaitLeft = new TrafficLightWaitNode(new Position(545, 318));
         public TrafficLight TrafficLight0Left = new TrafficLight(0, new Position(475, 318), null);
         public NotificationNode TrafficLight0ExitLeft = new NotificationNode(0, false, new Position(450, 318), null);
 
         public NotificationNode TrafficLight0EntryRight = new NotificationNode(0, true, new Position(820, 300), null);
-        public TrafficLightWaitNode TrafficLight0WaitRight = new TrafficLightWaitNode(new Position(525, 300));
+        public TrafficLightWaitNode TrafficLight0WaitRight = new TrafficLightWaitNode(new Position(545, 300));
         public TrafficLight TrafficLight0Right = new TrafficLight(0, new Position(475, 300), null);
         public NotificationNode TrafficLight0ExitRight = new NotificationNode(0, false, new Position(450, 300), null);
 
         public NotificationNode TrafficLight1EntryLeft = new NotificationNode(1, true, new Position(820, 354), null);
-        public TrafficLightWaitNode TrafficLight1WaitLeft = new TrafficLightWaitNode(new Position(525, 354));
+        public TrafficLightWaitNode TrafficLight1WaitLeft = new TrafficLightWaitNode(new Position(545, 354));
         public TrafficLight TrafficLight1Left = new TrafficLight(1, new Position(475, 354), null);
         public NotificationNode TrafficLight1ExitLeft = new NotificationNode(1, false, new Position(450, 354), null);
 
         public NotificationNode TrafficLight1EntryRight = new NotificationNode(1, true, new Position(820, 336), null);
-        public TrafficLightWaitNode TrafficLight1WaitRight = new TrafficLightWaitNode(new Position(525, 336));
+        public TrafficLightWaitNode TrafficLight1WaitRight = new TrafficLightWaitNode(new Position(545, 336));
         public TrafficLight TrafficLight1Right = new TrafficLight(1, new Position(475, 336), null);
         public NotificationNode TrafficLight1ExitRight = new NotificationNode(1, false, new Position(450, 336), null);
 
         public NotificationNode TrafficLight2EntryLeft = new NotificationNode(2, true, new Position(150, 436), null);
-        public TrafficLightWaitNode TrafficLight2WaitLeft = new TrafficLightWaitNode(new Position(255, 436));
-        public TrafficLight TrafficLight2Left = new TrafficLight(2, new Position(280, 436), null);
-        public NotificationNode TrafficLight2ExitLeft = new NotificationNode(2, false, new Position(305, 436), null);
+        public TrafficLightWaitNode TrafficLight2WaitLeft = new TrafficLightWaitNode(new Position(225, 436));
+        public TrafficLight TrafficLight2Left = new TrafficLight(2, new Position(305, 436), null);
+        public NotificationNode TrafficLight2ExitLeft = new NotificationNode(2, false, new Position(320, 436), null);
 
         public NotificationNode TrafficLight2EntryRight = new NotificationNode(2, true, new Position(150, 454), null);
-        public TrafficLightWaitNode TrafficLight2WaitRight = new TrafficLightWaitNode(new Position(255, 454));
-        public TrafficLight TrafficLight2Right = new TrafficLight(2, new Position(280, 454), null);
-        public NotificationNode TrafficLight2ExitRight = new NotificationNode(2, false, new Position(305, 454), null);
+        public TrafficLightWaitNode TrafficLight2WaitRight = new TrafficLightWaitNode(new Position(225, 454));
+        public TrafficLight TrafficLight2Right = new TrafficLight(2, new Position(305, 454), null);
+        public NotificationNode TrafficLight2ExitRight = new NotificationNode(2, false, new Position(320, 454), null);
 
         public NotificationNode TrafficLight3EntryLeft = new NotificationNode(3, true, new Position(150, 400), null);
-        public TrafficLightWaitNode TrafficLight3WaitLeft = new TrafficLightWaitNode(new Position(255, 400));
-        public TrafficLight TrafficLight3Left = new TrafficLight(3, new Position(280, 400), null);
-        public NotificationNode TrafficLight3ExitLeft = new NotificationNode(3, false, new Position(305, 400), null);
+        public TrafficLightWaitNode TrafficLight3WaitLeft = new TrafficLightWaitNode(new Position(225, 400));
+        public TrafficLight TrafficLight3Left = new TrafficLight(3, new Position(305, 400), null);
+        public NotificationNode TrafficLight3ExitLeft = new NotificationNode(3, false, new Position(320, 400), null);
 
         public NotificationNode TrafficLight3EntryRight = new NotificationNode(3, true, new Position(150, 418), null);
-        public TrafficLightWaitNode TrafficLight3WaitRight = new TrafficLightWaitNode(new Position(255, 418));
-        public TrafficLight TrafficLight3Right = new TrafficLight(3, new Position(280, 418), null);
-        public NotificationNode TrafficLight3ExitRight = new NotificationNode(3, false, new Position(305, 418), null);
+        public TrafficLightWaitNode TrafficLight3WaitRight = new TrafficLightWaitNode(new Position(225, 418));
+        public TrafficLight TrafficLight3Right = new TrafficLight(3, new Position(305, 418), null);
+        public NotificationNode TrafficLight3ExitRight = new NotificationNode(3, false, new Position(320, 418), null);
 
         public NotificationNode TrafficLight4EntryLeft = new NotificationNode(4, true, new Position(389, 750), null);
-        public TrafficLightWaitNode TrafficLight4WaitLeft = new TrafficLightWaitNode(new Position(389, 540));
+        public TrafficLightWaitNode TrafficLight4WaitLeft = new TrafficLightWaitNode(new Position(389, 560));
         public TrafficLight TrafficLight4Left = new TrafficLight(4, new Position(389, 475), null);
         public NotificationNode TrafficLight4ExitLeft = new NotificationNode(4, false, new Position(389, 450), null);
 
         public NotificationNode TrafficLight4EntryRight = new NotificationNode(4, true, new Position(407, 750), null);
-        public TrafficLightWaitNode TrafficLight4WaitRight = new TrafficLightWaitNode(new Position(407, 540));
+        public TrafficLightWaitNode TrafficLight4WaitRight = new TrafficLightWaitNode(new Position(407, 560));
         public TrafficLight TrafficLight4Right = new TrafficLight(4, new Position(407, 475), null);
         public NotificationNode TrafficLight4ExitRight = new NotificationNode(4, false, new Position(407, 450), null);
 
         public NotificationNode TrafficLight5EntryLeft = new NotificationNode(5, true, new Position(425, 750), null);
-        public TrafficLightWaitNode TrafficLight5WaitLeft = new TrafficLightWaitNode(new Position(425, 540));
+        public TrafficLightWaitNode TrafficLight5WaitLeft = new TrafficLightWaitNode(new Position(425, 560));
         public TrafficLight TrafficLight5Left = new TrafficLight(5, new Position(425, 475), null);
         public NotificationNode TrafficLight5ExitLeft = new NotificationNode(5, false, new Position(425, 450), null);
 
         public NotificationNode TrafficLight5EntryRight = new NotificationNode(5, true, new Position(443, 750), null);
-        public TrafficLightWaitNode TrafficLight5WaitRight = new TrafficLightWaitNode(new Position(443, 540));
+        public TrafficLightWaitNode TrafficLight5WaitRight = new TrafficLightWaitNode(new Position(443, 560));
         public TrafficLight TrafficLight5Right = new TrafficLight(5, new Position(443, 475), null);
         public NotificationNode TrafficLight5ExitRight = new NotificationNode(5, false, new Position(443, 450), null);
 
         public NotificationNode TrafficLight6Entry = new NotificationNode(6, true, new Position(461, 750), null, Colors.Gold);
-        public TrafficLightWaitNode TrafficLight6Wait = new TrafficLightWaitNode(new Position(461, 540));
+        public TrafficLightWaitNode TrafficLight6Wait = new TrafficLightWaitNode(new Position(461, 560));
         public TrafficLight TrafficLight6 = new TrafficLight(6, new Position(461, 475), null, Colors.Gold);
         public NotificationNode TrafficLight6Exit = new NotificationNode(6, false, new Position(461, 450), null, Colors.Gold);
 
@@ -251,22 +274,22 @@ namespace Simulator
 
         public NotificationNode TrafficLight11EntryLeft = new NotificationNode(11, true, new Position(1200, 150), null);
         public TrafficLightWaitNode TrafficLight11WaitLeft = new TrafficLightWaitNode(new Position(1200, 225));
-        public TrafficLight TrafficLight11Left = new TrafficLight(11, new Position(1200, 250), null);
+        public TrafficLight TrafficLight11Left = new TrafficLight(11, new Position(1200, 255), null);
         public NotificationNode TrafficLight11ExitLeft = new NotificationNode(11, false, new Position(1200, 275), null);
 
         public NotificationNode TrafficLight11EntryRight = new NotificationNode(11, true, new Position(1182, 150), null);
         public TrafficLightWaitNode TrafficLight11WaitRight = new TrafficLightWaitNode(new Position(1182, 225));
-        public TrafficLight TrafficLight11Right = new TrafficLight(11, new Position(1182, 250), null);
+        public TrafficLight TrafficLight11Right = new TrafficLight(11, new Position(1182, 255), null);
         public NotificationNode TrafficLight11ExitRight = new NotificationNode(11, false, new Position(1182, 275), null);
 
         public NotificationNode TrafficLight12Entry = new NotificationNode(12, true, new Position(1218, 150), null);
         public TrafficLightWaitNode TrafficLight12Wait = new TrafficLightWaitNode(new Position(1218, 225));
-        public TrafficLight TrafficLight12 = new TrafficLight(12, new Position(1218, 250), null);
+        public TrafficLight TrafficLight12 = new TrafficLight(12, new Position(1218, 255), null);
         public NotificationNode TrafficLight12Exit = new NotificationNode(12, false, new Position(1218, 275), null);
 
         public NotificationNode TrafficLight13Entry = new NotificationNode(13, true, new Position(1236, 200), null);
         public TrafficLightWaitNode TrafficLight13Wait = new TrafficLightWaitNode(new Position(1236, 225));
-        public TrafficLight TrafficLight13 = new TrafficLight(13, new Position(1236, 250), null);
+        public TrafficLight TrafficLight13 = new TrafficLight(13, new Position(1236, 255), null);
         public NotificationNode TrafficLight13Exit = new NotificationNode(13, false, new Position(1236, 275), null);
 
         public NotificationNode TrafficLight14Entry = new NotificationNode(14, true, new Position(1550, 264), null);
@@ -275,35 +298,101 @@ namespace Simulator
         public NotificationNode TrafficLight14Exit = new NotificationNode(14, false, new Position(1300, 264), null);
 
         //------------------Cycling Traffic lights---------------------------------------------
-        public NotificationNode TrafficLight220EntryLeft = new NotificationNode(34, true, new Position(295, 265), new VehicleType[] { VehicleType.Fiets });
-        public TrafficLightWaitNode TrafficLight220WaitLeft = new TrafficLightWaitNode(new Position(295, 275), "", new VehicleType[] { VehicleType.Fiets });
-        public TrafficLight TrafficLight220Left = new TrafficLight(34, new Position(295, 280), new VehicleType[] { VehicleType.Fiets });
-        public NotificationNode TrafficLight220ExitLeft = new NotificationNode(34, false, new Position(295, 290), new VehicleType[] { VehicleType.Fiets });
+        public NotificationNode TrafficLight220EntryLeft = new NotificationNode(34, true, new Position(278, 265), new VehicleType[] { VehicleType.Fiets });
+        public TrafficLightWaitNode TrafficLight220WaitLeft = new TrafficLightWaitNode(new Position(278, 275), "", new VehicleType[] { VehicleType.Fiets });
+        public TrafficLight TrafficLight220Left = new TrafficLight(34, new Position(278, 280), new VehicleType[] { VehicleType.Fiets });
+        public NotificationNode TrafficLight220ExitLeft = new NotificationNode(34, false, new Position(278, 290), new VehicleType[] { VehicleType.Fiets });
 
-        public NotificationNode TrafficLight221EntryLeft = new NotificationNode(32, true, new Position(305, 510), new VehicleType[] { VehicleType.Fiets });
-        public TrafficLightWaitNode TrafficLight221WaitLeft = new TrafficLightWaitNode(new Position(305, 505), "", new VehicleType[] { VehicleType.Fiets });
-        public TrafficLight TrafficLight221Left = new TrafficLight(32, new Position(305, 495), new VehicleType[] { VehicleType.Fiets });
-        public NotificationNode TrafficLight221ExitLeft = new NotificationNode(32, false, new Position(305, 485), new VehicleType[] { VehicleType.Fiets });
+        public NotificationNode TrafficLight221EntryLeft = new NotificationNode(32, true, new Position(287, 510), new VehicleType[] { VehicleType.Fiets });
+        public TrafficLightWaitNode TrafficLight221WaitLeft = new TrafficLightWaitNode(new Position(287, 480), "", new VehicleType[] { VehicleType.Fiets });
+        public TrafficLight TrafficLight221Left = new TrafficLight(32, new Position(287, 472), new VehicleType[] { VehicleType.Fiets });
+        public NotificationNode TrafficLight221ExitLeft = new NotificationNode(32, false, new Position(287, 454), new VehicleType[] { VehicleType.Fiets });
 
-        public NotificationNode TrafficLight222EntryLeft = new NotificationNode(43, true, new Position(305, 520), new VehicleType[] { VehicleType.Fiets });
-        public TrafficLightWaitNode TrafficLight222WaitLeft = new TrafficLightWaitNode(new Position(305, 520), "", new VehicleType[] { VehicleType.Fiets });
-        public TrafficLight TrafficLight222Left = new TrafficLight(43, new Position(310, 520), new VehicleType[] { VehicleType.Fiets });
-        public NotificationNode TrafficLight222ExitLeft = new NotificationNode(43, false, new Position(310, 520), new VehicleType[] { VehicleType.Fiets });
+        public NotificationNode TrafficLight222EntryLeft = new NotificationNode(43, true, new Position(287, 520), new VehicleType[] { VehicleType.Fiets });
+        public TrafficLightWaitNode TrafficLight222WaitLeft = new TrafficLightWaitNode(new Position(298, 520), "", new VehicleType[] { VehicleType.Fiets });
+        public TrafficLight TrafficLight222Left = new TrafficLight(43, new Position(307, 520), new VehicleType[] { VehicleType.Fiets });
+        public NotificationNode TrafficLight222ExitLeft = new NotificationNode(43, false, new Position(325, 520), new VehicleType[] { VehicleType.Fiets });
 
         public NotificationNode TrafficLight223EntryLeft = new NotificationNode(46, true, new Position(490, 510), new VehicleType[] { VehicleType.Fiets });
-        public TrafficLightWaitNode TrafficLight223WaitLeft = new TrafficLightWaitNode(new Position(493, 510), "", new VehicleType[] { VehicleType.Fiets });
-        public TrafficLight TrafficLight223Left = new TrafficLight(46, new Position(491, 510), new VehicleType[] { VehicleType.Fiets });
-        public NotificationNode TrafficLight223ExitLeft = new NotificationNode(46, false, new Position(489, 510), new VehicleType[] { VehicleType.Fiets });
+        public TrafficLightWaitNode TrafficLight223WaitLeft = new TrafficLightWaitNode(new Position(488, 510), "", new VehicleType[] { VehicleType.Fiets });
+        public TrafficLight TrafficLight223Left = new TrafficLight(46, new Position(479, 510), new VehicleType[] { VehicleType.Fiets });
+        public NotificationNode TrafficLight223ExitLeft = new NotificationNode(46, false, new Position(461, 510), new VehicleType[] { VehicleType.Fiets });
 
         public NotificationNode TrafficLight224EntryLeft = new NotificationNode(27, true, new Position(510, 450), new VehicleType[] { VehicleType.Fiets });
-        public TrafficLightWaitNode TrafficLight224WaitLeft = new TrafficLightWaitNode(new Position(510, 440), "", new VehicleType[] { VehicleType.Fiets });
-        public TrafficLight TrafficLight224Left = new TrafficLight(27, new Position(510, 445), new VehicleType[] { VehicleType.Fiets });
-        public NotificationNode TrafficLight224ExitLeft = new NotificationNode(27, false, new Position(510, 435), new VehicleType[] { VehicleType.Fiets });
+        public TrafficLightWaitNode TrafficLight224WaitLeft = new TrafficLightWaitNode(new Position(510, 445), "", new VehicleType[] { VehicleType.Fiets });
+        public TrafficLight TrafficLight224Left = new TrafficLight(27, new Position(510, 436), new VehicleType[] { VehicleType.Fiets });
+        public NotificationNode TrafficLight224ExitLeft = new NotificationNode(27, false, new Position(510, 418), new VehicleType[] { VehicleType.Fiets });
 
         public NotificationNode TrafficLight225EntryLeft = new NotificationNode(30, true, new Position(500, 265), new VehicleType[] { VehicleType.Fiets });
         public TrafficLightWaitNode TrafficLight225WaitLeft = new TrafficLightWaitNode(new Position(500, 275), "", new VehicleType[] { VehicleType.Fiets });
         public TrafficLight TrafficLight225Left = new TrafficLight(30, new Position(500, 280), new VehicleType[] { VehicleType.Fiets });
         public NotificationNode TrafficLight225ExitLeft = new NotificationNode(30, false, new Position(500, 290), new VehicleType[] { VehicleType.Fiets });
+
+        public NotificationNode TrafficLight40EntryLeft = new NotificationNode(40, true, new Position(1550, 240), new VehicleType[] { VehicleType.Fiets });
+        public TrafficLightWaitNode TrafficLight40WaitLeft = new TrafficLightWaitNode(new Position(1350, 240), "", new VehicleType[] { VehicleType.Fiets });
+        public TrafficLight TrafficLight40Left = new TrafficLight(40, new Position(1325, 240), new VehicleType[] { VehicleType.Fiets });
+        public NotificationNode TrafficLight40ExitLeft = new NotificationNode(40, false, new Position(1300, 240), new VehicleType[] { VehicleType.Fiets });
+
+        //------------------Pedestrian  Traffic lights---------------------------------------------
+        public NotificationNode TrafficLight38EntryLeft = new NotificationNode(38, true, new Position(267, 505), new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLightWaitNode TrafficLight38WaitLeft = new TrafficLightWaitNode(new Position(267, 480), "", new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLight TrafficLight38Left = new TrafficLight(38, new Position(267, 472), new VehicleType[] { VehicleType.Voetganger });
+        public NotificationNode TrafficLight38ExitLeft = new NotificationNode(38, false, new Position(267, 454), new VehicleType[] { VehicleType.Voetganger });
+
+        public NotificationNode TrafficLight36EntryLeft = new NotificationNode(36, true, new Position(267, 374), new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLightWaitNode TrafficLight36WaitLeft = new TrafficLightWaitNode(new Position(267, 344), "", new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLight TrafficLight36Left = new TrafficLight(36, new Position(267, 336), new VehicleType[] { VehicleType.Voetganger });
+        public NotificationNode TrafficLight36ExitLeft = new NotificationNode(36, false, new Position(267, 318), new VehicleType[] { VehicleType.Voetganger });
+
+        public NotificationNode TrafficLight35EntryLeft = new NotificationNode(35, true, new Position(267, 265), new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLightWaitNode TrafficLight35WaitLeft = new TrafficLightWaitNode(new Position(267, 275), "", new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLight TrafficLight35Left = new TrafficLight(35, new Position(267, 280), new VehicleType[] { VehicleType.Voetganger });
+        public NotificationNode TrafficLight35ExitLeft = new NotificationNode(35, false, new Position(267, 290), new VehicleType[] { VehicleType.Voetganger });
+
+        public NotificationNode TrafficLight37EntryLeft = new NotificationNode(37, true, new Position(267, 365), new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLightWaitNode TrafficLight37WaitLeft = new TrafficLightWaitNode(new Position(267, 375), "", new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLight TrafficLight37Left = new TrafficLight(37, new Position(267, 382), new VehicleType[] { VehicleType.Voetganger });
+        public NotificationNode TrafficLight37ExitLeft = new NotificationNode(37, false, new Position(267, 400), new VehicleType[] { VehicleType.Voetganger });
+
+        public NotificationNode TrafficLight48EntryLeft = new NotificationNode(48, true, new Position(489, 265), new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLightWaitNode TrafficLight48WaitLeft = new TrafficLightWaitNode(new Position(489, 275), "", new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLight TrafficLight48Left = new TrafficLight(48, new Position(489, 280), new VehicleType[] { VehicleType.Voetganger });
+        public NotificationNode TrafficLight48ExitLeft = new NotificationNode(48, false, new Position(489, 290), new VehicleType[] { VehicleType.Voetganger });
+
+        public NotificationNode TrafficLight25EntryLeft = new NotificationNode(25, true, new Position(489, 365), new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLightWaitNode TrafficLight25WaitLeft = new TrafficLightWaitNode(new Position(489, 375), "", new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLight TrafficLight25Left = new TrafficLight(25, new Position(489, 382), new VehicleType[] { VehicleType.Voetganger });
+        public NotificationNode TrafficLight25ExitLeft = new NotificationNode(25, false, new Position(489, 400), new VehicleType[] { VehicleType.Voetganger });
+
+        public NotificationNode TrafficLight26EntryLeft = new NotificationNode(26, true, new Position(489, 450), new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLightWaitNode TrafficLight26WaitLeft = new TrafficLightWaitNode(new Position(489, 445), "", new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLight TrafficLight26Left = new TrafficLight(26, new Position(489, 436), new VehicleType[] { VehicleType.Voetganger });
+        public NotificationNode TrafficLight26ExitLeft = new NotificationNode(26, false, new Position(489, 418), new VehicleType[] { VehicleType.Voetganger });
+
+        public NotificationNode TrafficLight49EntryLeft = new NotificationNode(49, true, new Position(489, 386), new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLightWaitNode TrafficLight49WaitLeft = new TrafficLightWaitNode(new Position(489, 381), "", new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLight TrafficLight49Left = new TrafficLight(49, new Position(489, 372), new VehicleType[] { VehicleType.Voetganger });
+        public NotificationNode TrafficLight49ExitLeft = new NotificationNode(49, false, new Position(489, 354), new VehicleType[] { VehicleType.Voetganger });
+
+        public NotificationNode TrafficLight50EntryLeft = new NotificationNode(50, true, new Position(490, 505), new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLightWaitNode TrafficLight50WaitLeft = new TrafficLightWaitNode(new Position(488, 505), "", new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLight TrafficLight50Left = new TrafficLight(50, new Position(479, 505), new VehicleType[] { VehicleType.Voetganger });
+        public NotificationNode TrafficLight50ExitLeft = new NotificationNode(50, false, new Position(461, 505), new VehicleType[] { VehicleType.Voetganger });
+
+        public NotificationNode TrafficLight15EntryLeft = new NotificationNode(15, true, new Position(372, 505), new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLightWaitNode TrafficLight15WaitLeft = new TrafficLightWaitNode(new Position(370, 505), "", new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLight TrafficLight15Left = new TrafficLight(15, new Position(361, 505), new VehicleType[] { VehicleType.Voetganger });
+        public NotificationNode TrafficLight15ExitLeft = new NotificationNode(15, false, new Position(343, 505), new VehicleType[] { VehicleType.Voetganger });
+
+        public NotificationNode TrafficLight47EntryLeft = new NotificationNode(47, true, new Position(287, 505), new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLightWaitNode TrafficLight47WaitLeft = new TrafficLightWaitNode(new Position(298, 505), "", new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLight TrafficLight47Left = new TrafficLight(47, new Position(307, 505), new VehicleType[] { VehicleType.Voetganger });
+        public NotificationNode TrafficLight47ExitLeft = new NotificationNode(47, false, new Position(325, 505), new VehicleType[] { VehicleType.Voetganger });
+
+        public NotificationNode TrafficLight16EntryLeft = new NotificationNode(16, true, new Position(351, 505), new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLightWaitNode TrafficLight16WaitLeft = new TrafficLightWaitNode(new Position(362, 505), "", new VehicleType[] { VehicleType.Voetganger });
+        public TrafficLight TrafficLight16Left = new TrafficLight(16, new Position(371, 505), new VehicleType[] { VehicleType.Voetganger });
+        public NotificationNode TrafficLight16ExitLeft = new NotificationNode(16, false, new Position(389, 505), new VehicleType[] { VehicleType.Voetganger });
 
         public Nodes()
         {
