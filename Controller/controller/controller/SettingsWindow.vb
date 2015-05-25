@@ -42,10 +42,10 @@
                 My.Settings.AutoClearLog = False
             End If
 
-            If CheckBoxWalkerCyclistTrafficLightsEnableWhenQueueEmpty.Checked Then
-                My.Settings.WalkerCyclistTrafficLightsAlwaysEnabled = True
+            If CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty.Checked Then
+                My.Settings.PedestrianCyclistTrafficLightsAlwaysEnabled = True
             Else
-                My.Settings.WalkerCyclistTrafficLightsAlwaysEnabled = False
+                My.Settings.PedestrianCyclistTrafficLightsAlwaysEnabled = False
             End If
 
             My.Settings.ListeningPortNumber = TextBoxGeneralServerPort.Text
@@ -81,10 +81,10 @@
             CheckBoxAutoClearLog.Checked = False
         End If
 
-        If My.Settings.WalkerCyclistTrafficLightsAlwaysEnabled Then
-            CheckBoxWalkerCyclistTrafficLightsEnableWhenQueueEmpty.Checked = True
+        If My.Settings.PedestrianCyclistTrafficLightsAlwaysEnabled Then
+            CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty.Checked = True
         Else
-            CheckBoxWalkerCyclistTrafficLightsEnableWhenQueueEmpty.Checked = False
+            CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty.Checked = False
         End If
 
         TextBoxGeneralServerPort.Text = My.Settings.ListeningPortNumber
@@ -114,6 +114,6 @@
         TextBoxDelayVehicleQueue.Text = My.Settings.ExtraVehicleDelay
         TextBoxDelayBetweenStates.Text = My.Settings.StateDelay
         TextBoxDelayMinimumDelayBetweenBusStates.Text = My.Settings.MinimumBusStateDelay
-        CheckBoxWalkerCyclistTrafficLightsEnableWhenQueueEmpty.Checked = False
+        CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty.Checked = False
     End Sub
 End Class

@@ -77,7 +77,7 @@ Public Class Message
                 Case 2
                     messageAsString.Append("Bus")
                 Case 3
-                    messageAsString.Append("Walker")
+                    messageAsString.Append("Pedestrian")
                 Case Else
                     messageAsString.Append("Unknown, raw: " + _parameters(2).ToString())
             End Select

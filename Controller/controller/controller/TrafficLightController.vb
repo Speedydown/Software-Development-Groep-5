@@ -117,6 +117,7 @@ Public Module TrafficLightController
 
         BusStateList = New List(Of State)()
 
+        'Left
         Dim busState1 As New State(Controller.TrafficLightList)
         busState1.Id = 5
         busState1.AffectedTrafficLightList.Add(Controller.TrafficLightList(2))
@@ -124,11 +125,14 @@ Public Module TrafficLightController
         busState1.AffectedTrafficLightList.Add(Controller.TrafficLightList(6))
         BusStateList.Add(busState1)
 
+        'Right
         Dim busState2 As New State(Controller.TrafficLightList)
         busState2.Id = 5
         busState2.AffectedTrafficLightList.Add(Controller.TrafficLightList(2))
-        busState2.AffectedTrafficLightList.Add(Controller.TrafficLightList(3))
-        busState2.AffectedTrafficLightList.Add(Controller.TrafficLightList(6))
+        busState2.AffectedTrafficLightList.Add(Controller.TrafficLightList(0))
+        busState2.AffectedTrafficLightList.Add(Controller.TrafficLightList(11))
+        busState2.AffectedTrafficLightList.Add(Controller.TrafficLightList(13))
+        busState2.AffectedTrafficLightList.Add(Controller.TrafficLightList(14))
         BusStateList.Add(busState2)
     End Sub
 
@@ -193,7 +197,17 @@ Public Module TrafficLightController
                     If _busStateQueued AndAlso _nonBusStatesPassed >= My.Settings.MinimumBusStateDelay Then
                         Dim randomNumber As Integer = Random.Next(2)
 
-                        StateList.Insert(i, BusStateList(randomNumber))
+                        If Controller.TrafficLightList(6).GetVehicleCount() > 0 AndAlso Controller.TrafficLightList(13).GetVehicleCount() > 0 AndAlso Controller.TrafficLightList(14).GetVehicleCount() > 0 Then
+                            StateList.Insert(i, BusStateList(randomNumber))
+                        Else
+                            If Controller.TrafficLightList(6).GetVehicleCount() > 0 Then
+                                StateList.Insert(i, BusStateList(0))
+                            End If
+                            If Controller.TrafficLightList(13).GetVehicleCount() > 0 Or Controller.TrafficLightList(14).GetVehicleCount() > 0 Then
+                                StateList.Insert(i, BusStateList(1))
+                            End If
+                        End If
+
                         _nonBusStatesPassed = 0
                     Else
                         If i <> StateList.Count - 1 Then

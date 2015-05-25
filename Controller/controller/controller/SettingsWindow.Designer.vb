@@ -42,11 +42,11 @@ Partial Class SettingsWindow
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.ButtonSave = New System.Windows.Forms.Button()
         Me.ButtonRestoreDefaults = New System.Windows.Forms.Button()
-        Me.GroupBoxWalkerCyclistTrafficLights = New System.Windows.Forms.GroupBox()
-        Me.CheckBoxWalkerCyclistTrafficLightsEnableWhenQueueEmpty = New System.Windows.Forms.CheckBox()
+        Me.GroupBoxPedestrianCyclistTrafficLights = New System.Windows.Forms.GroupBox()
+        Me.CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty = New System.Windows.Forms.CheckBox()
         Me.GroupBoxGeneral.SuspendLayout()
         Me.GroupBoxDelay.SuspendLayout()
-        Me.GroupBoxWalkerCyclistTrafficLights.SuspendLayout()
+        Me.GroupBoxPedestrianCyclistTrafficLights.SuspendLayout()
         Me.SuspendLayout()
         '
         'LabelGeneralServerPort
@@ -235,32 +235,32 @@ Partial Class SettingsWindow
         Me.ButtonRestoreDefaults.Text = "Restore Defaults"
         Me.ButtonRestoreDefaults.UseVisualStyleBackColor = True
         '
-        'GroupBoxWalkerCyclistTrafficLights
+        'GroupBoxPedestrianCyclistTrafficLights
         '
-        Me.GroupBoxWalkerCyclistTrafficLights.Controls.Add(Me.CheckBoxWalkerCyclistTrafficLightsEnableWhenQueueEmpty)
-        Me.GroupBoxWalkerCyclistTrafficLights.Location = New System.Drawing.Point(7, 277)
-        Me.GroupBoxWalkerCyclistTrafficLights.Name = "GroupBoxWalkerCyclistTrafficLights"
-        Me.GroupBoxWalkerCyclistTrafficLights.Size = New System.Drawing.Size(344, 50)
-        Me.GroupBoxWalkerCyclistTrafficLights.TabIndex = 17
-        Me.GroupBoxWalkerCyclistTrafficLights.TabStop = False
-        Me.GroupBoxWalkerCyclistTrafficLights.Text = "Walker/Cyclist Traffic Lights"
+        Me.GroupBoxPedestrianCyclistTrafficLights.Controls.Add(Me.CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty)
+        Me.GroupBoxPedestrianCyclistTrafficLights.Location = New System.Drawing.Point(7, 277)
+        Me.GroupBoxPedestrianCyclistTrafficLights.Name = "GroupBoxPedestrianCyclistTrafficLights"
+        Me.GroupBoxPedestrianCyclistTrafficLights.Size = New System.Drawing.Size(344, 50)
+        Me.GroupBoxPedestrianCyclistTrafficLights.TabIndex = 17
+        Me.GroupBoxPedestrianCyclistTrafficLights.TabStop = False
+        Me.GroupBoxPedestrianCyclistTrafficLights.Text = "Pedestrian/Cyclist Traffic Lights"
         '
-        'CheckBoxWalkerCyclistTrafficLightsEnableWhenQueueEmpty
+        'CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty
         '
-        Me.CheckBoxWalkerCyclistTrafficLightsEnableWhenQueueEmpty.AutoSize = True
-        Me.CheckBoxWalkerCyclistTrafficLightsEnableWhenQueueEmpty.Location = New System.Drawing.Point(9, 20)
-        Me.CheckBoxWalkerCyclistTrafficLightsEnableWhenQueueEmpty.Name = "CheckBoxWalkerCyclistTrafficLightsEnableWhenQueueEmpty"
-        Me.CheckBoxWalkerCyclistTrafficLightsEnableWhenQueueEmpty.Size = New System.Drawing.Size(313, 17)
-        Me.CheckBoxWalkerCyclistTrafficLightsEnableWhenQueueEmpty.TabIndex = 18
-        Me.CheckBoxWalkerCyclistTrafficLightsEnableWhenQueueEmpty.Text = "Enable walker/cyclist traffic lights even when queue is empty"
-        Me.CheckBoxWalkerCyclistTrafficLightsEnableWhenQueueEmpty.UseVisualStyleBackColor = True
+        Me.CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty.AutoSize = True
+        Me.CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty.Location = New System.Drawing.Point(9, 20)
+        Me.CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty.Name = "CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty"
+        Me.CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty.Size = New System.Drawing.Size(331, 17)
+        Me.CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty.TabIndex = 18
+        Me.CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty.Text = "Enable pedestrian/cyclist traffic lights even when queue is empty"
+        Me.CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty.UseVisualStyleBackColor = True
         '
         'SettingsWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(363, 372)
-        Me.Controls.Add(Me.GroupBoxWalkerCyclistTrafficLights)
+        Me.Controls.Add(Me.GroupBoxPedestrianCyclistTrafficLights)
         Me.Controls.Add(Me.ButtonSave)
         Me.Controls.Add(Me.ButtonRestoreDefaults)
         Me.Controls.Add(Me.ButtonClose)
@@ -276,8 +276,8 @@ Partial Class SettingsWindow
         Me.GroupBoxGeneral.PerformLayout()
         Me.GroupBoxDelay.ResumeLayout(False)
         Me.GroupBoxDelay.PerformLayout()
-        Me.GroupBoxWalkerCyclistTrafficLights.ResumeLayout(False)
-        Me.GroupBoxWalkerCyclistTrafficLights.PerformLayout()
+        Me.GroupBoxPedestrianCyclistTrafficLights.ResumeLayout(False)
+        Me.GroupBoxPedestrianCyclistTrafficLights.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -301,6 +301,6 @@ Partial Class SettingsWindow
     Friend WithEvents LabelDelayInfo As System.Windows.Forms.Label
     Friend WithEvents TextBoxDelayMinimumDelayBetweenBusStates As System.Windows.Forms.TextBox
     Friend WithEvents LabelDelayMinimumDelayBetweenBusStates As System.Windows.Forms.Label
-    Friend WithEvents GroupBoxWalkerCyclistTrafficLights As System.Windows.Forms.GroupBox
-    Friend WithEvents CheckBoxWalkerCyclistTrafficLightsEnableWhenQueueEmpty As System.Windows.Forms.CheckBox
+    Friend WithEvents GroupBoxPedestrianCyclistTrafficLights As System.Windows.Forms.GroupBox
+    Friend WithEvents CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty As System.Windows.Forms.CheckBox
 End Class

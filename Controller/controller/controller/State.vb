@@ -50,12 +50,12 @@ Public Class State
 
         Dim stopwatch As Stopwatch = stopwatch.StartNew()
 
-        Dim walkerCyclistPending As Boolean
+        Dim pedestrianCyclistPending As Boolean
 
         For Each trafficLight As TrafficLight In AffectedTrafficLightList
             If trafficLight.Type = 2 Then
                 If trafficLight.GetVehicleCount() > 0 Then
-                    walkerCyclistPending = True
+                    pedestrianCyclistPending = True
                 End If
             End If
         Next
@@ -78,10 +78,10 @@ Public Class State
 
                                                         If Not excluded Then
                                                             If trafficLight.Type = 2 Then
-                                                                If walkerCyclistPending Then
-                                                                        trafficLight.ChangeStateToGreen()
+                                                                If pedestrianCyclistPending Then
+                                                                    trafficLight.ChangeStateToGreen()
                                                                 Else
-                                                                    If Not My.Settings.WalkerCyclistTrafficLightsAlwaysEnabled Then
+                                                                    If Not My.Settings.PedestrianCyclistTrafficLightsAlwaysEnabled Then
                                                                         trafficLight.ChangeStateToGreen()
                                                                     End If
                                                                 End If
@@ -130,10 +130,10 @@ Public Class State
 
                                                            If Not excluded Then
                                                                If trafficLight.Type = 2 Then
-                                                                   If walkerCyclistPending Then
+                                                                   If pedestrianCyclistPending Then
                                                                        trafficLight.ChangeStateToOrange()
                                                                    Else
-                                                                       If Not My.Settings.WalkerCyclistTrafficLightsAlwaysEnabled Then
+                                                                       If Not My.Settings.PedestrianCyclistTrafficLightsAlwaysEnabled Then
                                                                            trafficLight.ChangeStateToOrange()
                                                                        End If
                                                                    End If
@@ -175,10 +175,10 @@ Public Class State
 
                                                            If Not excluded Then
                                                                If trafficLight.Type = 2 Then
-                                                                   If walkerCyclistPending Then
+                                                                   If pedestrianCyclistPending Then
                                                                        trafficLight.ChangeStateToRed()
                                                                    Else
-                                                                       If Not My.Settings.WalkerCyclistTrafficLightsAlwaysEnabled Then
+                                                                       If Not My.Settings.PedestrianCyclistTrafficLightsAlwaysEnabled Then
                                                                            trafficLight.ChangeStateToRed()
                                                                        End If
                                                                    End If

@@ -431,7 +431,7 @@ Partial Class MainWindow
         '
         Me.ComboBoxSpawnVehicleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxSpawnVehicleType.FormattingEnabled = True
-        Me.ComboBoxSpawnVehicleType.Items.AddRange(New Object() {"Car", "Bicycle", "Bus", "Walker"})
+        Me.ComboBoxSpawnVehicleType.Items.AddRange(New Object() {"Car", "Bicycle", "Bus", "Pedestrian"})
         Me.ComboBoxSpawnVehicleType.Location = New System.Drawing.Point(50, 75)
         Me.ComboBoxSpawnVehicleType.Name = "ComboBoxSpawnVehicleType"
         Me.ComboBoxSpawnVehicleType.Size = New System.Drawing.Size(121, 21)

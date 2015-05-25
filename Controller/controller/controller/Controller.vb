@@ -11,11 +11,11 @@ Public Module Controller
 
     Sub New()
         TrafficLightList = New List(Of TrafficLight)()
-        Dim walkerCyclistTrafficLightArray = New Integer() {46, 50, 15, 16, 43, 47, 35, 34, 36, 37, 38, 32, 48, 30, 25, 49, 26, 27, 17, 18, 19, 20, 23, 39, 24, 21, 22, 40}
+        Dim pedestrianCyclistTrafficLightArray = New Integer() {46, 50, 15, 16, 43, 47, 35, 34, 36, 37, 38, 32, 48, 30, 25, 49, 26, 27, 17, 18, 19, 20, 23, 39, 24, 21, 22, 40}
         Dim busTrafficLightArray = New Integer() {6, 13, 14}
 
         For i As Integer = 0 To 50
-            If walkerCyclistTrafficLightArray.Contains(i) Then
+            If pedestrianCyclistTrafficLightArray.Contains(i) Then
                 TrafficLightList.Add(New TrafficLight(i, 2))
             Else
                 If busTrafficLightArray.Contains(i) Then
@@ -89,8 +89,8 @@ Public Module Controller
                             If _receivedMessage.Parameters(1) = 1 Then
                                 trafficLight.AddVehicle()
 
-                                If trafficLight.Id = 6 Then
-                                    'TrafficLightController.AddBus()
+                                If trafficLight.Id = 6 Or trafficLight.Id = 13 Or trafficLight.Id = 14 Then
+                                    TrafficLightController.AddBus()
                                 End If
                             End If
 
