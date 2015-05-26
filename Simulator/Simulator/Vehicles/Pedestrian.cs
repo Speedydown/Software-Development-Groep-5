@@ -11,7 +11,7 @@ namespace Simulator
     public class Pedestrian : Vehicle
     {
         public Pedestrian(Node StartNode, int DefaultRotation, Direction EndDirection)
-            : base(StartNode, 0.01f, 0.01f, DefaultRotation, 2, 2, VehicleType.Voetganger, Colors.DarkRed, EndDirection, 10)
+            : base(StartNode, 0.01f, 0.01f, DefaultRotation, 5, 5, VehicleType.Voetganger, Colors.DarkRed, EndDirection, 10)
         {
             
         }
