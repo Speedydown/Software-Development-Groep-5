@@ -109,19 +109,21 @@
         My.Settings.AutoClearLog = True
         My.Settings.GreenToOrangeDelay = 15
         My.Settings.OrangeToRedDelay = 3
-        My.Settings.ExtraVehicleDelay = 1
+        My.Settings.ExtraVehicleDelay = 0
         My.Settings.StateDelay = 2
         My.Settings.MinimumBusStateDelay = 3
         My.Settings.ConflictingBusTrafficLightDelay = 10
+        My.Settings.PedestrianCyclistTrafficLightsAlwaysEnabled = False
 
         TextBoxGeneralServerPort.Text = My.Settings.ListeningPortNumber
         CheckBoxGeneralStartTrafficLightsRed.Checked = True
-        CheckBoxAutoClearLog.Checked = False
+        CheckBoxAutoClearLog.Checked = True
         TextBoxDelayGreenToOrange.Text = My.Settings.GreenToOrangeDelay
         TextBoxDelayOrangeToRed.Text = My.Settings.OrangeToRedDelay
         TextBoxDelayVehicleQueue.Text = My.Settings.ExtraVehicleDelay
         TextBoxDelayBetweenStates.Text = My.Settings.StateDelay
         TextBoxDelayMinimumDelayBetweenBusStates.Text = My.Settings.MinimumBusStateDelay
+        TextBoxDelayConflictingBusTrafficLightDelay.Text = My.Settings.ConflictingBusTrafficLightDelay
         CheckBoxPedestrianCyclistTrafficLightsEnableWhenQueueEmpty.Checked = False
     End Sub
 End Class

@@ -17,7 +17,7 @@ Public Class MainWindow
     Private Sub MainWindow_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         ComboBoxOptionsSpeed.SelectedIndex = 0
 
-        LogMessage(1, "Controller Version 1.0 (30-05-2015).")
+        LogMessage(1, "Controller Version 1.0 (02-06-2015).")
 
         Server.SetMainWindow(Me)
         Controller.SetMainWindow(Me)
