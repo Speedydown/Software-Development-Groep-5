@@ -75,7 +75,7 @@ namespace Simulator
             {
                 vehicle = new Bicycle(StartNode, DefaultRotation, EndDirection);
             }
-            else if (Vehicle == VehicleType.Voetganger)
+            else if (Vehicle == VehicleType.Voetganger && StartDirection != Direction.Ventweg && StartDirection != Direction.Oost && EndDirection != Direction.Oost)
             {
                 vehicle = new Pedestrian(StartNode, DefaultRotation, EndDirection);
             }
@@ -89,6 +89,8 @@ namespace Simulator
             {
                 try
                 {
+                   // Vehicle[] tempVehicles = CurrentVehicles.ToArray();
+
                     foreach (Vehicle v in CurrentVehicles)
                     {
                         v.Update();

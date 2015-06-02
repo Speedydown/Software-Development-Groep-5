@@ -106,6 +106,11 @@ namespace Simulator
         {
             try
             {
+                if (TargetNode == null)
+                {
+                    return;
+                }
+
                 this.Rotation = (float)Position.GetAngleBetweenPoints(this.CurrentNode.CurrentPosition, this.TargetNode.CurrentPosition);
                 this.DetermineVehicleState();
                 this.DetermineSpeed();

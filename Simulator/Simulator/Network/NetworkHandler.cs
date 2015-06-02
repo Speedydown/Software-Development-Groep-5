@@ -94,7 +94,7 @@ namespace Simulator.Network
                 }
 
                 Thread.Sleep(10);
-            } 
+            }
         }
 
         internal void Recv()
@@ -105,11 +105,20 @@ namespace Simulator.Network
             {
                 //NetworkHandler.InputBuffer.Add(new byte[] { 1, 2, 3, 0 });
 
+                byte[] inStream = new byte[4];
+
                 try
                 {
-                    byte[] inStream = new byte[4];
                     serverStream.Read(inStream, 0, 4);
-                    NetworkHandler.InputBuffer.Add(inStream);
+
+                    if (inStream != null)
+                    {
+                        NetworkHandler.InputBuffer.Add(inStream);
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+
                 }
                 catch (Exception e)
                 {
