@@ -15,7 +15,7 @@
       <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="ExtraVehicleDelay" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="StateDelay" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2</Value>

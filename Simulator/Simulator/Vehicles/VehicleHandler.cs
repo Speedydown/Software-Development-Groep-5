@@ -61,7 +61,7 @@ namespace Simulator
                 return;
             }
 
-            int DefaultRotation = (StartDirection == Direction.Noord || StartDirection == Direction.Zuid || StartDirection == Direction.Ventweg) ? 90 : 0;
+            int DefaultRotation = (StartDirection == Direction.Noord || StartDirection == Direction.Zuid) ? 90 : 0;
             Node StartNode = SuitableStartNodes[RandomNumberGenerator.Next(0, SuitableStartNodes.Count)];
             Vehicle vehicle = null;
 

@@ -13,9 +13,7 @@ Public Module TestController
     Public Property SpawnPedestrians As Boolean
     Public Property TestSpeed As Integer
     ReadOnly RandomInterval As New Random()
-    ReadOnly RandomDirectionsStart As New Random()
-    ReadOnly RandomDirectionEnd As New Random()
-    ReadOnly RandomVehicleType As New Random()
+    ReadOnly RandomNumber As New Random()
 
     Public Sub StartTestController()
         If _testControllerThread Is Nothing Then
@@ -136,24 +134,24 @@ Public Module TestController
             vehicleTypeList.Remove(3)
         End If
 
-        Dim directionStart As Integer = RandomDirectionsStart.Next(0, 5)
+        Dim directionStart As Integer = RandomNumber.Next(0, 5)
         Dim directionEnd As Integer = GenerateDirection(directionStart)
-        Dim vehicleTypeDouble As Double = RandomVehicleType.NextDouble() * (1.0 - 0.0) + 0.0
+        Dim vehicleTypeDouble As Double = RandomNumber.NextDouble() * (1.0 - 0.0) + 0.0
 
         Dim vehicleType As Integer
 
         'Generate a vehicle type based on probability.
-        If (vehicleTypeDouble < 0.1) Then
+        If (vehicleTypeDouble <= 0.05) Then
             If vehicleTypeList.Contains(2) Then
                 vehicleType = 2
             End If
         Else
-            If (vehicleTypeDouble < 0.2) Then
+            If (vehicleTypeDouble <= 0.2) Then
                 If vehicleTypeList.Contains(3) Then
                     vehicleType = 3
                 End If
             Else
-                If (vehicleTypeDouble < 0.7) Then
+                If (vehicleTypeDouble <= 0.7) Then
                     If vehicleTypeList.Contains(0) Then
                         vehicleType = 0
                     End If
@@ -178,10 +176,10 @@ Public Module TestController
     'Generate a end direction and check if the start/end direction are the same.
     Public Function GenerateDirection(previous As Integer) As Integer
 
-        Dim directionEnd As Integer = RandomDirectionEnd.Next(0, 5)
+        Dim directionEnd As Integer = RandomNumber.Next(0, 5)
 
         While directionEnd = previous
-            directionEnd = RandomDirectionEnd.Next(0, 5)
+            directionEnd = RandomNumber.Next(0, 5)
         End While
 
         Return directionEnd
