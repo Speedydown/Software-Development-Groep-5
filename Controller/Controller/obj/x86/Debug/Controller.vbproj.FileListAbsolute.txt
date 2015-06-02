@@ -95,3 +95,7 @@ E:\Dropbox\SCHOOLNEW3\SDM\VB.NET\Controller\controller\Controller\obj\x86\Debug\
 E:\Dropbox\SCHOOLNEW3\SDM\VB.NET\Controller\controller\Controller\obj\x86\Debug\Controller.Resources.resources
 E:\Dropbox\SCHOOLNEW3\SDM\VB.NET\Controller\controller\Controller\obj\x86\Debug\Controller.SettingsWindow.resources
 E:\Dropbox\SCHOOLNEW3\SDM\VB.NET\Controller\controller\Controller\obj\x86\Debug\Controller.vbproj.GenerateResource.Cache
+C:\Users\Teake\Documents\GitHub\Software-Development-Groep-5\Controller\Controller\bin\Debug\Controller.exe.config
+C:\Users\Teake\Documents\GitHub\Software-Development-Groep-5\Controller\Controller\obj\x86\Debug\Controller.exe
+C:\Users\Teake\Documents\GitHub\Software-Development-Groep-5\Controller\Controller\obj\x86\Debug\Controller.xml
+C:\Users\Teake\Documents\GitHub\Software-Development-Groep-5\Controller\Controller\obj\x86\Debug\Controller.pdb
