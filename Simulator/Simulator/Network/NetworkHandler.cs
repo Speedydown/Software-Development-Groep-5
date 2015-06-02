@@ -135,6 +135,11 @@ namespace Simulator.Network
 
         public void Disconnect()
         {
+            if (clientSocket == null)
+            {
+                return;
+            }
+
             clientSocket.Close();
             serverStream.Close();
             clientSocket = null;

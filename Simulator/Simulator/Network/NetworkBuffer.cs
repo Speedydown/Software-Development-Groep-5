@@ -35,8 +35,17 @@ namespace Simulator.Network
 
             if (this.Buffer.TryDequeue(out Output))
             {
-                LogHandler.Instance.Write(this.Name + " removed: " + BitConverter.ToString(Output).Replace("-", ""));
+                try
+                {
+                    LogHandler.Instance.Write(this.Name + " removed: " + BitConverter.ToString(Output).Replace("-", ""));
+                }
+                catch
+                {
+
+                }
+
                 return Output;
+
             }
 
             return null;
