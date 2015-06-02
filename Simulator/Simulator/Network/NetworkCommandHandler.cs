@@ -35,7 +35,16 @@ namespace Simulator.Network
 
             while (true)
             {
-                byte[] Input = NetworkHandler.InputBuffer.Get();
+                byte[] Input = null;
+
+                try
+                {
+                   Input = NetworkHandler.InputBuffer.Get();
+                }
+                catch (Exception)
+                {
+
+                }
 
                 if (Input != null)
                 {
