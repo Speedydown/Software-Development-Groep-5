@@ -90,7 +90,7 @@ namespace Simulator
             Map.Instance.Children.Add(this.CurrentShape);
             Map.SetZIndex(this.CurrentShape, 255);
 
-            VehicleHandler.CurrentVehicles.Add(this);
+            VehicleHandler.VehiclesToAdd.Add(this);
             this.TargetNode = DijkstraCalculationHandler.Instance.CalculateNextNodeForVehicle(this);
 
             this.CurrentPath = this.CurrentNode.GetPathByDestinationNode(this.TargetNode);
@@ -343,7 +343,7 @@ namespace Simulator
 
         public void Dispose()
         {
-            VehicleHandler.CurrentVehicles.Remove(this);
+            VehicleHandler.VehiclesToRemove.Add(this);
             this.Disposed = true;
 
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>

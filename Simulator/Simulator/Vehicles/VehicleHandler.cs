@@ -12,7 +12,9 @@ namespace Simulator
     public class VehicleHandler
     {
         public static readonly VehicleHandler Instance = new VehicleHandler();
-        public static readonly List<Vehicle> CurrentVehicles = new List<Vehicle>();
+        private static readonly List<Vehicle> CurrentVehicles = new List<Vehicle>();
+        public static readonly List<Vehicle> VehiclesToAdd = new List<Vehicle>();
+        public static readonly List<Vehicle> VehiclesToRemove = new List<Vehicle>();
         public static readonly Random RandomNumberGenerator = new Random();
         public static readonly Dictionary<Direction, Direction> InvalidDirections = new Dictionary<Direction, Direction>();
 
@@ -55,14 +57,19 @@ namespace Simulator
 
             if (SuitableStartNodes.Count == 0)
             {
-                LogHandler.Instance.Write("Invalid StartDirection for this vehicle", LogType.Warning);
+                LogHandler.Instance.Write("Invalid StartDirection for this vehicle. From " + StartDirection.ToString() + " to " + EndDirection.ToString() + " as a " + Vehicle.ToString(), LogType.Warning);
                 return;
             }
 
             int DefaultRotation = (StartDirection == Direction.Noord || StartDirection == Direction.Zuid || StartDirection == Direction.Ventweg) ? 90 : 0;
             Node StartNode = SuitableStartNodes[RandomNumberGenerator.Next(0, SuitableStartNodes.Count)];
-            Vehicle vehicle = null; 
-            
+            Vehicle vehicle = null;
+
+            if (EndDirection == Direction.Ventweg)
+            {
+                return;
+            }
+
             if (Vehicle == VehicleType.Auto)
             {
                 vehicle = new Car(StartNode, DefaultRotation, EndDirection);
@@ -89,8 +96,6 @@ namespace Simulator
             {
                 try
                 {
-                   // Vehicle[] tempVehicles = CurrentVehicles.ToArray();
-
                     foreach (Vehicle v in CurrentVehicles)
                     {
                         v.Update();
@@ -101,7 +106,32 @@ namespace Simulator
 
                 }
 
+                this.CleanUpVehicles();
+
                 Thread.Sleep(25);
+            }
+        }
+
+        private void CleanUpVehicles()
+        {
+            try
+            {
+                foreach (Vehicle v in VehiclesToAdd)
+                {
+                    CurrentVehicles.Add(v);
+                }
+
+                foreach (Vehicle v in VehiclesToRemove)
+                {
+                    CurrentVehicles.Remove(v);
+                }
+
+                VehiclesToAdd.Clear();
+                VehiclesToRemove.Clear();
+            }
+            catch (Exception)
+            {
+
             }
         }
 

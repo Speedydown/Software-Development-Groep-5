@@ -55,17 +55,24 @@ namespace Simulator.Network
                         Direction DestinationDirection = (Direction)Input[2];
                         VehicleType VehicleType = (VehicleType)Input[3];
 
-                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        try
                         {
-                            try
+                            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                             {
-                                VehicleHandler.Instance.SpawnVehicle(StartDirection, DestinationDirection, VehicleType);
-                            }
-                            catch (Exception)
-                            {
-                                Thread.CurrentThread.Abort();
-                            }
-                        }));
+                                try
+                                {
+                                    VehicleHandler.Instance.SpawnVehicle(StartDirection, DestinationDirection, VehicleType);
+                                }
+                                catch (Exception)
+                                {
+                                    Thread.CurrentThread.Abort();
+                                }
+                            }));
+                        }
+                        catch
+                        {
+                            Thread.CurrentThread.Abort();
+                        }
                     }
                     else if (Input[0] == (byte)2)
                     {

@@ -215,8 +215,6 @@ namespace Simulator.Dijkstra
                     {
 
                     }
-
-                    VehicleHandler.Instance.SpawnVehicle((vehicle.CurrentNode as EntryNode).StartDirection, TargetDirection, vehicle.VehicleType);
                 }
 
                 vehicle.Dispose();
