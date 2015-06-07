@@ -146,6 +146,7 @@ namespace Simulator.Dijkstra
         internal int CalculateCostOfRoute(Direction TargetDirection, int CurrentCost, Vehicle vehicle, List<Path> VisitedPaths)
         {
             int LowestCost = int.MaxValue;
+            CurrentCost += this.ExtraCost;
 
             if (!this.VehicleAllowed(vehicle))
             {

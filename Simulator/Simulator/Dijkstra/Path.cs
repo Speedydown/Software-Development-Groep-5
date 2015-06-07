@@ -13,6 +13,7 @@ namespace Simulator.Dijkstra
 {
     public class Path
     {
+        private static Random Randomizer = new Random();
         public int NumberOfVehicles { get; private set; } //Cost To Travel this Path
         private Canvas MapCanvas { get; set; }
 
@@ -109,10 +110,16 @@ namespace Simulator.Dijkstra
 
         private int CalculateCost()
         {
-            //Startwaarde niet statisch geven, nodes worden gestraft voor meerdere kruispunten terwijl dat niet hoeft
             int Output = 0;
 
             Output += this.Length;
+
+            if (this.Source is PedestrianNode || this.Destination is PedestrianNode)
+            {
+                Output += Randomizer.Next(0, 25);
+                return Output;
+            }
+
             Output += this.NumberOfVehicles * 25;
 
             if (this.Source is BusNode)

@@ -82,7 +82,7 @@ namespace Simulator
             {
                 vehicle = new Bicycle(StartNode, DefaultRotation, EndDirection);
             }
-            else if (Vehicle == VehicleType.Voetganger && StartDirection != Direction.Ventweg && StartDirection != Direction.Oost && EndDirection != Direction.Oost)
+            else if (Vehicle == VehicleType.Voetganger && StartDirection != Direction.Ventweg)
             {
                 vehicle = new Pedestrian(StartNode, DefaultRotation, EndDirection);
             }
