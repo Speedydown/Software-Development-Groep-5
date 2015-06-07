@@ -51,7 +51,7 @@ namespace Simulator
         public Node NodeJ = new Node(new Position(620, 418), "J");
         public Node NodeK = new Node(new Position(1475, 418), "K");
         public Node NodeG1 = new Node(new Position(1236, 400), "G1");
-        public Node NodeG2 = new Node(new Position(1218, 418), "G2");
+        public Node NodeG2 = new Node(new Position(1218, 418), "G2", null, -450);
 
         //ExitNodes
         public Node ExitNode1 = new ExitNode(new Position(1282, 0), Direction.Noord, new VehicleType[] { VehicleType.Auto, VehicleType.Bus }, "e1");
@@ -101,7 +101,7 @@ namespace Simulator
         public Node Custom63 = new Node(new Position(443, 950), "63");
 
         public Node Custom70 = new Node(new Position(510, 520), "70", new VehicleType[] { VehicleType.Auto, VehicleType.Bus, VehicleType.Fiets });
-        public Node Custom71 = new Node(new Position(690, 475), "71", new VehicleType[] { VehicleType.Auto, VehicleType.Bus, VehicleType.Fiets });
+        public Node Custom71 = new Node(new Position(690, 475), "71", new VehicleType[] { VehicleType.Auto, VehicleType.Bus, VehicleType.Fiets }, 1000);
         public Node Custom72 = new Node(new Position(1350, 475), "72", new VehicleType[] { VehicleType.Auto, VehicleType.Bus, VehicleType.Fiets });
         public Node Custom73 = new Node(new Position(1425, 475), "73", new VehicleType[] { VehicleType.Auto, VehicleType.Bus, VehicleType.Fiets });
         public Node Custom74 = new Node(new Position(510, 675), "74", new VehicleType[] { VehicleType.Auto, VehicleType.Bus, VehicleType.Fiets });
@@ -144,10 +144,10 @@ namespace Simulator
             new LaneSwitchNode(false, new Position(1105, 300)));
 
         public LaneSwitcher LaneSwitcher6 = new LaneSwitcher(
-            new LaneSwitchNode(true, new Position(510, 725), new VehicleType[] { VehicleType.Fiets }),
-            new LaneSwitchNode(true, new Position(535, 675)),
-            new LaneSwitchNode(false, new Position(510, 625)),
-            new LaneSwitchNode(false, new Position(510, 625)));
+            new LaneSwitchNode(true, new Position(510, 675), new VehicleType[] { VehicleType.Fiets }),
+            new LaneSwitchNode(true, new Position(535, 675), new VehicleType[] { VehicleType.Auto, VehicleType.Bus }),
+            new LaneSwitchNode(false, new Position(510, 625), new VehicleType[] { VehicleType.Fiets, VehicleType.Auto, VehicleType.Bus }),
+            new LaneSwitchNode(false, new Position(510, 625), new VehicleType[] { VehicleType.Fiets, VehicleType.Auto, VehicleType.Bus }));
 
         //------------------Cycling routes---------------------------------------------
         public Node Nodec1 = new BicycleNode(new Position(278, 545), "1");

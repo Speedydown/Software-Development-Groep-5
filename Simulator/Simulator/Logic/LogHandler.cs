@@ -36,22 +36,6 @@ namespace Simulator
             this.Log.Add(Value);
             OnPropertyChanged("Log");
 
-            if (this.LogListview != null)
-            {
-                try
-                {
-                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        //this.LogListview.ItemsSource = null;
-                        //this.LogListview.ItemsSource = this.Log.ToArray().Reverse();
-                    }));
-                }
-                catch
-                {
-
-                }
-            }
-
             System.Diagnostics.Debug.WriteLine(Value);
 
         }

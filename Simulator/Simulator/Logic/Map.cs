@@ -297,8 +297,9 @@ namespace Simulator.UserControls
             this.nodes.NodeA2.AddNode(this.nodes.NodeC2);
 
             //Ventweg
-            this.nodes.EntryNode8.AddNode(this.nodes.Custom74);
-            this.nodes.Custom74.AddNode(this.nodes.Custom70);
+            this.nodes.EntryNode8.AddNode(this.nodes.LaneSwitcher6.EntryNodeRight);
+            this.nodes.LaneSwitcher6.ExitNodeLeft.AddNode(this.nodes.Custom70);
+          //  this.nodes.Custom74.AddNode(this.nodes.Custom70);
             this.nodes.Custom70.AddNode(this.nodes.NodeI);
             this.nodes.NodeJ.AddNode(this.nodes.Custom71);
             this.nodes.Custom71.AddNode(this.nodes.Custom72);
@@ -366,7 +367,7 @@ namespace Simulator.UserControls
             this.nodes.Nodec15.AddNode(this.nodes.Nodec17);
             this.nodes.Nodec17.AddNode(this.nodes.Nodec2);
             this.nodes.Custom73.AddNode(this.nodes.ExitNode12);
-            this.nodes.EntryNode12.AddNode(this.nodes.Custom74);
+            this.nodes.EntryNode12.AddNode(this.nodes.LaneSwitcher6.EntryNodeLeft);
         }
 
         private void BuildPedestrianRoutes()

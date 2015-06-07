@@ -177,7 +177,7 @@ namespace Simulator
 
             if (CurrentNode is TrafficLightWaitNode && ((CurrentNode as TrafficLightWaitNode).Paths.First().Destination as TrafficLight).State != TrafficLightState.Groen)
             {
-                if (!(((CurrentNode as TrafficLightWaitNode).Paths.First().Destination as TrafficLight).State == TrafficLightState.Oranje && this.CurrentPercentOfPathTraveled > 0.7f))
+                if (!(((CurrentNode as TrafficLightWaitNode).Paths.First().Destination as TrafficLight).State == TrafficLightState.Oranje && this.CurrentPercentOfPathTraveled > 0.6f))
                 {
                     vehicleState = VehicleState.Stopping;
                 }
@@ -268,6 +268,11 @@ namespace Simulator
         private void UpdateCarShape()
         {
             Thread CurrentThread = Thread.CurrentThread;
+
+            if (this.CurrentPosition.ToString() == "[NaN][NaN]")
+            {
+                return;
+            }
 
             try
             {

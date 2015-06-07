@@ -10,5 +10,6 @@ namespace Simulator
     {
         public static readonly bool DisplayNodes = false;
         public static readonly bool DisplayDebugWindow = false;
+        public static readonly bool EnableNetworkLogging = false;
     }
 }

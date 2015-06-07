@@ -21,7 +21,11 @@ namespace Simulator.Network
         public void Add(byte[] ByteArray)
         {
             Buffer.Enqueue(ByteArray);
-            LogHandler.Instance.Write(this.Name + " recieved: " + BitConverter.ToString(ByteArray).Replace("-", ""));
+
+            if (Config.EnableNetworkLogging)
+            {
+                LogHandler.Instance.Write(this.Name + " recieved: " + BitConverter.ToString(ByteArray).Replace("-", ""));
+            }
         }
 
         public int GetQueueCount()
@@ -37,7 +41,10 @@ namespace Simulator.Network
             {
                 try
                 {
-                    LogHandler.Instance.Write(this.Name + " removed: " + BitConverter.ToString(Output).Replace("-", ""));
+                    if (Config.EnableNetworkLogging)
+                    {
+                        LogHandler.Instance.Write(this.Name + " removed: " + BitConverter.ToString(Output).Replace("-", ""));
+                    }
                 }
                 catch
                 {

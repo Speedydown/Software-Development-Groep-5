@@ -120,7 +120,7 @@ namespace Simulator.Dijkstra
                 return Output;
             }
 
-            Output += this.NumberOfVehicles * 25;
+            Output += this.NumberOfVehicles * 75;
 
             if (this.Source is BusNode)
             {

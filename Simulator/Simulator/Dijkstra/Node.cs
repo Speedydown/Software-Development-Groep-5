@@ -100,6 +100,10 @@ namespace Simulator.Dijkstra
 
                 if (Config.DisplayNodes || this is TrafficLight)
                 {
+                    NodeEllipse.Margin = new Thickness(CurrentPosition.X - 7, CurrentPosition.Y - 7, 0, 0);
+                    NodeEllipse.StrokeThickness = 0;
+                    NodeEllipse.Height = 14;
+                    NodeEllipse.Width = 14;
                     this.MapCanvas.Children.Add(NodeEllipse);
                     Map.SetZIndex(NodeEllipse, 253);
                 }
@@ -110,6 +114,16 @@ namespace Simulator.Dijkstra
                     NodeEllipse.Margin = new Thickness(CurrentPosition.X - 7, CurrentPosition.Y - 7, 0, 0);
                     NodeEllipse.Stroke = new SolidColorBrush(Colors.LightGray);
                     NodeEllipse.Fill = new SolidColorBrush(Colors.LightGray);
+                    this.MapCanvas.Children.Add(NodeEllipse);
+                    Map.SetZIndex(NodeEllipse, 10);
+                }
+                else if (this.AllowedVehicles.Contains(VehicleType.Fiets))
+                {
+                    NodeEllipse.Height = 6;
+                    NodeEllipse.Width = 6;
+                    NodeEllipse.Margin = new Thickness(CurrentPosition.X - 3, CurrentPosition.Y - 3, 0, 0);
+                    NodeEllipse.Stroke = new SolidColorBrush(Colors.Orange);
+                    NodeEllipse.Fill = new SolidColorBrush(Colors.Orange);
                     this.MapCanvas.Children.Add(NodeEllipse);
                     Map.SetZIndex(NodeEllipse, 10);
                 }
