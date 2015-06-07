@@ -120,10 +120,10 @@ namespace Simulator
             );
 
         public LaneSwitcher LaneSwitcher2 = new LaneSwitcher(
-            new LaneSwitchNode(true, new Position(645, 400)),
-            new LaneSwitchNode(true, new Position(645, 418)),
-            new LaneSwitchNode(false, new Position(690, 400)),
-            new LaneSwitchNode(false, new Position(690, 418)));
+            new LaneSwitchNode(true, new Position(775, 400)),
+            new LaneSwitchNode(true, new Position(775, 418)),
+            new LaneSwitchNode(false, new Position(820, 400)),
+            new LaneSwitchNode(false, new Position(820, 418)));
 
         public LaneSwitcher LaneSwitcher3 = new LaneSwitcher(
             new LaneSwitchNode(true, new Position(1218, 0)),

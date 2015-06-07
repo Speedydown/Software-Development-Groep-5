@@ -97,13 +97,16 @@ namespace Simulator.Dijkstra
                 {
                     p.Draw();
                 }
-
                 if (Config.DisplayNodes || this is TrafficLight)
                 {
-                    NodeEllipse.Margin = new Thickness(CurrentPosition.X - 7, CurrentPosition.Y - 7, 0, 0);
-                    NodeEllipse.StrokeThickness = 0;
-                    NodeEllipse.Height = 14;
-                    NodeEllipse.Width = 14;
+                    if (this is TrafficLight)
+                    {
+                        NodeEllipse.Margin = new Thickness(CurrentPosition.X - 7, CurrentPosition.Y - 7, 0, 0);
+                        NodeEllipse.StrokeThickness = 0;
+                        NodeEllipse.Height = 14;
+                        NodeEllipse.Width = 14;
+                    }
+
                     this.MapCanvas.Children.Add(NodeEllipse);
                     Map.SetZIndex(NodeEllipse, 253);
                 }

@@ -228,6 +228,18 @@ namespace Simulator
                     Distance = Distance - 5;
                 }
 
+                if (vehicle is Bicycle && (this is Car || this is Bus))
+                {
+                    if (this is Bus)
+                    {
+                        Distance = Distance - 50;
+                    }
+                    else
+                    {
+                        Distance = Distance - 25;
+                    }
+                }
+
                 if (DifX < Distance && DifY < Distance)
                 {
                     vehicleState = VehicleState.Stopping;
