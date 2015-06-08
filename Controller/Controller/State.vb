@@ -177,27 +177,16 @@ Public Class State
             'Sets all traffic lights to orange.
             Parallel.ForEach(AffectedTrafficLightList, Sub(trafficLight)
 
-                                                           Dim excluded As Boolean
-
-                                                           If TrafficLightController.NextState IsNot Nothing Then
-                                                               If TrafficLightController.NextState.AffectedTrafficLightList.Contains(trafficLight) Then
-                                                                   excluded = True
-                                                                   _mainWindow.LogMessage(1, "Traffic light " + trafficLight.Id.ToString() + " was excluded from switching to orange.")
-                                                               End If
-                                                           End If
-
-                                                           If Not excluded Then
-                                                               If trafficLight.Type = 2 Then
-                                                                   If pedestrianCyclistPending Then
-                                                                       trafficLight.ChangeStateToOrange()
-                                                                   Else
-                                                                       If Not My.Settings.PedestrianCyclistTrafficLightsAlwaysEnabled Then
-                                                                           trafficLight.ChangeStateToOrange()
-                                                                       End If
-                                                                   End If
-                                                               Else
+                                                           If trafficLight.Type = 2 Then
+                                                               If pedestrianCyclistPending Then
                                                                    trafficLight.ChangeStateToOrange()
+                                                               Else
+                                                                   If Not My.Settings.PedestrianCyclistTrafficLightsAlwaysEnabled Then
+                                                                       trafficLight.ChangeStateToOrange()
+                                                                   End If
                                                                End If
+                                                           Else
+                                                               trafficLight.ChangeStateToOrange()
                                                            End If
                                                        End Sub)
         End If
@@ -223,27 +212,16 @@ Public Class State
             'Sets all traffic lights to red.
             Parallel.ForEach(AffectedTrafficLightList, Sub(trafficLight)
 
-                                                           Dim excluded As Boolean
-
-                                                           If TrafficLightController.NextState IsNot Nothing Then
-                                                               If TrafficLightController.NextState.AffectedTrafficLightList.Contains(trafficLight) Then
-                                                                   excluded = True
-                                                                   _mainWindow.LogMessage(1, "Traffic light " + trafficLight.Id.ToString() + " was excluded from switching to red.")
-                                                               End If
-                                                           End If
-
-                                                           If Not excluded Then
-                                                               If trafficLight.Type = 2 Then
-                                                                   If pedestrianCyclistPending Then
-                                                                       trafficLight.ChangeStateToRed()
-                                                                   Else
-                                                                       If Not My.Settings.PedestrianCyclistTrafficLightsAlwaysEnabled Then
-                                                                           trafficLight.ChangeStateToRed()
-                                                                       End If
-                                                                   End If
-                                                               Else
+                                                           If trafficLight.Type = 2 Then
+                                                               If pedestrianCyclistPending Then
                                                                    trafficLight.ChangeStateToRed()
+                                                               Else
+                                                                   If Not My.Settings.PedestrianCyclistTrafficLightsAlwaysEnabled Then
+                                                                       trafficLight.ChangeStateToRed()
+                                                                   End If
                                                                End If
+                                                           Else
+                                                               trafficLight.ChangeStateToRed()
                                                            End If
                                                        End Sub)
 

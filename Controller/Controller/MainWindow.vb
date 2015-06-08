@@ -17,7 +17,7 @@ Public Class MainWindow
     Private Sub MainWindow_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         ComboBoxOptionsSpeed.SelectedIndex = 0
 
-        LogMessage(1, "Controller Version 1.0 (07-06-2015).")
+        LogMessage(1, "Controller Version 1.0 (08-06-2015).")
 
         Server.SetMainWindow(Me)
         Controller.SetMainWindow(Me)
@@ -143,7 +143,7 @@ Public Class MainWindow
         End If
     End Sub
 
-    Private Sub ClearLogToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearLogToolStripMenuItem.Click
+    Private Sub ClearLogToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ClearLogToolStripMenuItem.Click
         ClearLog()
     End Sub
 
@@ -157,7 +157,7 @@ Public Class MainWindow
     End Sub
 
     'Send a vehicle announcement message to a traffic light.
-    Private Sub ButtonVehicleAnnouncementReceive_Click(sender As Object, e As EventArgs) Handles ButtonVehicleAnnouncementReceive.Click
+    Private Sub ButtonVehicleAnnouncementReceive_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ButtonVehicleAnnouncementReceive.Click
         Dim textBoxValue As Integer
         Dim parameters(2) As Integer
 
@@ -186,7 +186,7 @@ Public Class MainWindow
         End If
     End Sub
 
-    Private Sub ButtonTrafficLightControllerStart_Click(sender As Object, e As EventArgs) Handles ButtonTrafficLightControllerStart.Click
+    Private Sub ButtonTrafficLightControllerStart_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ButtonTrafficLightControllerStart.Click
 
         'Start the Traffic Light Controller.
         If CheckServerReady() Then
@@ -196,7 +196,7 @@ Public Class MainWindow
         End If
     End Sub
 
-    Private Sub ButtonTrafficLightControllerStop_Click(sender As Object, e As EventArgs) Handles ButtonTrafficLightControllerStop.Click
+    Private Sub ButtonTrafficLightControllerStop_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ButtonTrafficLightControllerStop.Click
 
         'Stop the Traffic Light Controller.
         If CheckServerReady() Then
@@ -207,7 +207,7 @@ Public Class MainWindow
     End Sub
 
     'Spawn a selected vehicle.
-    Private Sub ButtonSpawnVehicle_Click(sender As Object, e As EventArgs) Handles ButtonSpawnVehicle.Click
+    Private Sub ButtonSpawnVehicle_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ButtonSpawnVehicle.Click
         Dim parameters(2) As Integer
 
         'Collect parameters for the message.
@@ -239,7 +239,7 @@ Public Class MainWindow
     End Sub
 
     'Reset a traffic light queue.
-    Private Sub ButtonVehicleQueueResetQueue_Click(sender As Object, e As EventArgs) Handles ButtonVehicleQueueResetQueue.Click
+    Private Sub ButtonVehicleQueueResetQueue_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ButtonVehicleQueueResetQueue.Click
         Dim textBoxValue As Integer
 
         If CheckServerReady() Then
@@ -266,7 +266,7 @@ Public Class MainWindow
     End Sub
 
     'Reset all traffic light queues.
-    Private Sub ButtonVehicleQueueResetAllQueues_Click(sender As Object, e As EventArgs) Handles ButtonVehicleQueueResetAllQueues.Click
+    Private Sub ButtonVehicleQueueResetAllQueues_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ButtonVehicleQueueResetAllQueues.Click
         If CheckServerReady() Then
             If Controller.CheckControllerStarted() Then
                 Controller.ResetQueue(Nothing)
@@ -279,7 +279,7 @@ Public Class MainWindow
     End Sub
 
     'Update the "Current timer" label.
-    Public Sub UpdateTimerLabel(value As String)
+    Public Sub UpdateTimerLabel(ByVal value As String)
         If IsHandleCreated Then
             Invoke(Sub()
                        'Only update when the tab is selected.
@@ -333,7 +333,7 @@ Public Class MainWindow
     End Sub
 
     'Show the size of a traffic light.
-    Private Sub ButtonVehicleQueueGetQueueSize_Click(sender As Object, e As EventArgs) Handles ButtonVehicleQueueGetQueueSize.Click
+    Private Sub ButtonVehicleQueueGetQueueSize_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ButtonVehicleQueueGetQueueSize.Click
         Dim textBoxValue As Integer
 
         If CheckServerReady() Then
@@ -359,7 +359,7 @@ Public Class MainWindow
         End If
     End Sub
 
-    Private Sub CheckBoxSpawnVehicleTypesCars_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxSpawnVehicleTypesCars.CheckedChanged
+    Private Sub CheckBoxSpawnVehicleTypesCars_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles CheckBoxSpawnVehicleTypesCars.CheckedChanged
         If Not CheckBoxSpawnVehicleTypesCars.Checked Then
             If Not CheckOneSelected() Then
                 CheckBoxSpawnVehicleTypesCars.Checked = True
@@ -382,7 +382,7 @@ Public Class MainWindow
         End If
     End Function
 
-    Private Sub CheckBoxSpawnVehicleCyclists_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxSpawnVehicleCyclists.CheckedChanged
+    Private Sub CheckBoxSpawnVehicleCyclists_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles CheckBoxSpawnVehicleCyclists.CheckedChanged
         If Not CheckBoxSpawnVehicleCyclists.Checked Then
             If Not CheckOneSelected() Then
                 CheckBoxSpawnVehicleCyclists.Checked = True
@@ -395,7 +395,7 @@ Public Class MainWindow
         End If
     End Sub
 
-    Private Sub CheckBoxSpawnVehicleBuses_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxSpawnVehicleBuses.CheckedChanged
+    Private Sub CheckBoxSpawnVehicleBuses_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles CheckBoxSpawnVehicleBuses.CheckedChanged
         If Not CheckBoxSpawnVehicleBuses.Checked Then
             If Not CheckOneSelected() Then
                 CheckBoxSpawnVehicleBuses.Checked = True
@@ -408,7 +408,7 @@ Public Class MainWindow
         End If
     End Sub
 
-    Private Sub CheckBoxSpawnVehicleTypesPedestrians_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxSpawnVehicleTypesPedestrian.CheckedChanged
+    Private Sub CheckBoxSpawnVehicleTypesPedestrians_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles CheckBoxSpawnVehicleTypesPedestrian.CheckedChanged
         If Not CheckBoxSpawnVehicleTypesPedestrian.Checked Then
             If Not CheckOneSelected() Then
                 CheckBoxSpawnVehicleTypesPedestrian.Checked = True
@@ -421,13 +421,13 @@ Public Class MainWindow
         End If
     End Sub
 
-    Private Sub ComboBoxOptionsSpeed_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxOptionsSpeed.SelectedIndexChanged
+    Private Sub ComboBoxOptionsSpeed_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles ComboBoxOptionsSpeed.SelectedIndexChanged
 
         TestController.TestSpeed = ComboBoxOptionsSpeed.SelectedIndex
     End Sub
 
     'Stop the Test Controller.
-    Private Sub ButtonAutoSpawnStopTestController_Click(sender As Object, e As EventArgs) Handles ButtonAutoSpawnStopTestController.Click
+    Private Sub ButtonAutoSpawnStopTestController_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ButtonAutoSpawnStopTestController.Click
         If CheckServerReady() Then
             If Controller.CheckControllerStarted() Then
                 If TrafficLightController.CheckTrafficLightControllerStarted Then
@@ -440,7 +440,7 @@ Public Class MainWindow
     End Sub
 
     'Start the Test Controller.
-    Private Sub ButtonAutoSpawnStartTestController_Click(sender As Object, e As EventArgs) Handles ButtonAutoSpawnStartTestController.Click
+    Private Sub ButtonAutoSpawnStartTestController_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ButtonAutoSpawnStartTestController.Click
         If CheckServerReady() Then
             If Controller.CheckControllerStarted() Then
                 If Not TrafficLightController.CheckTrafficLightControllerStarted() Then

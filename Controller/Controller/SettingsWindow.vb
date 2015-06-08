@@ -112,7 +112,7 @@
         My.Settings.ExtraVehicleDelay = 0
         My.Settings.StateDelay = 2
         My.Settings.MinimumBusStateDelay = 3
-        My.Settings.ConflictingBusTrafficLightDelay = 10
+        My.Settings.ConflictingBusTrafficLightDelay = 7
         My.Settings.PedestrianCyclistTrafficLightsAlwaysEnabled = False
 
         TextBoxGeneralServerPort.Text = My.Settings.ListeningPortNumber

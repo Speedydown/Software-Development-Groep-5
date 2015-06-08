@@ -117,6 +117,8 @@ Public Module TrafficLightController
         busState1.AffectedTrafficLightList.Add(Controller.TrafficLightList(4))
         busState1.AffectedTrafficLightList.Add(Controller.TrafficLightList(5))
         busState1.AffectedTrafficLightList.Add(Controller.TrafficLightList(6))
+        busState1.AffectedTrafficLightList.Add(Controller.TrafficLightList(7))
+        busState1.AffectedTrafficLightList.Add(Controller.TrafficLightList(8))
 
         busState1.ConflictingBusTrafficLightList.Add(Controller.TrafficLightList(5))
         BusStateList.Add(busState1)
@@ -381,7 +383,7 @@ Public Module TrafficLightController
     End Function
 
     'Remove a bus state from the state list.
-    Private Sub RemoveBus(id As Integer)
+    Private Sub RemoveBus(ByVal id As Integer)
         For i As Integer = StateList.Count() - 1 To 0 Step -1
 
             If StateList(i).Id = id Then
