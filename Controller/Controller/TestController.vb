@@ -174,11 +174,11 @@ Public Module TestController
     End Function
 
     'Generate a end direction and check if the start/end direction are the same.
-    Public Function GenerateDirection(previous As Integer) As Integer
+    Public Function GenerateDirection(ByVal directionStart As Integer) As Integer
 
         Dim directionEnd As Integer = RandomNumber.Next(0, 5)
 
-        While directionEnd = previous
+        While directionEnd = directionStart Or (directionStart = 5 AndAlso directionEnd = 2) Or (directionStart = 5 AndAlso directionEnd = 3) Or (directionStart = 0 AndAlso directionEnd = 5) Or (directionStart = 1 AndAlso directionEnd = 5)
             directionEnd = RandomNumber.Next(0, 5)
         End While
 
